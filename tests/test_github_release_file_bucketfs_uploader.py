@@ -45,7 +45,6 @@ def test_uploading_github_release_to_bucketfs():
             password=database_config.credentials.pwd) as con:
         try:
             con.execute(f"CREATE SCHEMA IF NOT EXISTS {database_config.schema};")
-            con.execute(f"OPEN SCHEMA {database_config.schema};")
             con.execute(textwrap.dedent(f"""
             CREATE OR REPLACE PYTHON SCALAR SCRIPT test_schema.bucketfs_ls(my_path VARCHAR(256)) 
             EMITS (files VARCHAR(256)) AS
@@ -67,7 +66,7 @@ def test_uploading_github_release_to_bucketfs():
                         except: pass
             /
             """))
-            result = con.execute("SELECT bucketfs_ls('/buckets/bfsdefault/default')").fetchall()
+            result = con.execute("SELECT test_schema.bucketfs_ls('/buckets/bfsdefault/default')").fetchall()
             output = result[0][0]
             print(output)
             assert re.match(
