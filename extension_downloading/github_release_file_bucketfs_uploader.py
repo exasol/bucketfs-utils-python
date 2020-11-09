@@ -1,6 +1,6 @@
 import requests
 
-from extension_downloading.ReleaseLinkExtractor import ReleaseLinkExtractor
+from extension_downloading.release_link_extractor import ReleaseLinkExtractor
 
 
 class GithubReleaseFileBucketFSUploader:

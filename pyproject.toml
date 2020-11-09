@@ -19,6 +19,7 @@ keywords = ['exasol', 'bucketfs']
 
 [tool.poetry.dependencies]
 python = ">=3.6.1"
+requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"

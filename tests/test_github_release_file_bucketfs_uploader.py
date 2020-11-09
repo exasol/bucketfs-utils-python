@@ -1,15 +1,10 @@
-import os
 import re
-import subprocess
 import textwrap
-from pathlib import Path
 
 import pyexasol
 
-import extension_downloading
-
-from extension_downloading.GithubReleaseFileBucketFSUploader import GithubReleaseFileBucketFSUploader
-from tests.bucketfs_utils import BucketFsConfig, generate_bucketfs_url, upload_file_to_bucketfs, BucketFSCredentials
+from extension_downloading.github_release_file_bucketfs_uploader import GithubReleaseFileBucketFSUploader
+from tests.bucketfs_utils import BucketFsConfig, generate_bucketfs_url, BucketFSCredentials
 
 
 class DatabaseCredentials:
