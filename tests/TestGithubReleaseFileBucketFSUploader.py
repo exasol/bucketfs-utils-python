@@ -26,10 +26,6 @@ class DatabaseConfig:
         self.schema = schema
 
 
-def find_project_base_directory():
-    return Path(extension_downloading.__file__).parent.parent
-
-
 def upload_file_to_bucket(bucketfs_config):
     release_uploader = \
         GithubReleaseFileBucketFSUploader(file_to_download_name="virtual-schema-dist",
@@ -43,26 +39,8 @@ def upload_file_to_bucket(bucketfs_config):
         password=bucketfs_config.credentials.pwd)
 
 
-def upload_sdist(bucketfs_config: BucketFsConfig):
-    result = subprocess.run(["echo $PATH; poetry build"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
-    result.check_returncode()
-    project_base_directory = find_project_base_directory()
-    dist_directory = Path(project_base_directory, "dist")
-    tar_release_file_name = next(filter(lambda x: x.endswith(".tar.gz"), os.listdir(dist_directory)))
-    tar_release_file_path = Path(dist_directory, tar_release_file_name)
-    url, path = upload_file_to_bucketfs(bucketfs_config, tar_release_file_name, tar_release_file_path)
-    return url, path
-
-
-def prepare_test(con, database_config):
-    bucketfs_config = BucketFsConfig(BucketFSCredentials())
-    sdist_url, sdist_path = upload_sdist(bucketfs_config)
-    con.execute(f"CREATE SCHEMA IF NOT EXISTS {database_config.schema};")
-    con.execute(f"OPEN SCHEMA {database_config.schema};")
-
-
-def test_tensorflow_udf_train():
-    database_config = DatabaseConfig(DatabaseCredentials(), "test_tensorflow_udf")
+def test_uploading_github_release_to_bucketfs():
+    database_config = DatabaseConfig(DatabaseCredentials(), "test_schema")
     bucketfs_config = BucketFsConfig(BucketFSCredentials())
 
     upload_file_to_bucket(bucketfs_config)
@@ -71,7 +49,8 @@ def test_tensorflow_udf_train():
             user=database_config.credentials.user,
             password=database_config.credentials.pwd) as con:
         try:
-            prepare_test(con, database_config)
+            con.execute(f"CREATE SCHEMA IF NOT EXISTS {database_config.schema};")
+            con.execute(f"OPEN SCHEMA {database_config.schema};")
             con.execute(textwrap.dedent(f"""
             CREATE OR REPLACE PYTHON SCALAR SCRIPT EXA_toolbox.bucketfs_ls(my_path VARCHAR(256)) 
             EMITS (files VARCHAR(256)) AS
