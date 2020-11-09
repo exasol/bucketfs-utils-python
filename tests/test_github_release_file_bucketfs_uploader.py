@@ -47,7 +47,7 @@ def test_uploading_github_release_to_bucketfs():
             con.execute(f"CREATE SCHEMA IF NOT EXISTS {database_config.schema};")
             con.execute(f"OPEN SCHEMA {database_config.schema};")
             con.execute(textwrap.dedent(f"""
-            CREATE OR REPLACE PYTHON SCALAR SCRIPT EXA_toolbox.bucketfs_ls(my_path VARCHAR(256)) 
+            CREATE OR REPLACE PYTHON SCALAR SCRIPT test_schema.bucketfs_ls(my_path VARCHAR(256)) 
             EMITS (files VARCHAR(256)) AS
             import subprocess
 
