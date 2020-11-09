@@ -46,31 +46,28 @@ def test_uploading_github_release_to_bucketfs():
         try:
             con.execute(f"CREATE SCHEMA IF NOT EXISTS {database_config.schema};")
             con.execute(textwrap.dedent(f"""
-            CREATE OR REPLACE PYTHON SCALAR SCRIPT test_schema.bucketfs_ls(my_path VARCHAR(256)) 
-            EMITS (files VARCHAR(256)) AS
-            import subprocess
+CREATE OR REPLACE PYTHON SCALAR SCRIPT test_schema.bucketfs_ls(my_path VARCHAR(256)) 
+EMITS (files VARCHAR(256)) AS
+import subprocess
 
-            def run(c):
-                try:
-                    p = subprocess.Popen('ls -F ' + c.my_path,
-                                         stdout    = subprocess.PIPE,
-                                         stderr    = subprocess.STDOUT,
-                                         close_fds = True,
-                                         shell     = True)
-                    out, err = p.communicate()
-                    for line in out.strip().split('\n'):
-                        c.emit(line)
-                finally:
-                    if p is not None:
-                        try: p.kill()
-                        except: pass
-            /
-            """))
+def run(c):
+    try:
+        p = subprocess.Popen('ls -F ' + c.my_path,
+                             stdout    = subprocess.PIPE,
+                             stderr    = subprocess.STDOUT,
+                             close_fds = True,
+                             shell     = True)
+        out, err = p.communicate()
+        for line in out.strip().split('\\n'):
+            c.emit(line)
+    finally:
+        if p is not None:
+            try: p.kill()
+            except: pass
+/"""))
             result = con.execute("SELECT test_schema.bucketfs_ls('/buckets/bfsdefault/default')").fetchall()
-            output = result[0][0]
+            output = result
             print(output)
-            assert re.match(
-                r"""some text""",
-                output)
+            assert ("""virtualschemas/""",) in output
         finally:
             con.execute(f"DROP SCHEMA IF EXISTS {database_config.schema} CASCADE;")
