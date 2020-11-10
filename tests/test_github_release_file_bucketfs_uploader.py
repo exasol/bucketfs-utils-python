@@ -1,7 +1,4 @@
-import re
-import textwrap
-
-import pyexasol
+import requests
 
 from extension_downloading.github_release_file_bucketfs_uploader import GithubReleaseFileBucketFSUploader
 from tests.bucketfs_utils import BucketFsConfig, generate_bucketfs_url, BucketFSCredentials
@@ -37,37 +34,7 @@ def upload_file_to_bucket(bucketfs_config):
 def test_uploading_github_release_to_bucketfs():
     database_config = DatabaseConfig(DatabaseCredentials(), "test_schema")
     bucketfs_config = BucketFsConfig(BucketFSCredentials())
-
     upload_file_to_bucket(bucketfs_config)
-    with pyexasol.connect(
-            dsn=f"{database_config.credentials.host}:{database_config.credentials.port}",
-            user=database_config.credentials.user,
-            password=database_config.credentials.pwd) as con:
-        try:
-            con.execute(f"CREATE SCHEMA IF NOT EXISTS {database_config.schema};")
-            con.execute(textwrap.dedent(f"""
-CREATE OR REPLACE PYTHON SCALAR SCRIPT test_schema.bucketfs_ls(my_path VARCHAR(256)) 
-EMITS (files VARCHAR(256)) AS
-import subprocess
-
-def run(c):
-    try:
-        p = subprocess.Popen('ls -F ' + c.my_path,
-                             stdout    = subprocess.PIPE,
-                             stderr    = subprocess.STDOUT,
-                             close_fds = True,
-                             shell     = True)
-        out, err = p.communicate()
-        for line in out.strip().split('\\n'):
-            c.emit(line)
-    finally:
-        if p is not None:
-            try: p.kill()
-            except: pass
-/"""))
-            result = con.execute("SELECT test_schema.bucketfs_ls('/buckets/bfsdefault/default')").fetchall()
-            output = result
-            print(output)
-            assert ("""virtualschemas/""",) in output
-        finally:
-            con.execute(f"DROP SCHEMA IF EXISTS {database_config.schema} CASCADE;")
+    response = requests.get("http://{}:{}/virtualschemas/".format(database_config.credentials.host,
+                                                                  database_config.credentials.port))
+    assert "virtual-schema-dist" in response.text
