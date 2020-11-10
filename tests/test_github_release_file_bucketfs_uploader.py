@@ -20,7 +20,7 @@ def upload_file_to_bucket(bucketfs_config):
 def test_uploading_github_release_to_bucketfs():
     bucketfs_config = BucketFsConfig(BucketFSCredentials())
     upload_file_to_bucket(bucketfs_config)
-    response = requests.get("http://{}:{}/".format(bucketfs_config.credentials.host,
+    response = requests.get("http://{}:{}/default/virtualschemas/".format(bucketfs_config.credentials.host,
                                                    bucketfs_config.credentials.port))
     print(response.text)
     assert "virtual-schema-dist" in response.text
