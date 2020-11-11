@@ -19,7 +19,7 @@ pip install -e git://github.com/exasol/bucketfs-utils-python.git@{ tag name }#eg
 Example:
 
 ```python
-from extension_downloading.github_release_file_bucketfs_uploader import GithubReleaseFileBucketFSUploader
+from exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader import GithubReleaseFileBucketFSUploader
 
 release_uploader = \
     GithubReleaseFileBucketFSUploader(file_to_download_name="file",
@@ -34,7 +34,7 @@ release_uploader.upload("http://<host>:<port>/<bucket>/", "user", "password")
 
 | Dependency                    | Purpose                          | License            |
 |-------------------------------|----------------------------------|--------------------|
-| [Python 3.6][python-3-6-1]    | Python version 3.6.1             | PSF                |
+| [Python 3][python]            | Python version 3.6.1 and above   | PSF                |
 | [Requests][requests]          | Allows to send HTTP/1.1 requests | Apache License 2.0 |
 
 
@@ -47,7 +47,7 @@ release_uploader.upload("http://<host>:<port>/<bucket>/", "user", "password")
 
 
 
-[python-3-6-1]: https://docs.python.org/release/3.6.1/
+[python]: https://docs.python.org
 [requests]: https://pypi.org/project/requests/
 
 [pytest]: https://docs.pytest.org/en/stable/

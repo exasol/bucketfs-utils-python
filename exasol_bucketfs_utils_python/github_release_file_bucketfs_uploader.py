@@ -1,7 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-from extension_downloading.release_link_extractor import ReleaseLinkExtractor
+from exasol_bucketfs_utils_python.release_link_extractor import ReleaseLinkExtractor
 
 
 class GithubReleaseFileBucketFSUploader:
