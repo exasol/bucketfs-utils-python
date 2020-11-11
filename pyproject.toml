@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "bucketfs-utils-python"
+name = "exasol-bucketfs-utils-python"
 version = "0.1.0"
 description = "BucketFS utilities for the Python programming language"
 
@@ -24,7 +24,6 @@ requests = "^2.24.0"
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
 pytest-cov = "^2.10.1"
-pyexasol = "^0.14.1"
 
 [tool.dephell.main]
 from = { format = "poetry", path = "pyproject.toml" }

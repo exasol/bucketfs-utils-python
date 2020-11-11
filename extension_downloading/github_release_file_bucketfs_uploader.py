@@ -1,4 +1,5 @@
 import requests
+from requests.auth import HTTPBasicAuth
 
 from extension_downloading.release_link_extractor import ReleaseLinkExtractor
 
@@ -20,18 +21,14 @@ class GithubReleaseFileBucketFSUploader:
         """
         download_url = self.__extract_download_url()
         r_download = requests.get(download_url, stream=True)
-        upload_url = self.__build_upload_url(address, username, password)
-        requests.put(upload_url, data=r_download.iter_content(10 * 1024))
+        upload_url = self.__build_upload_url(address)
+        requests.put(upload_url, data=r_download.iter_content(10 * 1024), auth=HTTPBasicAuth(username, password))
 
-    def __build_upload_url(self, address, username, password):
-        connection_first_part = 'http://'
-        split_url = address.split(connection_first_part, 1)
-        upload_url = "{connection_first_part}{username}:{password}@{url}/".format(
-            connection_first_part=connection_first_part, username=username, password=password, url=split_url[1])
+    def __build_upload_url(self, address):
         if self.path_inside_bucket:
-            upload_url += self.path_inside_bucket
-        upload_url += self.file_to_download_name
-        return upload_url
+            address += self.path_inside_bucket
+        address += self.file_to_download_name
+        return address
 
     def __extract_download_url(self):
         github_api_link = self.__build_github_api_link()

@@ -1,6 +1,6 @@
-# BucketFS Utils Python 0.1.0, released 2020-??-??
+# BucketFS Utils Python 0.1.0, released 2020-11-??
 
-Code name: 
+Code name: Initial implementation
 
 ## Features
 
