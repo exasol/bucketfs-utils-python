@@ -19,7 +19,31 @@ jobs:
         run: poetry install
       - name: Poetry build
         run: poetry build
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Add the changes here.
+          draft: true
+          prerelease: false
+      - name: Upload Release Asset
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: /dist/exasol-bucketfs-utils-python-${{ github.ref }}.tar.gz
+            asset_name: exasol-bucketfs-utils-python-${{ github.ref }}.tar.gz
+            asset_content_type: application/gzip
+
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:
-          password: ${{ secrets.PYPI_PASSWORD }}
+          password: ${{ secrets.PYPI_PASSWORD }} # We need to prepare this password
