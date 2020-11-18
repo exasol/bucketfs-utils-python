@@ -5,3 +5,4 @@ Code name: Initial implementation
 ## Features
 
 #1: Added initial implementation.
+#3: Added github workflow for releasing on PyPI.

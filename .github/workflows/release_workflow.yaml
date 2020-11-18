@@ -1,0 +1,25 @@
+name: Release Python package on GitHub and PyPI
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - uses: abatilo/actions-poetry@v2.0.0
+      - name: Poetry install
+        run: poetry install
+      - name: Poetry build
+        run: poetry build
+      - name: Publish distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_PASSWORD }}
