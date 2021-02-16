@@ -33,13 +33,7 @@ def upload_string_to_bucketfs(bucketfs_config: BucketFsConfig, file_name: str, s
 
 def upload_object_to_bucketfs_via_joblib(object, bucketfs_config: BucketFsConfig, file_name: str, compress=True):
     with NamedTemporaryFile() as temp_file:
-        try:
-            joblib.dump(object, temp_file.name, compress=compress)
-            temp_file.flush()
-            temp_file.seek(0)
-            upload_fileobj_to_bucketfs(bucketfs_config, file_name, temp_file)
-        finally:
-            try:
-                os.remove(temp_file.name)
-            except OSError:
-                pass
+        joblib.dump(object, temp_file.name, compress=compress)
+        temp_file.flush()
+        temp_file.seek(0)
+        upload_fileobj_to_bucketfs(bucketfs_config, file_name, temp_file)
