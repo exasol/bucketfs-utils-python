@@ -1,5 +1,5 @@
 class BucketFSCredentials:
-    def __init__(self, host="localhost", port=6666, user="w", pwd="write"):
+    def __init__(self, host, port, user, pwd):
         self.host = host
         self.port = port
         self.user = user
@@ -7,7 +7,7 @@ class BucketFSCredentials:
 
 
 class BucketFsConfig:
-    def __init__(self, credentials: BucketFSCredentials, bucket="default", bucketfs_name="bfsdefault", is_https=False):
+    def __init__(self, credentials: BucketFSCredentials, bucket, bucketfs_name, is_https=False):
         self.is_https = is_https
         self.credentials = credentials
         self.bucket = bucket
