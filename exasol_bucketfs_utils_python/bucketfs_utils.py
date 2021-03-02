@@ -16,11 +16,23 @@ def _correct_path_in_bucket_for_archives(path_in_bucket: str) -> str:
 
 
 def get_bucketfs_udf_path(bucketfs_config: BucketFsConfig) -> str:
+    """
+    This function generates the path where UDFs can access the content of a BucketFS in there file system
+    :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can None
+    :return: Path of the given BucketFS in the file system of UDFs
+    """
     path = f"/buckets/{bucketfs_config.bucketfs_name}"
     return path
 
 
-def get_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: str) -> str:
+def get_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: Union[None, str]) -> str:
+    """
+    This function generates the path where UDFs can access the content of a Bucket or
+    the given Path in a Bucket in there file system
+    :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
+    :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
+    :return:
+    """
     bucketfs_path = get_bucketfs_udf_path(bucket_config.bucketfs_config)
     path = f"{bucketfs_path}/{bucket_config.bucket_name}"
 
@@ -34,7 +46,7 @@ def get_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: str) -> str
 
 def generate_bucketfs_url(bucketfs_config: BucketFsConfig, with_credentials: bool = False) -> str:
     if bucketfs_config.connection_config is None:
-        raise TypeError("bucket_config.bucketfs_config.connection_config can't be none for this operations")
+        raise TypeError("bucket_config.bucketfs_config.connection_config can't be None for this operations")
     if with_credentials:
         credentials = f"{bucketfs_config.connection_config.user}:{bucketfs_config.connection_config.pwd}@"
     else:
@@ -60,7 +72,7 @@ def generate_bucket_url(bucket_config: BucketConfig, path_in_bucket: Union[None,
 
 def create_auth_object(bucket_config):
     if bucket_config.bucketfs_config.connection_config is None:
-        raise TypeError("bucket_config.bucketfs_config.connection_config can't be none for this operations")
+        raise TypeError("bucket_config.bucketfs_config.connection_config can't be None for this operations")
     auth = HTTPBasicAuth(
         bucket_config.bucketfs_config.connection_config.user,
         bucket_config.bucketfs_config.connection_config.pwd)
