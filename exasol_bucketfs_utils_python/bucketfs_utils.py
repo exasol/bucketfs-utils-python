@@ -4,7 +4,7 @@ from typing import Union
 
 from requests.auth import HTTPBasicAuth
 
-from exasol_bucketfs_utils_python.bucketfs_config import BucketConfig, BucketFsConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketConfig, BucketFSConfig
 
 ARCHIVE_EXTENSIONS = [".tar.gz", ".tar.bz2", ".zip", ".tar"]
 
@@ -32,7 +32,7 @@ def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> Pure
     return path_in_bucket
 
 
-def generate_bucketfs_udf_path(bucketfs_config: BucketFsConfig) -> PurePosixPath:
+def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a BucketFS in there file system
     :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can None
@@ -63,7 +63,7 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
     return path
 
 
-def generate_bucketfs_http_url(bucketfs_config: BucketFsConfig,
+def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
                                with_credentials: bool = False) -> urllib.parse.ParseResult:
     """
     This function generates the HTTP[s] url for the given BucketFSConfig

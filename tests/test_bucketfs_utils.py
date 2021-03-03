@@ -1,12 +1,12 @@
 import pytest
 
 from exasol_bucketfs_utils_python import bucketfs_utils
-from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConnectionConfig, BucketFsConfig, BucketConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConnectionConfig, BucketFSConfig, BucketConfig
 
 
 def test_generate_bucket_udf_path_non_archive_file():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_udf_path(
@@ -18,7 +18,7 @@ def test_generate_bucket_udf_path_non_archive_file():
 
 def test_generate_bucket_udf_path_trailing_slash():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_udf_path(
@@ -31,7 +31,7 @@ def test_generate_bucket_udf_path_trailing_slash():
 @pytest.mark.parametrize("extension", ["tar.gz", "zip", "tar.bz2", "tar"])
 def test_generate_bucket_udf_path_archive_tar(extension):
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_udf_path(
@@ -43,7 +43,7 @@ def test_generate_bucket_udf_path_archive_tar(extension):
 
 def test_generate_bucket_url_file_write_access():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -55,7 +55,7 @@ def test_generate_bucket_url_file_write_access():
 
 def test_generate_bucket_url_file_trailing_slash():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -67,7 +67,7 @@ def test_generate_bucket_url_file_trailing_slash():
 
 def test_generate_bucket_url_file_with_credentials():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -80,7 +80,7 @@ def test_generate_bucket_url_file_with_credentials():
 
 def test_generate_bucket_url_file_with_ip():
     connection_config = BucketFSConnectionConfig(host="127.0.0.1", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -93,7 +93,7 @@ def test_generate_bucket_url_file_with_ip():
 
 def test_generate_bucket_url_file_with_whitespace_in_host():
     connection_config = BucketFSConnectionConfig(host="local host", port=6666, user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -107,7 +107,7 @@ def test_generate_bucket_url_file_with_whitespace_in_host():
 def test_generate_bucket_url_file_with_whitespace_in_password():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write write",
                                                  is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -121,7 +121,7 @@ def test_generate_bucket_url_file_with_whitespace_in_password():
 def test_generate_bucket_url_file_with_whitespace_in_bucket_name():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write",
                                                  is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -135,7 +135,7 @@ def test_generate_bucket_url_file_with_whitespace_in_bucket_name():
 def test_generate_bucket_url_file_with_whitespace_in_path_in_bucket():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write",
                                                  is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -148,7 +148,7 @@ def test_generate_bucket_url_file_with_whitespace_in_path_in_bucket():
 
 def test_generate_bucket_url_file_read_only_access():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="r", pwd="read", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     udf_path = bucketfs_utils.generate_bucket_http_url(
@@ -158,8 +158,14 @@ def test_generate_bucket_url_file_read_only_access():
     )
     assert udf_path.geturl() == "http://r:read@localhost:6666/default/path/in/bucket/test_file.txt"
 
-
-def test_generate_bucket_url_file_with_not_allowed_user():
-    with pytest.raises(ValueError):
-        connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="abc", pwd="write",
-                                                     is_https=False)
+def test_generate_bucket_url_file_https():
+    connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="r", pwd="read", is_https=True)
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
+                                     bucketfs_name="bfsdefault")
+    bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
+    udf_path = bucketfs_utils.generate_bucket_http_url(
+        bucket_config=bucket_config,
+        path_in_bucket="path/in/bucket/test_file.txt",
+        with_credentials=True
+    )
+    assert udf_path.geturl() == "https://r:read@localhost:6666/default/path/in/bucket/test_file.txt"

@@ -2,12 +2,12 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 from exasol_bucketfs_utils_python import upload, download
-from exasol_bucketfs_utils_python.bucketfs_config import BucketFsConfig, BucketFSConnectionConfig, BucketConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig, BucketFSConnectionConfig, BucketConfig
 
 
 def test_file_upload_download():
     connection_config = BucketFSConnectionConfig(host="localhost", port="6666", user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     with NamedTemporaryFile() as input_temp_file:
@@ -32,7 +32,7 @@ def test_file_upload_download():
 
 def test_fileobj_upload_download():
     connection_config = BucketFSConnectionConfig(host="localhost", port="6666", user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     with NamedTemporaryFile() as input_temp_file:
@@ -59,7 +59,7 @@ def test_fileobj_upload_download():
 
 def test_string_upload_download():
     connection_config = BucketFSConnectionConfig(host="localhost", port="6666", user="w", pwd="write", is_https=False)
-    bucketfs_config = BucketFsConfig(connection_config=connection_config,
+    bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     test_string = "test_string"
