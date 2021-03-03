@@ -15,25 +15,25 @@ def _correct_path_in_bucket_for_archives(path_in_bucket: str) -> str:
     return path_in_bucket
 
 
-def get_bucketfs_udf_path(bucketfs_config: BucketFsConfig) -> str:
+def generate_bucketfs_udf_path(bucketfs_config: BucketFsConfig) -> str:
     """
     This function generates the path where UDFs can access the content of a BucketFS in there file system
     :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can None
-    :return: Path of the given BucketFS in the file system of UDFs
+    :return: Path of the given BucketFS in the file system of UDFs as string
     """
     path = f"/buckets/{bucketfs_config.bucketfs_name}"
     return path
 
 
-def get_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: Union[None, str]) -> str:
+def generate_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: Union[None, str]) -> str:
     """
-    This function generates the path where UDFs can access the content of a Bucket or
-    the given Path in a Bucket in there file system
+    This function generates the path where UDFs can access the content of a bucket or
+    the given Path in a bucket in there file system
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
-    :return:
+    :return: Path of the bucket or the file in the Bucket in the file system of UDFs as string
     """
-    bucketfs_path = get_bucketfs_udf_path(bucket_config.bucketfs_config)
+    bucketfs_path = generate_bucketfs_udf_path(bucket_config.bucketfs_config)
     path = f"{bucketfs_path}/{bucket_config.bucket_name}"
 
     if path_in_bucket is not None:
@@ -44,7 +44,14 @@ def get_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: Union[None,
     return path
 
 
-def generate_bucketfs_url(bucketfs_config: BucketFsConfig, with_credentials: bool = False) -> str:
+def generate_bucketfs_http_url(bucketfs_config: BucketFsConfig, with_credentials: bool = False) -> str:
+    """
+    This function generates the HTTP[s] url for the given BucketFSConfig
+    with or without basic authentication  (http[s]://user:password@host:port)
+    :param bucketfs_config: A BucketFSConfig with a non None BucketFSConnectionConfig
+    :param with_credentials: If True, this function generates a url with basic authentication, default False
+    :return: HTTP[S] URL of the BucketFS as string
+    """
     if bucketfs_config.connection_config is None:
         raise TypeError("bucket_config.bucketfs_config.connection_config can't be None for this operations")
     if with_credentials:
@@ -60,8 +67,17 @@ def generate_bucketfs_url(bucketfs_config: BucketFsConfig, with_credentials: boo
     return url
 
 
-def generate_bucket_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str], with_credentials: bool = False):
-    url = generate_bucketfs_url(bucket_config.bucketfs_config, with_credentials)
+def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str],
+                             with_credentials: bool = False):
+    """
+    This function generates the HTTP[s] url for the given bucket ot the path in the bucket
+    with or without basic authentication  (http[s]://user:password@host:port)
+    :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig must be not None
+    :param path_in_bucket:  If not None, path_in_bucket gets concatenated to the path of the bucket
+    :param with_credentials: If True, this function generates a url with basic authentication, default False
+    :return: HTTP[S] URL of the bucket or the path in the bucket as string
+    """
+    url = generate_bucketfs_http_url(bucket_config.bucketfs_config, with_credentials)
     url = url + f"/{bucket_config.bucket_name}"
     if path_in_bucket is not None:
         if path_in_bucket.startswith("/"):
@@ -70,7 +86,7 @@ def generate_bucket_url(bucket_config: BucketConfig, path_in_bucket: Union[None,
     return url
 
 
-def create_auth_object(bucket_config):
+def create_auth_object(bucket_config: BucketConfig) -> HTTPBasicAuth:
     if bucket_config.bucketfs_config.connection_config is None:
         raise TypeError("bucket_config.bucketfs_config.connection_config can't be None for this operations")
     auth = HTTPBasicAuth(
