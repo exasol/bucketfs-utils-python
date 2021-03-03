@@ -1,5 +1,5 @@
 import urllib.parse
-from pathlib import Path, PurePosixPath
+from pathlib import PurePosixPath
 from typing import Union
 
 from requests.auth import HTTPBasicAuth
@@ -14,40 +14,52 @@ def _encode_url_part(part: str) -> str:
     return urlencoded
 
 
-def _correct_path_in_bucket_for_archives(path_in_bucket: str) -> str:
+def _correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) -> PurePosixPath:
     for extension in ARCHIVE_EXTENSIONS:
-        if path_in_bucket.endswith(extension):
-            path_in_bucket = path_in_bucket[:-len(extension)]
+        print(path_in_bucket.name)
+        if path_in_bucket.name.endswith(extension):
+            path_in_bucket = PurePosixPath(path_in_bucket.parent,
+                                           path_in_bucket.name[:-len(extension)])
+            print(path_in_bucket)
             break
     return path_in_bucket
 
 
-def generate_bucketfs_udf_path(bucketfs_config: BucketFsConfig) -> str:
+def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
+    path_in_bucket = PurePosixPath(path_in_bucket)
+    if path_in_bucket.is_absolute():
+        path_in_bucket = path_in_bucket.relative_to(PurePosixPath("/"))
+    return path_in_bucket
+
+
+def generate_bucketfs_udf_path(bucketfs_config: BucketFsConfig) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a BucketFS in there file system
     :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can None
-    :return: Path of the given BucketFS in the file system of UDFs as string
+    :return: Path of the given BucketFS in the file system of UDFs
     """
-    path = f"/buckets/{bucketfs_config.bucketfs_name}"
+    path = PurePosixPath("/buckets/", bucketfs_config.bucketfs_name)
     return path
 
 
-def generate_bucket_udf_path(bucket_config: BucketConfig, path_in_bucket: Union[None, str]) -> str:
+def generate_bucket_udf_path(bucket_config: BucketConfig,
+                             path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a bucket or
     the given Path in a bucket in there file system
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
-    :return: Path of the bucket or the file in the Bucket in the file system of UDFs as string
+    :return: Path of the bucket or the file in the Bucket in the file system of UDFs
     """
     bucketfs_path = generate_bucketfs_udf_path(bucket_config.bucketfs_config)
-    path = f"{bucketfs_path}/{bucket_config.bucket_name}"
+    path = PurePosixPath(bucketfs_path, bucket_config.bucket_name)
 
     if path_in_bucket is not None:
+        path_in_bucket = _make_path_relative(path_in_bucket)
         path_in_bucket = _correct_path_in_bucket_for_archives(path_in_bucket)
-        if path_in_bucket.startswith("/"):
-            path_in_bucket = path_in_bucket[1:]
-        path = f"{path}/{path_in_bucket}"
+    else:
+        path_in_bucket = ""
+    path = PurePosixPath(path, path_in_bucket)
     return path
 
 
@@ -58,7 +70,7 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFsConfig,
     with or without basic authentication  (http[s]://user:password@host:port)
     :param bucketfs_config: A BucketFSConfig with a non None BucketFSConnectionConfig
     :param with_credentials: If True, this function generates a url with basic authentication, default False
-    :return: HTTP[S] URL of the BucketFS as string
+    :return: HTTP[S] URL of the BucketFS
     """
     if bucketfs_config.connection_config is None:
         raise ValueError("bucket_config.bucketfs_config.connection_config can't be None for this operations")
@@ -79,7 +91,7 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFsConfig,
     return urlparse
 
 
-def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str],
+def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str, PurePosixPath],
                              with_credentials: bool = False) -> urllib.parse.ParseResult:
     """
     This function generates the HTTP[s] url for the given bucket ot the path in the bucket
@@ -87,12 +99,13 @@ def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig must be not None
     :param path_in_bucket:  If not None, path_in_bucket gets concatenated to the path of the bucket
     :param with_credentials: If True, this function generates a url with basic authentication, default False
-    :return: HTTP[S] URL of the bucket or the path in the bucket as string
+    :return: HTTP[S] URL of the bucket or the path in the bucket
     """
     url = generate_bucketfs_http_url(bucket_config.bucketfs_config, with_credentials)
     if path_in_bucket is not None:
-        if path_in_bucket.startswith("/"):
-            path_in_bucket = path_in_bucket[1:]
+        path_in_bucket = _make_path_relative(path_in_bucket)
+    else:
+        path_in_bucket = ""
     encoded_bucket_and_path_in_bucket = \
         "/".join(
             _encode_url_part(part)

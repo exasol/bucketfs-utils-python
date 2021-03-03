@@ -9,11 +9,15 @@ class BucketFSConnectionConfig:
 
     def __init__(self, host: str, port: int, user: str, pwd: str, is_https=False):
         self.is_https = is_https
+        if host == "":
+            raise ValueError("Host can't be an empty string")
         self.host = host
         self.port = port
-        if user not in ["w", "r"]: # The BucketFs currently supports only these two users
+        if user not in ["w", "r"]:  # The BucketFs currently supports only these two users
             raise ValueError(f"User can only be, 'w' (read-write access) or 'r' (read-only access), but got {user}")
         self.user = user
+        if pwd == "":
+            raise ValueError("Password can't be an empty string")
         self.pwd = pwd
 
 
@@ -27,6 +31,8 @@ class BucketFsConfig:
 
     def __init__(self, bucketfs_name: str, connection_config: Union[BucketFSConnectionConfig, None] = None):
         self.connection_config = connection_config
+        if bucketfs_name == "":
+            raise ValueError("BucketFS name can't be an empty string")
         self.bucketfs_name = bucketfs_name
 
 
@@ -39,5 +45,7 @@ class BucketConfig:
     def __init__(self, bucket_name: str, bucketfs_config: BucketFsConfig):
         if bucketfs_config is None:
             raise TypeError("bucketfs_config can't be None")
+        if bucket_name == "":
+            raise ValueError("Bucket name can't be an empty string")
         self.bucket_name = bucket_name
         self.bucketfs_config = bucketfs_config
