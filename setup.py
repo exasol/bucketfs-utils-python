@@ -8,7 +8,7 @@ package_data = \
 {'': ['*']}
 
 install_requires = \
-['joblib>=1.0.1,<2.0.0', 'requests>=2.24.0,<3.0.0']
+['joblib>=1.0.1,<2.0.0', 'requests>=2.24.0,<3.0.0', 'typeguard>=2.11.1,<3.0.0']
 
 setup_kwargs = {
     'name': 'exasol-bucketfs-utils-python',
