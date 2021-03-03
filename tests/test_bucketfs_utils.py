@@ -1,7 +1,9 @@
 import pytest
 
 from exasol_bucketfs_utils_python import bucketfs_utils
-from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConnectionConfig, BucketFSConfig, BucketConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
+from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConnectionConfig
+from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
 
 def test_generate_bucket_udf_path_non_archive_file():

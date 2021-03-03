@@ -2,7 +2,9 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 from exasol_bucketfs_utils_python import upload, download
-from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig, BucketFSConnectionConfig, BucketConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
+from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConnectionConfig
+from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
 
 def test_file_upload_download():

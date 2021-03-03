@@ -5,7 +5,8 @@ from typing import Union
 from requests.auth import HTTPBasicAuth
 from typeguard import typechecked
 
-from exasol_bucketfs_utils_python.bucketfs_config import BucketConfig, BucketFSConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
+from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
 ARCHIVE_EXTENSIONS = [".tar.gz", ".tar.bz2", ".zip", ".tar"]
 
