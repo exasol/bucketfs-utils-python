@@ -16,18 +16,22 @@ def download_from_bucketfs_to_file(bucket_config: BucketConfig, bucket_file_path
 
 
 def download_from_bucketfs_to_fileobj(bucket_config: BucketConfig, bucket_file_path: str, fileobj: typing.IO):
+    if bucket_file_path is None:
+        raise ValueError("bucket_file_path can't be None")
     url = generate_bucket_http_url(bucket_config, bucket_file_path)
     auth = bucketfs_utils.create_auth_object(bucket_config)
-    with requests.get(url, stream=True, auth=auth) as response:
+    with requests.get(url.geturl(), stream=True, auth=auth) as response:
         response.raise_for_status()
         for chunk in response.iter_content(chunk_size=8192):
             fileobj.write(chunk)
 
 
 def download_from_bucketfs_to_string(bucket_config: BucketConfig, bucket_file_path: str) -> str:
+    if bucket_file_path is None:
+        raise ValueError("bucket_file_path can't be None")
     url = generate_bucket_http_url(bucket_config, bucket_file_path)
     auth = bucketfs_utils.create_auth_object(bucket_config)
-    response = requests.get(url, auth=auth)
+    response = requests.get(url.geturl(), auth=auth)
     response.raise_for_status()
     return response.text
 
