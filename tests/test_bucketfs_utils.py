@@ -30,8 +30,8 @@ def test_generate_bucket_udf_path_trailing_slash():
     assert str(udf_path) == "/buckets/bfsdefault/default/path/in/bucket/test_file.txt"
 
 
-@pytest.mark.parametrize("extension", ["tar.gz", "zip", "tar.bz2", "tar"])
-def test_generate_bucket_udf_path_archive_tar(extension):
+@pytest.mark.parametrize("extension", ["tar.gz", "zip", "tgz", "tar"])
+def test_generate_bucket_udf_path_archive(extension):
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig(connection_config=connection_config,
                                      bucketfs_name="bfsdefault")
