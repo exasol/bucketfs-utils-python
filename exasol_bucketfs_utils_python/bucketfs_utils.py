@@ -37,7 +37,7 @@ def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> Pure
 def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a BucketFS in there file system
-    :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can None
+    :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :return: Path of the given BucketFS in the file system of UDFs
     """
     path = PurePosixPath("/buckets/", bucketfs_config.bucketfs_name)
