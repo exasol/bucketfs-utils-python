@@ -5,8 +5,8 @@ from typing import Union
 from requests.auth import HTTPBasicAuth
 from typeguard import typechecked
 
-from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
+from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
 
 ARCHIVE_EXTENSIONS = [".tar.gz", ".tgz", ".zip", ".tar"]
 
@@ -18,11 +18,9 @@ def _encode_url_part(part: str) -> str:
 
 def _correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) -> PurePosixPath:
     for extension in ARCHIVE_EXTENSIONS:
-        print(path_in_bucket.name)
         if path_in_bucket.name.endswith(extension):
             path_in_bucket = PurePosixPath(path_in_bucket.parent,
                                            path_in_bucket.name[:-len(extension)])
-            print(path_in_bucket)
             break
     return path_in_bucket
 
@@ -33,6 +31,7 @@ def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> Pure
         path_in_bucket = path_in_bucket.relative_to(PurePosixPath("/"))
     return path_in_bucket
 
+
 @typechecked(always=True)
 def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath:
     """
@@ -42,6 +41,7 @@ def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath
     """
     path = PurePosixPath("/buckets/", bucketfs_config.bucketfs_name)
     return path
+
 
 @typechecked(always=True)
 def generate_bucket_udf_path(bucket_config: BucketConfig,
@@ -63,6 +63,7 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
         path_in_bucket = ""
     path = PurePosixPath(path, path_in_bucket)
     return path
+
 
 @typechecked(always=True)
 def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
@@ -92,6 +93,7 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
     urlparse = urllib.parse.urlparse(url)
     return urlparse
 
+
 @typechecked(always=True)
 def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str, PurePosixPath],
                              with_credentials: bool = False) -> urllib.parse.ParseResult:
@@ -118,6 +120,7 @@ def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[
     return urlparse
 
 
+@typechecked(always=True)
 def create_auth_object(bucket_config: BucketConfig) -> HTTPBasicAuth:
     if bucket_config.bucketfs_config.connection_config is None:
         raise TypeError("bucket_config.bucketfs_config.connection_config can't be None for this operation")
