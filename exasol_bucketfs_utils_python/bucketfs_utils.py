@@ -35,9 +35,9 @@ def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> Pure
 @typechecked(always=True)
 def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath:
     """
-    This function generates the path where UDFs can access the content of a BucketFS in there file system
+    This function generates the path where UDFs can access the content of a BucketFS in their file system
     :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can be None
-    :return: Path of the given BucketFS in the file system of UDFs
+    :return: Path of the given BucketFS in the file system of the UDFs
     """
     path = PurePosixPath("/buckets/", bucketfs_config.bucketfs_name)
     return path
@@ -48,7 +48,7 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
                              path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a bucket or
-    the given Path in a bucket in there file system
+    the given Path in a bucket in their file system
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
     :return: Path of the bucket or the file in the Bucket in the file system of UDFs
