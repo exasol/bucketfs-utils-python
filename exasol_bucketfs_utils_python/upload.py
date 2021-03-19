@@ -27,7 +27,7 @@ def upload_file_to_bucketfs(bucket_config: BucketConfig, bucket_file_path: str, 
 def upload_fileobj_to_bucketfs(bucket_config: BucketConfig, bucket_file_path: str, fileobj: IO) \
         -> Tuple[ParseResult, PurePosixPath]:
     """
-    This function uploads a file object `file object <https://docs.python.org/3/glossary.html#term-file-object>`_
+    This function uploads a `file object <https://docs.python.org/3/glossary.html#term-file-object>`_
     to the specified path in bucket of the BucketFS.
     :param bucket_config: BucketConfig for the destination bucket
     :param bucket_file_path: Path in the bucket to upload the file to
