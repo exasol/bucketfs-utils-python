@@ -48,7 +48,7 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
                              path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a bucket or
-    the given Path in a bucket in their file system
+    the given path in a bucket in their file system
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
     :return: Path of the bucket or the file in the Bucket in the file system of UDFs
@@ -69,8 +69,8 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
 def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
                                with_credentials: bool = False) -> urllib.parse.ParseResult:
     """
-    This function generates the HTTP[s] url for the given BucketFSConfig
-    with or without basic authentication  (http[s]://user:password@host:port)
+    This function generates an HTTP[s] url for the given BucketFSConfig
+    with or without basic authentication  (a template: http[s]://user:password@host:port)
     :param bucketfs_config: A BucketFSConfig with a non None BucketFSConnectionConfig
     :param with_credentials: If True, this function generates a url with basic authentication, default False
     :return: HTTP[S] URL of the BucketFS
@@ -98,8 +98,8 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
 def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str, PurePosixPath],
                              with_credentials: bool = False) -> urllib.parse.ParseResult:
     """
-    This function generates the HTTP[s] url for the given bucket ot the path in the bucket
-    with or without basic authentication  (http[s]://user:password@host:port)
+    This function generates an HTTP[s] url for the given bucket or the path in the bucket
+    with or without basic authentication  (a template: http[s]://user:password@host:port)
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig must be not None
     :param path_in_bucket:  If not None, path_in_bucket gets concatenated to the path of the bucket
     :param with_credentials: If True, this function generates a url with basic authentication, default False
