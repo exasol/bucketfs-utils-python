@@ -13,6 +13,7 @@ from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_http_url
 def download_from_bucketfs_to_file(bucket_config: BucketConfig, bucket_file_path: str, local_file_path: Path):
     """
     Download a file from the specified path in the bucket in the BucketFs and save as a local file
+
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to download the file from
     :param local_file_path: File path to the local file to store the downloaded data
@@ -26,6 +27,7 @@ def download_from_bucketfs_to_fileobj(bucket_config: BucketConfig, bucket_file_p
     """
     Download a file from the specified path in the bucket in the BucketFs into a given
     `file object <https://docs.python.org/3/glossary.html#term-file-object>`_
+
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to download the file from
     :param fileobj: File object where the data of the file in the BucketFS is downloaded to
@@ -44,6 +46,7 @@ def download_from_bucketfs_to_fileobj(bucket_config: BucketConfig, bucket_file_p
 def download_from_bucketfs_to_string(bucket_config: BucketConfig, bucket_file_path: str) -> str:
     """
     Download a file from the specified path in the bucket in the BucketFs into a string
+
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to download the file from
     :return: The content of the file in the BucketFS as string
@@ -61,6 +64,7 @@ def download_object_from_bucketfs_via_joblib(bucket_config: BucketConfig, bucket
     """
     Download a file from the specified path in the bucket in the BucketFs and deserialize it via
     `joblib.load <https://joblib.readthedocs.io/en/latest/generated/joblib.load.html#>`_
+
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to download the file from
     :return: The deserialized object which was downloaded from the BucketFS

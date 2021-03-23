@@ -36,6 +36,7 @@ def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> Pure
 def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath:
     """
     This function generates the path where UDFs can access the content of a BucketFS in their file system
+
     :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :return: Path of the given BucketFS in the file system of the UDFs
     """
@@ -49,6 +50,7 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
     """
     This function generates the path where UDFs can access the content of a bucket or
     the given path in a bucket in their file system
+
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
     :return: Path of the bucket or the file in the Bucket in the file system of UDFs
@@ -71,6 +73,7 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
     """
     This function generates an HTTP[s] url for the given BucketFSConfig
     with or without basic authentication  (a template: http[s]://user:password@host:port)
+
     :param bucketfs_config: A BucketFSConfig with a non None BucketFSConnectionConfig
     :param with_credentials: If True, this function generates a url with basic authentication, default False
     :return: HTTP[S] URL of the BucketFS
@@ -100,6 +103,7 @@ def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[
     """
     This function generates an HTTP[s] url for the given bucket or the path in the bucket
     with or without basic authentication  (a template: http[s]://user:password@host:port)
+
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig must be not None
     :param path_in_bucket:  If not None, path_in_bucket gets concatenated to the path of the bucket
     :param with_credentials: If True, this function generates a url with basic authentication, default False
