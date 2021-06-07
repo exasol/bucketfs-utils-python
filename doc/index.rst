@@ -1,7 +1,3 @@
-#####################
-BucketFS Utils Python
-#####################
-
 .. include:: overview.rst
 
 *****************
@@ -11,7 +7,7 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
 
-   user_guide/user_guide.md
+   user_guide/user_guide.rst
 
 *************
 API Reference
