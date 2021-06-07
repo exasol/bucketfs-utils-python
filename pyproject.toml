@@ -10,7 +10,7 @@ authors = [
     "Anastasiia Sergienko <anastasiia.sergienko@exasol.com>"
 ]
 
-readme = 'README.md'
+readme = 'README.rst'
 
 repository = "https://github.com/exasol/bucketfs-utils-python"
 homepage = "https://github.com/exasol/bucketfs-utils-python"
@@ -27,9 +27,11 @@ typeguard = "^2.11.1"
 pytest = "^6.1.1"
 pytest-cov = "^2.10.1"
 Sphinx = "^3.5.3"
-taskipy = "^1.6.0"
-sphinx-automodapi = "^0.13"
+poethepoet = "^0.10.0"
+myst-parser = "^0.14.0"
 
-[tool.taskipy.tasks]
-html_docs = "make html"
+[tool.poe.tasks]
+build-html-doc = {shell = "cd $(git rev-parse --show-toplevel)/doc; make clean-build; make html" }
+open-html-doc = { shell = "xdg-open doc/_build/html/index.html" }
+open-build-html-doc [ "build-html-doc", "open-html-doc" ]
 test =  "pytest tests"
