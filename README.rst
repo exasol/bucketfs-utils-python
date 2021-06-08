@@ -39,8 +39,6 @@ Table of Contents
 Information for Users
 =====================
 
-:ref:`user-guide`
-
 Information for Developers
 ==========================
 
