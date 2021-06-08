@@ -30,7 +30,7 @@ then
   git worktree add "$WORKTREE" "$TARGET_BRANCH"
 else
   echo "Checkout new branch $TARGET_BRANCH"
-  git worktree add -b "$TARGET_BRANCH" "$WORKTREE" github-pages/main
+  git worktree add -b "$TARGET_BRANCH" "$WORKTREE" "github-pages/main"
 fi
 sphinx-build -M html "$SCRIPT_DIR" "$BUILD_DIR" -W
 rm -rf  "${WORKTREE:?}/"*
