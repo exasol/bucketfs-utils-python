@@ -1,0 +1,26 @@
+name: Build and push documentation for current branch
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  create_github_pages_docs:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.6]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install poetry
+      uses: abatilo/actions-poetry@v2.0.0
+    - name: Test deploy documentation to github-pages-main branch
+      run: poetry run poe commit-html-doc-to-github-pages-current
