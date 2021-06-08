@@ -1,6 +1,9 @@
 name: Check if setup.py is up to date
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - github-pages/*
 
 jobs:
   check_setup_py:

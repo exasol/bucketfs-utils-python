@@ -4,6 +4,7 @@ on:
   push:
     branches-ignore:
       - main
+      - github-pages/*
 
 jobs:
   create_github_pages_docs:

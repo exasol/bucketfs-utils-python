@@ -1,6 +1,9 @@
 name: Run pytest tests
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches-ignore:
+      - github-pages/*
 
 jobs:
   integration_tests:
