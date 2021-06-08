@@ -31,5 +31,4 @@ jobs:
       run: |
         git fetch
         git branch -v
-        git checkout github-pages/main
-        #poetry run poe commit-html-doc-to-github-pages-current
+        poetry run poe commit-html-doc-to-github-pages-current
