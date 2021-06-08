@@ -31,14 +31,3 @@ Features
 * Object-based specification of BucketFS connection information
 * Download into or upload from files, file objects, string and objects ((De-)Serialization with [Joblib](https://joblib.readthedocs.io/en/latest/persistence.html))
 * Loading files directly from Github Releases
-
-*****************
-Table of Contents
-*****************
-
-Information for Users
-=====================
-
-Information for Developers
-==========================
-
