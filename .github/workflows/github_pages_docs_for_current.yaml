@@ -30,4 +30,6 @@ jobs:
     - name: Test deploy documentation to github-pages-main branch
       run: |
         git fetch
-        poetry run poe commit-html-doc-to-github-pages-current
+        git branch -v
+        git checkout github-pages/main
+        #poetry run poe commit-html-doc-to-github-pages-current
