@@ -24,5 +24,8 @@ jobs:
       uses: abatilo/actions-poetry@v2.0.0
       with:
         poetry-version: 1.1.4
+    - name: Poetry install
+      run: poetry install
     - name: Deploy documentation to github-pages-main branch
-      run: poetry run poe push-html-doc-to-github-pages-main
+      run: |
+        poetry run poe push-html-doc-to-github-pages-main
