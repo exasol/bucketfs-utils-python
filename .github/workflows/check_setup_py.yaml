@@ -16,6 +16,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - uses: abatilo/actions-poetry@v2.0.0
+      with:
+        poetry-version: 1.1.4
     - name: Run packaging update
       run: bash githooks/update_setup_py.sh
     - name: Show changes on working copy
