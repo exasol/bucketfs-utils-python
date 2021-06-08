@@ -30,4 +30,5 @@ jobs:
       run: poetry install
     - name: Deploy documentation to github-pages-main branch
       run: |
+        git fetch
         poetry run poe push-html-doc-to-github-pages-main

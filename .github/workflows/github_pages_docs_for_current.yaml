@@ -28,4 +28,6 @@ jobs:
     - name: Poetry install
       run: poetry install
     - name: Test deploy documentation to github-pages-main branch
-      run: poetry run poe commit-html-doc-to-github-pages-current
+      run: |
+        git fetch
+        poetry run poe commit-html-doc-to-github-pages-current
