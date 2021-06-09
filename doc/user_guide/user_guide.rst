@@ -2,6 +2,7 @@
 User Guide
 **********
 
-.. _user-guide:
+.. toctree::
+   :maxdepth: 1
 
-The exasol-bucketfs-utils-python package is a library which provides basic functionalities to interact with Exasol's BucketFS from python. 
+   upload_github_release_to_bucket

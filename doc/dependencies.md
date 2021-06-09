@@ -1,6 +1,6 @@
-## Dependencies
+# Dependencies
 
-### Run Time Dependencies
+## Run Time Dependencies
 
 | Dependency                    | Purpose                          | License            |
 |-------------------------------|----------------------------------|--------------------|
@@ -8,7 +8,7 @@
 | [Requests][requests]          | Allows to send HTTP/1.1 requests | Apache License 2.0 |
 
 
-### Test Dependencies
+## Test Dependencies
 
 | Dependency                    | Purpose                           | License           |
 |-------------------------------|-----------------------------------|-------------------|

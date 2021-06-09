@@ -25,6 +25,11 @@ Install the package from Github via `pip`:
 pip install -e git://github.com/exasol/bucketfs-utils-python.git@{tag name}#egg=exasol-bucketfs-utils-python
 ```
 
+Documentation
+-------------
+
+`Documentation for the latest release text <https://exasol.github.io/bucketfs-utils-python/>`_ is hosted on the Github Pages of this project.
+
 Features
 ========
 

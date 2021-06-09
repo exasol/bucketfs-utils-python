@@ -15,9 +15,11 @@ class GithubReleaseFileBucketFSUploader:
     def upload(self, address, username, password):
         """
         This method uploads the GitHub release into a selected Exasol bucket.
-        :param address: address in the format 'http://<host>:<port>/<bucket name>'
+
+        :param address: address in the format :samp:`http://{host}:{port}/{bucket name}`
         :param username: bucket writing username
         :param password: bucket writing password
+        :return: none
         """
         download_url = self.__extract_download_url()
         r_download = requests.get(download_url, stream=True)

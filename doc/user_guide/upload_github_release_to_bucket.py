@@ -1,10 +1,3 @@
-# Examples
-
-## Uploading GitHub Release to Bucket
-
-Example:
-
-```python
 from exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader import GithubReleaseFileBucketFSUploader
 
 release_uploader = \
@@ -14,4 +7,3 @@ release_uploader = \
                                         release_name="latest",
                                         path_inside_bucket="some/path/")
 release_uploader.upload("http://<host>:<port>/<bucket>/", "user", "password")
-```

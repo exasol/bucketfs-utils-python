@@ -1,13 +1,15 @@
-.. include:: overview.rst
+.. include:: ../README.rst
 
 *****************
 Table of Contents
 *****************
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   user_guide/user_guide.rst
+   user_guide/user_guide
+   dependencies
+   changes/changelog
 
 *************
 API Reference
