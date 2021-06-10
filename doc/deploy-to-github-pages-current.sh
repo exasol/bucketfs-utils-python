@@ -8,13 +8,10 @@ SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 SOURCE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [ "$SOURCE_BRANCH" != "main" ]
-then
-  BRANCH="github-pages/$SOURCE_BRANCH"
-  if [ -n "$SOURCE_BRANCH" ]
-  then
-    BRANCH="github-pages/$SOURCE_BRANCH"
-    bash "$SCRIPT_DIR/deploy-to-github-pages.sh" "$BRANCH" origin "$PUSH_ENABLED"
+if [ "$SOURCE_BRANCH" != "main" ]; then
+  if [ -n "$SOURCE_BRANCH" ]; then
+    TARGET_BRANCH="github-pages/$SOURCE_BRANCH"
+    bash "$SCRIPT_DIR/deploy-to-github-pages.sh" "$TARGET_BRANCH" origin "$PUSH_ENABLED" "$SOURCE_BRANCH"
   else
     echo "ERROR: Could not acquire your current checked out branch. Please check the state of your "
   fi
