@@ -73,10 +73,10 @@ git_commit_and_push() {
   echo "BRANCH=$SOURCE_BRANCH" >.source
   echo "COMMIT_ID=$CURRENT_COMMIT_ID" >>.source
   git add .
+  git config --local user.email "opensource@exasol.com"
+  git config --local user.name "GitHub Action"
   git diff-index --quiet HEAD || git commit --no-verify -m "Update documentation from source branch '$SOURCE_BRANCH' with commit id '$CURRENT_COMMIT_ID'"
   if [ -n "$PUSH_ORIGIN" ] && [ "$PUSH_ENABLED" == "push" ]; then
-    git config --local user.email "opensource@exasol.com"
-    git config --local user.name "GitHub Action"
     echo "Git push $PUSH_ORIGIN $TARGET_BRANCH"
     git push "$PUSH_ORIGIN" "$TARGET_BRANCH"
   fi
