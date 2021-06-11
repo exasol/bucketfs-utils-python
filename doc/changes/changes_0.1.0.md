@@ -2,6 +2,14 @@
 
 Code name: Initial implementation
 
-## Features
+## Summary
 
-#1: Added initial implementation.
+### Features
+
+  - #1: Added initial implementation.
+  - #6: Download file into fileobj, string or file
+  - #7: Upload file, string or fileboj
+  
+### Refactorings
+  - #15: Remove DepHell dependency, because it is not maintained anymore
+

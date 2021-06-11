@@ -32,9 +32,11 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosummary',
-    'myst_parser'
+    'myst_parser',
+    'sphinx.ext.autosectionlabel',
 ]
-
+# Make sure the target is unique
+autosectionlabel_prefix_document = True
 source_suffix = {
     '.rst': 'restructuredtext',
     '.txt': 'markdown',
