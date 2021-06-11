@@ -6,11 +6,11 @@ SOURCE_BRANCH="$4"
 
 set -euo pipefail
 
-detect_source_branch() {
+detect_or_verify_source_branch() {
   CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   if [ -z "$SOURCE_BRANCH" ]; then
     if [ -z "$CURRENT_BRANCH" ]; then
-      echo "Abort. Could detect current branch and no source branch given."
+      echo "Abort. Could not detect current branch and no source branch given."
       exit 1
     fi
     SOURCE_BRANCH="$CURRENT_BRANCH"
@@ -93,7 +93,7 @@ trap 'cleanup_trap' EXIT
 TARGET_BRANCH="$1"
 CURRENT_COMMIT_ID="$(git rev-parse HEAD)"
 
-detect_source_branch
+detect_or_verify_source_branch
 checkout_target_branch_as_worktree
 build_and_copy_documentation
 git_commit_and_push
