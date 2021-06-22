@@ -43,6 +43,10 @@ checkout_target_branch_as_worktree() {
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
     pushd "$WORKTREE"
     # We need to set the TARGET_BRANCH to the default branch
+    # The default branch from github for pages is gh-pages, but you can change that.
+    # Not using the default branch actually has benefits, because the branch gh-pages enforces some things.
+    # We use github-pages/root and github-pagesmain, because github-pages/root is the new git root for the github pages
+    # and main-branch replaces master-branch. Master is a banned word and we are going to migrate more and more repos to main.
     GH_PAGES_MAIN_BRANCH=origin/github-pages/main
     GH_PAGES_ROOT_BRANCH=origin/github-pages/root
     GH_PAGES_MAIN_BRANCH_EXISTS="$(git show-ref "refs/heads/$TARGET_BRANCH" || echo)"
