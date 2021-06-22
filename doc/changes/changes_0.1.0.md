@@ -9,7 +9,9 @@ Code name: Initial implementation
   - #1: Added initial implementation.
   - #6: Download file into fileobj, string or file
   - #7: Upload file, string or fileboj
+  - #29: Add sphinx documentation
   
 ### Refactorings
+
   - #15: Remove DepHell dependency, because it is not maintained anymore
 
