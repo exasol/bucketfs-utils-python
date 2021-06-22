@@ -43,8 +43,8 @@ checkout_target_branch_as_worktree() {
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
     pushd "$WORKTREE"
     # We need to set the TARGET_BRANCH to the default branch
-    GH_PAGES_MAIN_BRANCH=github-pages/main
-    GH_PAGES_ROOT_BRANCH=github-pages/root
+    GH_PAGES_MAIN_BRANCH=origin/github-pages/main
+    GH_PAGES_ROOT_BRANCH=origin/github-pages/root
     GH_PAGES_MAIN_BRANCH_EXISTS="$(git show-ref "refs/heads/$TARGET_BRANCH" || echo)"
     if [ -n "$GH_PAGES_MAIN_BRANCH_EXISTS" ]
     then
