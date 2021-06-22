@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Exasol BucketFS Utils Python'
-copyright = '2021, Torsten Kilias'
-author = 'Torsten Kilias'
+copyright = '2021, Exasol'
+author = 'Exasol'
 
 
 # -- General configuration ---------------------------------------------------
