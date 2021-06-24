@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 PUSH_ORIGIN="$2"
 PUSH_ENABLED="$3"
 SOURCE_BRANCH="$4"
@@ -37,24 +37,32 @@ checkout_target_branch_as_worktree() {
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
   else
     echo "Checkout new branch $TARGET_BRANCH"
-    # We create the branch with git branch and not with the -b option of git worktree, because the -b option seems to doesn't work in all cases
+    # We create the branch with git branch and not with the -b option of git worktree,
+    # because the -b option seems to doesn't work in all cases
     git branch "$TARGET_BRANCH"
-    # We need to create the worktree directly with the TARGET_BRANCH, because every other branch could be already checked out
+    # We need to create the worktree directly with the TARGET_BRANCH,
+    # because every other branch could be already checked out
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
     pushd "$WORKTREE"
     # We need to set the TARGET_BRANCH to the default branch
     # The default branch from github for pages is gh-pages, but you can change that.
     # Not using the default branch actually has benefits, because the branch gh-pages enforces some things.
-    # We use github-pages/root and github-pages/main, because github-pages/root is the new git root for the github pages
-    # and main-branch replaces master-branch. Master is a banned word and we are going to migrate more and more repos to main.
+    # We use github-pages/main with separate history for Github Pages,
+    # because automated commits to the main branch can cause problems and
+    # we don't want to mix the generated documentation with sources.
+    # Furthermore, Github Pages expects a certain directory structure in the repository
+    # which we only can provide with a separate history.
     GH_PAGES_MAIN_BRANCH=origin/github-pages/main
-    GH_PAGES_ROOT_BRANCH=origin/github-pages/root
-    GH_PAGES_MAIN_BRANCH_EXISTS="$(git show-ref "refs/heads/$TARGET_BRANCH" || echo)"
+    GH_PAGES_MAIN_BRANCH_EXISTS="$(git show-ref "refs/heads/$GH_PAGES_MAIN_BRANCH" || echo)"
     if [ -n "$GH_PAGES_MAIN_BRANCH_EXISTS" ]
     then
       git reset --hard "$GH_PAGES_MAIN_BRANCH"
     else
-      git reset --hard "$GH_PAGES_ROOT_BRANCH"
+      echo "Creating a new empty root commit for the Github Pages."
+
+      git checkout --orphan "$GH_PAGES_MAIN_BRANCH"
+      git reset --hard
+      git commit --no-verify --allow-empty -m 'Initial empty commit for Github Pages'
     fi
     popd
   fi
