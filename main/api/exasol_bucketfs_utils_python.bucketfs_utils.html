@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>exasol_bucketfs_utils_python.bucketfs_utils module &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="exasol_bucketfs_utils_python.download module" href="exasol_bucketfs_utils_python.download.html" />
+    <link rel="prev" title="exasol_bucketfs_utils_python.bucketfs_connection_config module" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-exasol_bucketfs_utils_python.bucketfs_utils">
+<span id="exasol-bucketfs-utils-python-bucketfs-utils-module"></span><h1>exasol_bucketfs_utils_python.bucketfs_utils module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.bucketfs_utils" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.bucketfs_utils.create_auth_object">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_utils.</span></code><code class="sig-name descname"><span class="pre">create_auth_object</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">requests.auth.HTTPBasicAuth</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_utils.create_auth_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.bucketfs_utils.generate_bucket_http_url">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_utils.</span></code><code class="sig-name descname"><span class="pre">generate_bucket_http_url</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_in_bucket</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.PurePosixPath</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_credentials</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">urllib.parse.ParseResult</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_utils.generate_bucket_http_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates an HTTP[s] url for the given bucket or the path in the bucket
+with or without basic authentication  (a template: http[s]://user:password&#64;host:port)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig must be not None</p></li>
+<li><p><strong>path_in_bucket</strong> – If not None, path_in_bucket gets concatenated to the path of the bucket</p></li>
+<li><p><strong>with_credentials</strong> – If True, this function generates a url with basic authentication, default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HTTP[S] URL of the bucket or the path in the bucket</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.bucketfs_utils.generate_bucket_udf_path">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_utils.</span></code><code class="sig-name descname"><span class="pre">generate_bucket_udf_path</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_in_bucket</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.PurePosixPath</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pathlib.PurePosixPath</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_utils.generate_bucket_udf_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates the path where UDFs can access the content of a bucket or
+the given path in a bucket in their file system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None</p></li>
+<li><p><strong>path_in_bucket</strong> – If not None, path_in_bucket gets concatenated to the path of the bucket</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Path of the bucket or the file in the Bucket in the file system of UDFs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.bucketfs_utils.generate_bucketfs_http_url">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_utils.</span></code><code class="sig-name descname"><span class="pre">generate_bucketfs_http_url</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucketfs_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html#exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig" title="exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig"><span class="pre">exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_credentials</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">urllib.parse.ParseResult</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_utils.generate_bucketfs_http_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates an HTTP[s] url for the given BucketFSConfig
+with or without basic authentication  (a template: http[s]://user:password&#64;host:port)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucketfs_config</strong> – A BucketFSConfig with a non None BucketFSConnectionConfig</p></li>
+<li><p><strong>with_credentials</strong> – If True, this function generates a url with basic authentication, default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HTTP[S] URL of the BucketFS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.bucketfs_utils.generate_bucketfs_udf_path">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_utils.</span></code><code class="sig-name descname"><span class="pre">generate_bucketfs_udf_path</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucketfs_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html#exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig" title="exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig"><span class="pre">exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pathlib.PurePosixPath</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_utils.generate_bucketfs_udf_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates the path where UDFs can access the content of a BucketFS in their file system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bucketfs_config</strong> – Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can be None</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Path of the given BucketFS in the file system of the UDFs</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Exasol BucketFS Utils Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/developer_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes/changelog.html">Changelog</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html">exasol_bucketfs_utils_python.bucket_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html">exasol_bucketfs_utils_python.bucketfs_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html">exasol_bucketfs_utils_python.bucketfs_connection_config module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.download.html">exasol_bucketfs_utils_python.download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html">exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.release_link_extractor.html">exasol_bucketfs_utils_python.release_link_extractor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.upload.html">exasol_bucketfs_utils_python.upload module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.html#module-exasol_bucketfs_utils_python">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul>
+      <li>Previous: <a href="exasol_bucketfs_utils_python.bucketfs_connection_config.html" title="previous chapter">exasol_bucketfs_utils_python.bucketfs_connection_config module</a></li>
+      <li>Next: <a href="exasol_bucketfs_utils_python.download.html" title="next chapter">exasol_bucketfs_utils_python.download module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Exasol.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/exasol_bucketfs_utils_python.bucketfs_utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>exasol_bucketfs_utils_python.download module &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader module" href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html" />
+    <link rel="prev" title="exasol_bucketfs_utils_python.bucketfs_utils module" href="exasol_bucketfs_utils_python.bucketfs_utils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-exasol_bucketfs_utils_python.download">
+<span id="exasol-bucketfs-utils-python-download-module"></span><h1>exasol_bucketfs_utils_python.download module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.download" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.download.download_from_bucketfs_to_file">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.download.</span></code><code class="sig-name descname"><span class="pre">download_from_bucketfs_to_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exasol_bucketfs_utils_python.download.download_from_bucketfs_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a file from the specified path in the bucket in the BucketFs and save as a local file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – BucketConfig for the bucket to download from</p></li>
+<li><p><strong>bucket_file_path</strong> – Path in the bucket to download the file from</p></li>
+<li><p><strong>local_file_path</strong> – File path to the local file to store the downloaded data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.download.download_from_bucketfs_to_fileobj">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.download.</span></code><code class="sig-name descname"><span class="pre">download_from_bucketfs_to_fileobj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileobj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">IO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exasol_bucketfs_utils_python.download.download_from_bucketfs_to_fileobj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a file from the specified path in the bucket in the BucketFs into a given
+<a class="reference external" href="https://docs.python.org/3/glossary.html#term-file-object">file object</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – BucketConfig for the bucket to download from</p></li>
+<li><p><strong>bucket_file_path</strong> – Path in the bucket to download the file from</p></li>
+<li><p><strong>fileobj</strong> – File object where the data of the file in the BucketFS is downloaded to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.download.download_from_bucketfs_to_string">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.download.</span></code><code class="sig-name descname"><span class="pre">download_from_bucketfs_to_string</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#exasol_bucketfs_utils_python.download.download_from_bucketfs_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a file from the specified path in the bucket in the BucketFs into a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – BucketConfig for the bucket to download from</p></li>
+<li><p><strong>bucket_file_path</strong> – Path in the bucket to download the file from</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The content of the file in the BucketFS as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.download.download_object_from_bucketfs_via_joblib">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.download.</span></code><code class="sig-name descname"><span class="pre">download_object_from_bucketfs_via_joblib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#exasol_bucketfs_utils_python.download.download_object_from_bucketfs_via_joblib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a file from the specified path in the bucket in the BucketFs and deserialize it via
+<a class="reference external" href="https://joblib.readthedocs.io/en/latest/generated/joblib.load.html#">joblib.load</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – BucketConfig for the bucket to download from</p></li>
+<li><p><strong>bucket_file_path</strong> – Path in the bucket to download the file from</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The deserialized object which was downloaded from the BucketFS</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Exasol BucketFS Utils Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/developer_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes/changelog.html">Changelog</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html">exasol_bucketfs_utils_python.bucket_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html">exasol_bucketfs_utils_python.bucketfs_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html">exasol_bucketfs_utils_python.bucketfs_connection_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_utils.html">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.download module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html">exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.release_link_extractor.html">exasol_bucketfs_utils_python.release_link_extractor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.upload.html">exasol_bucketfs_utils_python.upload module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.html#module-exasol_bucketfs_utils_python">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul>
+      <li>Previous: <a href="exasol_bucketfs_utils_python.bucketfs_utils.html" title="previous chapter">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
+      <li>Next: <a href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html" title="next chapter">exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Exasol.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/exasol_bucketfs_utils_python.download.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
