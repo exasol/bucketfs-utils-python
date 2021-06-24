@@ -96,8 +96,6 @@ git_commit_and_push() {
   echo "BRANCH=$SOURCE_BRANCH" >.source
   echo "COMMIT_ID=$CURRENT_COMMIT_ID" >>.source
   git add .
-  git config --local user.email "opensource@exasol.com"
-  git config --local user.name "GitHub Action"
   git diff-index --quiet HEAD || git commit --no-verify -m "Update documentation from source branch '$SOURCE_BRANCH' with commit id '$CURRENT_COMMIT_ID'"
   if [ -n "$PUSH_ORIGIN" ] && [ "$PUSH_ENABLED" == "push" ]; then
     echo "Git push $PUSH_ORIGIN $TARGET_BRANCH"
@@ -116,6 +114,8 @@ trap 'cleanup_trap' EXIT
 TARGET_BRANCH="$1"
 CURRENT_COMMIT_ID="$(git rev-parse HEAD)"
 
+git config --local user.email "opensource@exasol.com"
+git config --local user.name "GitHub Action"
 detect_or_verify_source_branch
 checkout_target_branch_as_worktree
 build_and_copy_documentation
