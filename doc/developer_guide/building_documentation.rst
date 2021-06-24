@@ -51,11 +51,10 @@ The scripts which are responsible for the deployment are::
     deploy-to-github-pages-main.sh # only applicable for the main branch and creates or updates github-pages/main
 
 
-We again a few shortcuts defined in our project.toml for poethepoet::
+We also provide a few shortcuts defined in our project.toml for poethepoet::
 
     poetry run poe commit-html-doc-to-github-pages-main # creates or updates github-pages/main locally
     poetry run poe push-html-doc-to-github-pages-main  # creates or updates github-pages/main and pushes it to origin
     poetry run poe commit-html-doc-to-github-pages-current  # creates or updates github-pages/<current-branch-name> locally
     poetry run poe push-html-doc-to-github-pages-current  # creates or updates github-pages/<current-branch-name> and pushes it to origin
-
 
