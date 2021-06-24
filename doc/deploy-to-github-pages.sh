@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 PUSH_ORIGIN="$2"
 PUSH_ENABLED="$3"
@@ -19,6 +20,7 @@ detect_or_verify_source_branch() {
     echo "Abort. Specified Source Branch doesn't correspond to the currently checked out branch $CURRENT_BRANCH."
     exit 1
   fi
+  echo "Detected current branch $CURRENT_BRANCH"
 }
 
 cleanup_trap() {
@@ -33,15 +35,13 @@ cleanup_trap() {
 checkout_target_branch_as_worktree() {
   TARGET_BRANCH_EXISTS="$(git show-ref "refs/heads/$TARGET_BRANCH" || echo)"
   if [ -n "$TARGET_BRANCH_EXISTS" ]; then
-    echo "Checkout existing branch $TARGET_BRANCH"
+    echo "Create worktree from existing branch $TARGET_BRANCH"
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
   else
-    echo "Checkout new branch $TARGET_BRANCH"
-    # We create the branch with git branch and not with the -b option of git worktree,
-    # because the -b option seems to doesn't work in all cases
-    git branch "$TARGET_BRANCH"
+    echo "Create worktree from new branch $TARGET_BRANCH"
     # We need to create the worktree directly with the TARGET_BRANCH,
     # because every other branch could be already checked out
+    git branch "$TARGET_BRANCH"
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
     pushd "$WORKTREE"
     # We need to set the TARGET_BRANCH to the default branch
@@ -52,17 +52,22 @@ checkout_target_branch_as_worktree() {
     # we don't want to mix the generated documentation with sources.
     # Furthermore, Github Pages expects a certain directory structure in the repository
     # which we only can provide with a separate history.
-    GH_PAGES_MAIN_BRANCH=origin/github-pages/main
-    GH_PAGES_MAIN_BRANCH_EXISTS="$(git show-ref "refs/heads/$GH_PAGES_MAIN_BRANCH" || echo)"
+    GH_PAGES_ROOT_BRANCH=github-pages/root # is needed to temporarly create a new root commit
+    GH_PAGES_MAIN_BRANCH=github-pages/main
+    GH_PAGES_MAIN_BRANCH_EXISTS="$(git show-ref "refs/heads/$PUSH_ORIGIN/$GH_PAGES_MAIN_BRANCH" || echo)"
     if [ -n "$GH_PAGES_MAIN_BRANCH_EXISTS" ]
     then
-      git reset --hard "$GH_PAGES_MAIN_BRANCH"
+      git reset --hard "$PUSH_ORIGIN/$GH_PAGES_MAIN_BRANCH"
     else
-      echo "Creating a new empty root commit for the Github Pages."
-
-      git checkout --orphan "$GH_PAGES_MAIN_BRANCH"
+      echo "Creating a new empty root commit for the Github Pages in root branch $GH_PAGES_ROOT_BRANCH."
+      git checkout --orphan "$GH_PAGES_ROOT_BRANCH"
       git reset --hard
       git commit --no-verify --allow-empty -m 'Initial empty commit for Github Pages'
+      echo "Reset target branch $TARGET_BRANCH to root branch $GH_PAGES_ROOT_BRANCH"
+      git checkout "$TARGET_BRANCH"
+      git reset --hard "$GH_PAGES_ROOT_BRANCH"
+      echo "Delete root branch $GH_PAGES_ROOT_BRANCH"
+      git branch -D "$GH_PAGES_ROOT_BRANCH"
     fi
     popd
   fi
@@ -74,9 +79,11 @@ build_and_copy_documentation() {
 
   echo "Generated HTML Output"
   HTML_OUTPUT_DIR="$BUILD_DIR/html/"
+  echo "Using HTML_OUTPUT_DIR=$HTML_OUTPUT_DIR"
   ls -la "$HTML_OUTPUT_DIR"
 
   OUTPUT_DIR="${WORKTREE:?}/${SOURCE_BRANCH:?}"
+  echo "Using OUTPUT_DIR=$OUTPUT_DIR"
   if [ -e "${OUTPUT_DIR}" ]; then
     echo "Removing existing output directory $OUTPUT_DIR"
     rm -rf "${OUTPUT_DIR}"
@@ -92,6 +99,7 @@ build_and_copy_documentation() {
 
 git_commit_and_push() {
   pushd "$WORKTREE"
+  echo "Current directory before commit and push $PWD"
   echo "Git commit"
   echo "BRANCH=$SOURCE_BRANCH" >.source
   echo "COMMIT_ID=$CURRENT_COMMIT_ID" >>.source
@@ -114,6 +122,19 @@ trap 'cleanup_trap' EXIT
 TARGET_BRANCH="$1"
 CURRENT_COMMIT_ID="$(git rev-parse HEAD)"
 
+echo "Commandline parameter"
+echo "TARGET_BRANCH=$TARGET_BRANCH"
+echo "PUSH_ORIGIN=$PUSH_ORIGIN"
+echo "PUSH_ENABLED=$PUSH_ENABLED"
+echo "SOURCE_BRANCH=$SOURCE_BRANCH"
+echo
+echo "Using following Directories:"
+echo "TMP=$TMP"
+echo "TMP=$TMP"
+echo "WORKTREE=$WORKTREE"
+echo "BUILD_DIR=$BUILD_DIR"
+echo "CURRENT_COMMIT_ID=$CURRENT_COMMIT_ID"
+echo
 detect_or_verify_source_branch
 checkout_target_branch_as_worktree
 build_and_copy_documentation
