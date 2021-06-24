@@ -10,7 +10,7 @@ authors = [
     "Anastasiia Sergienko <anastasiia.sergienko@exasol.com>"
 ]
 
-readme = 'README.md'
+readme = 'README.rst'
 
 repository = "https://github.com/exasol/bucketfs-utils-python"
 homepage = "https://github.com/exasol/bucketfs-utils-python"
@@ -18,7 +18,7 @@ homepage = "https://github.com/exasol/bucketfs-utils-python"
 keywords = ['exasol', 'bucketfs']
 
 [tool.poetry.dependencies]
-python = ">=3.6.1"
+python = ">=3.6.1,<4.0"
 requests = "^2.24.0"
 joblib="^1.0.1"
 typeguard = "^2.11.1"
@@ -26,3 +26,23 @@ typeguard = "^2.11.1"
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
 pytest-cov = "^2.10.1"
+Sphinx = "^3.5.3"
+poethepoet = "^0.10.0"
+myst-parser = "^0.14.0"
+
+[tool.poe.tasks]
+build-html-doc = {shell = """
+    cd "$(git rev-parse --show-toplevel)/doc";
+    make clean-build; make html
+    """ }
+open-html-doc = { shell = """
+    cd "$(git rev-parse --show-toplevel)/doc";
+    xdg-open _build/html/index.html""" }
+build-and-open-html-doc = [ "build-html-doc", "open-html-doc" ]
+
+commit-html-doc-to-github-pages-main = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-main.sh commit" }
+push-html-doc-to-github-pages-main = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-main.sh push" }
+commit-html-doc-to-github-pages-current = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-current.sh commit" }
+push-html-doc-to-github-pages-current = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-current.sh push" }
+
+test =  "pytest tests"

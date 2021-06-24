@@ -15,6 +15,7 @@ def upload_file_to_bucketfs(bucket_config: BucketConfig, bucket_file_path: str, 
         -> Tuple[ParseResult, PurePosixPath]:
     """
     This function uploads a file to the specified path in a bucket of the BucketFS.
+
     :param bucket_config: BucketConfig for the destination bucket
     :param bucket_file_path: Path in the bucket to upload the file to
     :param local_file_path: File path to the local file
@@ -29,6 +30,7 @@ def upload_fileobj_to_bucketfs(bucket_config: BucketConfig, bucket_file_path: st
     """
     This function uploads a `file object <https://docs.python.org/3/glossary.html#term-file-object>`_
     to the specified path in a bucket of the BucketFS.
+
     :param bucket_config: BucketConfig for the destination bucket
     :param bucket_file_path: Path in the bucket to upload the file to
     :param fileobj: File object which should be uploaded
@@ -48,6 +50,7 @@ def upload_string_to_bucketfs(bucket_config: BucketConfig, bucket_file_path: str
         -> Tuple[ParseResult, PurePosixPath]:
     """
     This function uploads a string to the specified path in a bucket of the BucketFS.
+
     :param bucket_config: BucketConfig for the destination bucket
     :param bucket_file_path: Path in the bucket to upload the file to
     :param string: String which should be uploaded
@@ -71,6 +74,7 @@ def upload_object_to_bucketfs_via_joblib(object: Any,
     This function serializes a python object with
     `joblib.dump <https://joblib.readthedocs.io/en/latest/generated/joblib.dump.html#>`_
     and uploads it to the specified path in a bucket of the BucketFS.
+
     :param object: Object which gets serialized and uploaded via joblib.dump
     :param bucket_config: BucketConfig for the destination bucket
     :param bucket_file_path: Path in the bucket to upload the file to
