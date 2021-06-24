@@ -29,6 +29,8 @@ jobs:
       run: poetry install
     - name: Test documentation deployment for current feature branch
       run: |
+        git config --local user.email "opensource@exasol.com"
+        git config --local user.name "GitHub Action"
         git fetch
         SOURCE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
         TARGET_BRANCH="$(doc/get_target_branch_name.sh "$SOURCE_BRANCH")"

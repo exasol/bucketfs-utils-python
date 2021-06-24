@@ -27,5 +27,7 @@ jobs:
       run: poetry install
     - name: Deploy documentation to github-pages-main branch
       run: |
+        git config --local user.email "opensource@exasol.com"
+        git config --local user.name "GitHub Action"
         git fetch
         poetry run poe push-html-doc-to-github-pages-main

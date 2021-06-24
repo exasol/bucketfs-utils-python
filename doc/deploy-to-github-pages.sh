@@ -114,8 +114,6 @@ trap 'cleanup_trap' EXIT
 TARGET_BRANCH="$1"
 CURRENT_COMMIT_ID="$(git rev-parse HEAD)"
 
-git config --local user.email "opensource@exasol.com"
-git config --local user.name "GitHub Action"
 detect_or_verify_source_branch
 checkout_target_branch_as_worktree
 build_and_copy_documentation
