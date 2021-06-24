@@ -8,6 +8,7 @@ Table of Contents
    :maxdepth: 1
 
    user_guide/user_guide
+   developer_guide/developer_guide
    dependencies
    changes/changelog
 
