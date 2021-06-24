@@ -4,8 +4,8 @@ Building the Documentation
 
 We are using Sphinx for generating the documentation of this project,
 because it is the default documentation tool for Python projects.
-Sphinx supports API generation for Python and with plugins also for other languages.
-Furthermore, it supports reStructuredText with proper cros-document references.
+Sphinx supports API documentation generation for Python and with plugins also for other languages.
+Furthermore, it supports reStructuredText with proper cross-document references.
 We using the MyST-Parser to also integrate markdown files into the documentation.
 
 ######################################################
@@ -19,16 +19,16 @@ which allow you to build and view the documentation during coding::
     poetry run poe open-html-doc # Opens the currently build documentation in the browser
     poetry run poe build-and-open-html-doc # Builds and opens the documentation
 
-All three commands build use the builded documentation located in/doc/_build/
-which is excluded in gitignore. If you want to build the documentation to other formats than HTML,
+All three build commands use the generated documentation located in /doc/_build/
+which is excluded in gitignore. If you want to build the documentation for other formats than HTML,
 you find a Makefile in /doc which allows you to run the sphinx build with other goals.
 
 ####################################
 Building the Documentation in the CI
 ####################################
 
-Building the Documentation in the CI is a bit different to what you do during coding,
-because we in also contains the preperations for publishing. At the moment, we publish
+Building the documentation in the CI is a bit different to the steps you can use during coding,
+because it also contains the preparations for publishing. At the moment, we publish
 the documentation on Github Pages.
 
 To publish it there, we need to build the HTML from the documentation source and commit it.
@@ -38,7 +38,7 @@ a new Git root commit and initially set github-pages/main branch to this commit.
 We then add new commits to this branch to update existing or add new versions of the documentation.
 
 This has the additional benefit, that we don't have automatic commits to the source branch.
-We create for each branch or tag for which we build the documentation in the CI
+For each branch or tag for which we build the documentation in the CI
 we add a directory to the root directory of the github-pages/main branch.
 
 With each merge into the main branch the CI updates the documentation for the main branch in github-pages/main.
@@ -57,6 +57,5 @@ We again a few shortcuts defined in our project.toml for poethepoet::
     poetry run poe push-html-doc-to-github-pages-main  # creates or updates github-pages/main and pushes it to origin
     poetry run poe commit-html-doc-to-github-pages-current  # creates or updates github-pages/<current-branch-name> locally
     poetry run poe push-html-doc-to-github-pages-current  # creates or updates github-pages/<current-branch-name> and pushes it to origin
-
 
 
