@@ -1,5 +1,5 @@
 #!/bin/bash
-protected_branches=( master )
+protected_branches=( master main )
 for i in "${protected_branches[@]}"
 do
 
