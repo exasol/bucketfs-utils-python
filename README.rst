@@ -27,7 +27,7 @@ Install the package from Github via `pip`::
 Documentation
 -------------
 
-`Documentation for the latest release text <https://exasol.github.io/bucketfs-utils-python/>`_ is hosted on the Github Pages of this project.
+`Documentation for the latest release text <https://exasol.github.io/bucketfs-utils-python/main>`_ is hosted on the Github Pages of this project.
 
 Features
 ========
