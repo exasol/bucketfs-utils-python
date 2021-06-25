@@ -35,6 +35,9 @@ extensions = [
     'myst_parser',
     'sphinx.ext.autosectionlabel',
 ]
+
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
+
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
 source_suffix = {
