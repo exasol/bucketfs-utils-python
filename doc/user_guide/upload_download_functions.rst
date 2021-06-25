@@ -14,7 +14,7 @@ For more details, please refer to our
 Uploading and downloading data from and to files
 ################################################
 
-The simplest form of the download and upload functions simply uploads a local file to the BucketFS or
+In their simplest form the download and upload functions simply upload a local file to the BucketFS or
 download the data from the BucketFS into a local file.
 
 Example:
