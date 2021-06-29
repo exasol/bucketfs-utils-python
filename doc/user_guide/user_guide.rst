@@ -8,4 +8,6 @@ For a detailed explanation of the API, please refer to our :doc:`API Documentati
 .. toctree::
    :maxdepth: 1
 
+   upload_download_functions
    upload_github_release_to_bucket
+
