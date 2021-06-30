@@ -33,7 +33,7 @@ cleanup_trap() {
 }
 
 checkout_target_branch_as_worktree() {
-  TARGET_BRANCH_EXISTS="$(git show-ref "refs/heads/$TARGET_BRANCH" || echo)"
+  TARGET_BRANCH_EXISTS="$(git show-branch "remotes/origin/$TARGET_BRANCH" || echo)"
   if [ -n "$TARGET_BRANCH_EXISTS" ]; then
     echo "Create worktree from existing branch $TARGET_BRANCH"
     git worktree add "$WORKTREE" "$TARGET_BRANCH"
