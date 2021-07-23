@@ -16,11 +16,13 @@ detect_or_verify_source_branch() {
     fi
     SOURCE_BRANCH="$CURRENT_BRANCH"
   fi
-  if [ "$SOURCE_BRANCH" != "$CURRENT_BRANCH" ]; then
-    echo "Abort. Specified Source Branch doesn't correspond to the currently checked out branch $CURRENT_BRANCH."
-    exit 1
+  SOURCE_BRANCH_COMMIT_ID="$(git rev-parse "$SOURCE_BRANCH")"
+  if [ "$CURRENT_COMMIT_ID" != "$SOURCE_BRANCH_COMMIT_ID" ]
+  then
+      echo "Abort. Current commit id $CURRENT_COMMIT_ID and commit id of source branch $SOURCE_BRANCH_COMMIT_ID are not equal."
+      exit 1
   fi
-  echo "Detected current branch $CURRENT_BRANCH"
+  echo "Detected source branch $SOURCE_BRANCH"
 }
 
 cleanup_trap() {
@@ -104,8 +106,8 @@ git_commit_and_push() {
   pushd "$WORKTREE"
   echo "Current directory before commit and push $PWD"
   echo "Git commit"
-  echo "BRANCH=$SOURCE_BRANCH" >.source
-  echo "COMMIT_ID=$CURRENT_COMMIT_ID" >>.source
+  echo "BRANCH=$SOURCE_BRANCH" > "$OUTPUT_DIR/.source"
+  echo "COMMIT_ID=$CURRENT_COMMIT_ID" >> "$OUTPUT_DIR/.source"
   git add .
   git diff-index --quiet HEAD || git commit --no-verify -m "Update documentation from source branch '$SOURCE_BRANCH' with commit id '$CURRENT_COMMIT_ID'"
   if [ -n "$PUSH_ORIGIN" ] && [ "$PUSH_ENABLED" == "push" ]; then

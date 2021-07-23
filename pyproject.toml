@@ -50,5 +50,8 @@ commit-html-doc-to-github-pages-main = { shell = "cd $(git rev-parse --show-topl
 push-html-doc-to-github-pages-main = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-main.sh push" }
 commit-html-doc-to-github-pages-current = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-current.sh commit" }
 push-html-doc-to-github-pages-current = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-current.sh push" }
+commit-html-doc-to-github-pages-release = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-release.sh commit" }
+push-html-doc-to-github-pages-release = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-release.sh push" }
+
 
 test =  "pytest tests"
