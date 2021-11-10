@@ -8,7 +8,7 @@ from exasol_bucketfs_utils_python.bucketfs_location import BucketFSLocation
 
 
 def test_upload_download_string_with_different_instance():
-    connection_config = BucketFSConnectionConfig(host="localhost", port=6583, user="w", pwd="write", is_https=False)
+    connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig("bfsdefault", connection_config=connection_config)
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     bucket_base_path = PurePosixPath("test")
@@ -30,7 +30,7 @@ class TestValue():
 
 
 def test_upload_download_obj_with_different_instance():
-    connection_config = BucketFSConnectionConfig(host="localhost", port=6583, user="w", pwd="write", is_https=False)
+    connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig("bfsdefault", connection_config=connection_config)
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
     bucket_base_path = PurePosixPath("test")
