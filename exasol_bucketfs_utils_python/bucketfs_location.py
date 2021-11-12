@@ -14,7 +14,7 @@ class BucketFSLocation(AbstractBucketFSLocation):
         self.base_path = base_path
         self.bucket_config = bucket_config
 
-    def get_complete_file_path_in_bucket(self, bucket_file_path) -> str:
+    def get_complete_file_path_in_bucket(self, bucket_file_path: str) -> str:
         return str(PurePosixPath(self.base_path, bucket_file_path))
 
     def download_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
