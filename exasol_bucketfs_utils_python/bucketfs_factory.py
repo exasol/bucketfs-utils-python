@@ -12,7 +12,7 @@ from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import LocalFSM
 
 class BucketFSFactory:
 
-    def create_bucketfs_location(self, url: str, user: str, pwd: str, base_path: Union[PurePosixPath, None] = None):
+    def create_bucketfs_location(self, url: str, user: str, pwd: str, base_path: Optional[PurePosixPath] = None):
         """
         Create BucketFSLocation from the the url given. If the url has the schema http:// or https://,
         this function creates a real BucketFSLocation for a url scheme file:/// we create a LocalFSMockBucketFSLocation.
