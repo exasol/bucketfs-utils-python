@@ -13,4 +13,4 @@ Code name: Initial implementation
 ### Refactorings
 
   - #15: Remove DepHell dependency, because it is not maintained anymore
-  - #46: Moved BucketFS Location over from exasol_data_science_utils_python
+  - #42: Moved BucketFS Location over from exasol_data_science_utils_python

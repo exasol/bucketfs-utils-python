@@ -8,6 +8,12 @@ from exasol_bucketfs_utils_python.abstract_bucketfs_location import AbstractBuck
 
 
 class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
+    """
+    LocalFSMockBucketFSLocation implements AbstractBucketFSLocation.
+    Mockup for use/testing of the BucketFSLocation for a local File System.
+    Used to upload fileobjects, strings or joblib objects to the LocalFS given a path and the object,
+    or to download objects into strings, fileobjects or joblib objects from the LocalFS given a file path.
+    """
 
     def __init__(self, base_path: PurePosixPath):
         self.base_path = base_path

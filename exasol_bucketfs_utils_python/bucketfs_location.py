@@ -9,6 +9,11 @@ from exasol_bucketfs_utils_python.abstract_bucketfs_location import AbstractBuck
 
 
 class BucketFSLocation(AbstractBucketFSLocation):
+    """
+    BucketFSLocation implements AbstractBucketFSLocation.
+    BucketFSLocation is used to upload fileobjects, strings or joblib objects to the BucketFS given a path and the object,
+    or to download objects into strings, fileobjects or joblib objects from the BucketFS given a file path.
+    """
 
     def __init__(self, bucket_config: BucketConfig, base_path: PurePosixPath):
         self.base_path = base_path

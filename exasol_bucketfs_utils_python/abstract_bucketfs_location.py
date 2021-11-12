@@ -4,6 +4,9 @@ from typing import Any
 
 
 class AbstractBucketFSLocation(ABC):
+    """
+    Abstract class for a BucketFSLocation for uploading and downloading strings, filesobjects and joblib objects.
+    """
 
     @abstractmethod
     def download_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
