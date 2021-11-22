@@ -43,7 +43,7 @@ def upload_language_container(pyexasol_connection, language_container):
     alter_session = Path(language_container["alter_session"])
     pyexasol_connection.execute(f"ALTER SYSTEM SET SCRIPT_LANGUAGES='{alter_session}'")
     pyexasol_connection.execute(f"ALTER SESSION SET SCRIPT_LANGUAGES='{alter_session}'")
-    with open(container_path, "rb") as container_file: #TODO
+    with open(container_path, "rb") as container_file:
         container_bucketfs_location.upload_fileobj_to_bucketfs(container_file, "ml.tar")
 
 
@@ -79,7 +79,6 @@ def upload_testfile_to_BucketFS(bucket_config: BucketConfig, file_path: str, con
             bucket_config=bucket_config,
             bucket_file_path=file_path,
             local_file_path=Path(input_temp_file.name))
-
 
 def test_load_file_to_string(upload_language_container, pyexasol_connection, bucketfs_location):
     test_input_string = "test_string"
