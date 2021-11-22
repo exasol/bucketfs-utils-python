@@ -2,6 +2,8 @@ from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_udf_path
 import typing
 from pathlib import Path
+from tempfile import NamedTemporaryFile
+import joblib
 # TODO remove class
 
 class LoadFromLocalFS:
@@ -40,12 +42,13 @@ class LoadFromLocalFS:
             file.seek(0)
             fileobj.write(file.read())
 
-        #return fileobj
-
-
-    def read_file_from_bucketfs_via_joblib(self, ctx, exa, bucket_config: BucketConfig):
+    def read_file_from_bucketfs_via_joblib(self, ctx, exa, bucket_config: BucketConfig) -> typing.Any:
         """
 
         """
-        # to file
-        pass
+        with NamedTemporaryFile() as temp_file:
+            self.read_file_from_bucketfs_to_fileobj(ctx, exa, bucket_config, temp_file)
+            temp_file.flush()
+            temp_file.seek(0)
+            obj = joblib.load(temp_file)
+            return obj
