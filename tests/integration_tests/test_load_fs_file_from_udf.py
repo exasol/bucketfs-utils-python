@@ -7,8 +7,8 @@ from tempfile import NamedTemporaryFile
 import requests
 
 from exasol_udf_mock_python.connection import Connection
-                                                            #TODO something is strange with poetry install of
-                                                            # exasol_udf_mock_python and dill
+# todo commit toml and change changes with dill version
+# todo move um into test folder
 
 from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_http_url, create_auth_object
 from exasol_bucketfs_utils_python.bucketfs_factory import BucketFSFactory
@@ -62,7 +62,7 @@ def bucketfs_location():
     return container_bucketfs_location
 
 
-# TODO test for missing file? test for wrong file format, invalid bucket obj, error while writing?
+# TODO test for missing file, test for wrong file format, invalid bucket obj, error while writing
 
 def delete_testfile_from_BucketFS(bucket_config: BucketConfig, file_path: str):
     url = generate_bucket_http_url(bucket_config, file_path)
@@ -113,9 +113,8 @@ def test_load_file_to_string(upload_language_container, pyexasol_connection, buc
                 
             def run(ctx):
                 bucket_config = get_bucket_config()
-                from exasol_bucketfs_utils_python.load_file_from_local_fs import LoadFromLocalFS
-                udf = LoadFromLocalFS()
-                output_test_string = udf.read_file_from_bucketfs_to_string(ctx, exa, bucket_config)
+                from exasol_bucketfs_utils_python.load_file_from_local_fs import read_file_from_bucketfs_to_string
+                output_test_string = read_file_from_bucketfs_to_string(ctx.path, bucket_config)
                 return output_test_string
             """)
         pyexasol_connection.execute(udf_sql)
@@ -163,10 +162,9 @@ def test_load_file_to_fileObj(upload_language_container, pyexasol_connection, bu
 
             def run(ctx):
                 bucket_config = get_bucket_config()
-                from exasol_bucketfs_utils_python.load_file_from_local_fs import LoadFromLocalFS
-                udf = LoadFromLocalFS()
+                from exasol_bucketfs_utils_python.load_file_from_local_fs import read_file_from_bucketfs_to_fileobj
                 with NamedTemporaryFile() as output_temp_file:
-                    udf.read_file_from_bucketfs_to_fileobj(ctx, exa, bucket_config, output_temp_file)
+                    read_file_from_bucketfs_to_fileobj(ctx.path, bucket_config, output_temp_file)
                     output_temp_file.flush()
                     output_temp_file.seek(0)
                     output_file_content = output_temp_file.read()
@@ -217,10 +215,9 @@ def test_load_file_to_file(upload_language_container, pyexasol_connection, bucke
 
             def run(ctx):
                 bucket_config = get_bucket_config()
-                from exasol_bucketfs_utils_python.load_file_from_local_fs import LoadFromLocalFS
-                udf = LoadFromLocalFS()
+                from exasol_bucketfs_utils_python.load_file_from_local_fs import read_file_from_bucketfs_to_file
                 with NamedTemporaryFile() as output_temp_file:
-                    udf.read_file_from_bucketfs_to_file(ctx, exa, bucket_config, Path(output_temp_file.name))
+                    read_file_from_bucketfs_to_file(ctx.path, bucket_config, Path(output_temp_file.name))
                     output_test_byte_string = output_temp_file.read()
                 return output_test_byte_string.decode('utf-8')
             """)
@@ -234,15 +231,6 @@ def test_load_file_to_file(upload_language_container, pyexasol_connection, bucke
                                       bucket_config=bucketfs_location.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
 
-class TestClass:
-    def __init__(self, attribute: str):
-        self.attribute = attribute
-
-    def __eq__(self, other: "TestClass"):
-        return isinstance(other, TestClass) and self.attribute == other.attribute
-
-    def __str__(self):
-        return "attribute = " + self.attribute
 
 def test_load_file_to_object_via_joblib(upload_language_container, pyexasol_connection, bucketfs_location):
     # TODO only works for python objects known inside the udf
@@ -283,11 +271,8 @@ def test_load_file_to_object_via_joblib(upload_language_container, pyexasol_conn
 
             def run(ctx):
                 bucket_config = get_bucket_config()
-                from exasol_bucketfs_utils_python.load_file_from_local_fs import LoadFromLocalFS
-                udf = LoadFromLocalFS()
-                output_test_python_object = udf.read_file_from_bucketfs_via_joblib(ctx, 
-                                                                                    exa, 
-                                                                                    bucket_config)
+                from exasol_bucketfs_utils_python.load_file_from_local_fs import read_file_from_bucketfs_via_joblib
+                output_test_python_object = read_file_from_bucketfs_via_joblib(ctx.path, bucket_config)
                 return str(output_test_python_object.bucketfs_name)
             """)
         pyexasol_connection.execute(udf_sql)
