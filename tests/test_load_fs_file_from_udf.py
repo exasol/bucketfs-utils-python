@@ -1,66 +1,21 @@
 import textwrap
 from pathlib import Path
 
-import pyexasol
 import pytest
 from tempfile import NamedTemporaryFile
 import requests
 
-from exasol_udf_mock_python.connection import Connection
-# todo commit toml and change changes with dill version
-# todo move um into test folder
+# todo change changes with dill version
 
 from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_http_url, create_auth_object
-from exasol_bucketfs_utils_python.bucketfs_factory import BucketFSFactory
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig, BucketFSConfig
 from exasol_bucketfs_utils_python import upload
 
 
-@pytest.fixture(scope="session")
-def db_connection():
-    db_connection = Connection(address=f"localhost:8888", user="sys", password="exasol")
-    return db_connection
 
-
-@pytest.fixture(scope="session")
-def pyexasol_connection(db_connection):
-    conn = pyexasol.connect(dsn=db_connection.address, user=db_connection.user, password=db_connection.password)
-    return conn
-
-
-@pytest.fixture(scope="session")
-def upload_language_container(pyexasol_connection, language_container):
-    container_connection = Connection(address=f"http://localhost:6666/default/container;bfsdefault",
-                                      user="w", password="write")
-    bucket_fs_factory = BucketFSFactory()
-    container_bucketfs_location = \
-        bucket_fs_factory.create_bucketfs_location(
-            url=container_connection.address,
-            user=container_connection.user,
-            pwd=container_connection.password,
-            base_path=None)
-    container_path = Path(language_container["container_path"])
-    alter_session = Path(language_container["alter_session"])
-    pyexasol_connection.execute(f"ALTER SYSTEM SET SCRIPT_LANGUAGES='{alter_session}'")
-    pyexasol_connection.execute(f"ALTER SESSION SET SCRIPT_LANGUAGES='{alter_session}'")
-    with open(container_path, "rb") as container_file:
-        container_bucketfs_location.upload_fileobj_to_bucketfs(container_file, "ml.tar")
-
-
-
-@pytest.fixture(scope="session")
-def bucketfs_location():
-    container_connection = Connection(address=f"http://localhost:6666/default/container;bfsdefault",
-                                      user="w", password="write")
-    bucket_fs_factory = BucketFSFactory()
-    container_bucketfs_location = \
-        bucket_fs_factory.create_bucketfs_location(
-            url=container_connection.address,
-            user=container_connection.user,
-            pwd=container_connection.password,
-            base_path=None)
-    return container_bucketfs_location
-
+@pytest.mark.usefixtures("upload_language_container",
+                         "pyexasol_connection",
+                         "bucketfs_location")
 
 # TODO test for missing file, test for wrong file format, invalid bucket obj, error while writing
 
