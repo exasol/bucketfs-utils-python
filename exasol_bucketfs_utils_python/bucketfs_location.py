@@ -14,6 +14,7 @@ class BucketFSLocation(AbstractBucketFSLocation):
     BucketFSLocation is used to upload fileobjects, strings or joblib objects to the BucketFS given a path and the object,
     or to download objects into strings, fileobjects or joblib objects from the BucketFS given a file path.
     Also able to read files from the BucketFS directly, if called from inside a UDF.
+    If reading an object via joblib inside an UDF, make sure the object type is known inside the UDF.
     """
 
     def __init__(self, bucket_config: BucketConfig, base_path: PurePosixPath):
@@ -64,14 +65,14 @@ class BucketFSLocation(AbstractBucketFSLocation):
 
     def read_file_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
         result = from_BFS.read_file_from_bucketfs_to_string(
-            bucket_file_path,
+            self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config
         )
         return result
 
     def read_file_from_bucketfs_via_joblib(self, bucket_file_path: str) -> typing.Any:
         result = from_BFS.read_file_from_bucketfs_via_joblib(
-            bucket_file_path,
+            self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config
         )
         return result
@@ -79,7 +80,7 @@ class BucketFSLocation(AbstractBucketFSLocation):
 
     def read_file_from_bucketfs_to_file(self, bucket_file_path: str, local_file_path: Path):
         result = from_BFS.read_file_from_bucketfs_to_file(
-            bucket_file_path,
+            self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config,
             local_file_path
         )
@@ -87,7 +88,7 @@ class BucketFSLocation(AbstractBucketFSLocation):
 
     def read_file_from_bucketfs_to_fileobj(self, bucket_file_path: str, fileobj: typing.IO):
         result = from_BFS.read_file_from_bucketfs_to_fileobj(
-            bucket_file_path,
+            self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config,
             fileobj
         )

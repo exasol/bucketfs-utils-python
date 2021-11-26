@@ -53,13 +53,13 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
                 f.write(chunk)
 
     def read_file_from_bucketfs_to_fileobj(self, bucket_file_path: str, fileobj: typing.IO):
-        bucket_path = self.base_path + bucket_file_path
+        bucket_path = self.get_complete_file_path_in_bucket(bucket_file_path)
         with open(bucket_path, "rb") as read_file:
             read_file.seek(0)
             fileobj.write(read_file.read())
 
     def read_file_from_bucketfs_to_file(self, bucket_file_path: str, local_file_path: Path):
-        with open(local_file_path) as fileobj:
+        with open(local_file_path, "wb") as fileobj:
             self.read_file_from_bucketfs_to_fileobj(bucket_file_path, fileobj)
 
     def read_file_from_bucketfs_to_string(self, bucket_file_path: str) -> str:

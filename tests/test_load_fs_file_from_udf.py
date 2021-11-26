@@ -137,7 +137,7 @@ def test_load_file_to_fileObj(upload_language_container, pyexasol_connection, bu
 
 def test_load_file_to_file(upload_language_container, pyexasol_connection, bucketfs_location):
     test_input_string = "test_file_string"
-    path_in_bucket = "path/in/bucket/file.txt"
+    path_in_bucket = "path/in/bucket/file_file.txt"
     # upload file
     upload_testfile_to_BucketFS(bucketfs_location.bucket_config, path_in_bucket, test_input_string)
     try:
@@ -188,7 +188,8 @@ def test_load_file_to_file(upload_language_container, pyexasol_connection, bucke
 
 
 def test_load_file_to_object_via_joblib(upload_language_container, pyexasol_connection, bucketfs_location):
-    # TODO only works for python objects known inside the udf
+    # only works for python objects known inside the udf.
+    # Therefore BucketFSConfig is used as a test object.
     path_in_bucket = "path/in/bucket/joblib_file.txt"
     test_python_object = BucketFSConfig("test_name")
     # upload file

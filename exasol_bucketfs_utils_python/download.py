@@ -60,7 +60,7 @@ def download_from_bucketfs_to_string(bucket_config: BucketConfig, bucket_file_pa
     return response.text
 
 
-def download_object_from_bucketfs_via_joblib(bucket_config: BucketConfig, bucket_file_path: str)-> typing.Any:
+def download_object_from_bucketfs_via_joblib(bucket_config: BucketConfig, bucket_file_path: str) -> typing.Any:
     """
     Download a file from the specified path in the bucket in the BucketFs and deserialize it via
     `joblib.load <https://joblib.readthedocs.io/en/latest/generated/joblib.load.html#>`_
