@@ -8,6 +8,7 @@ from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
 from exasol_bucketfs_utils_python.abstract_bucketfs_location import AbstractBucketFSLocation
 
+
 class BucketFSLocation(AbstractBucketFSLocation):
     """
     BucketFSLocation implements AbstractBucketFSLocation.
@@ -23,7 +24,6 @@ class BucketFSLocation(AbstractBucketFSLocation):
 
     def get_complete_file_path_in_bucket(self, bucket_file_path: str) -> str:
         return str(PurePosixPath(self.base_path, bucket_file_path))
-
 
     def download_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
         result = download.download_from_bucketfs_to_string(
