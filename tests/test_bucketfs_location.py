@@ -8,11 +8,10 @@ from exasol_bucketfs_utils_python.bucketfs_location import BucketFSLocation
 import pytest
 import textwrap
 from tests.test_load_fs_file_from_udf import delete_testfile_from_BucketFS, upload_testfile_to_BucketFS
-# TODO move these into a helper functs file?
 # TODO replace upload_testfile_to_BucketFS once missing funcs in BucketFSLocation are implemented
 
 
-def test_upload_download_string_with_different_instance():
+def test_upload_download_string_from_different_instance():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig("bfsdefault", connection_config=connection_config)
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
@@ -36,7 +35,7 @@ class TestValue():
         return self.value == self.value
 
 
-def test_upload_download_obj_with_different_instance(): #TODO better names?
+def test_upload_download_obj_from_different_instance():
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig("bfsdefault", connection_config=connection_config)
     bucket_config = BucketConfig(bucket_name="default", bucketfs_config=bucketfs_config)
@@ -52,7 +51,6 @@ def test_upload_download_obj_with_different_instance(): #TODO better names?
                                   bucket_config=bucketfs_location_upload.bucket_config)
 
 
-    #TODO add new test for read functs
 @pytest.mark.usefixtures("upload_language_container",
                              "pyexasol_connection",
                              "db_connection")

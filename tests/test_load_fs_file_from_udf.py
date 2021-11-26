@@ -5,19 +5,13 @@ import pytest
 from tempfile import NamedTemporaryFile
 import requests
 
-# todo change changes with dill version
-
 from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_http_url, create_auth_object
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig, BucketFSConfig
 from exasol_bucketfs_utils_python import upload
 
-
-
 @pytest.mark.usefixtures("upload_language_container",
                          "pyexasol_connection",
                          "bucketfs_location")
-
-# TODO test for missing file, test for wrong file format, invalid bucket obj, error while writing
 
 def delete_testfile_from_BucketFS(bucket_config: BucketConfig, file_path: str):
     url = generate_bucket_http_url(bucket_config, file_path)
@@ -34,6 +28,7 @@ def upload_testfile_to_BucketFS(bucket_config: BucketConfig, file_path: str, con
             bucket_config=bucket_config,
             bucket_file_path=file_path,
             local_file_path=Path(input_temp_file.name))
+
 
 def test_load_file_to_string(upload_language_container, pyexasol_connection, bucketfs_location):
     test_input_string = "test_string"
@@ -81,7 +76,6 @@ def test_load_file_to_string(upload_language_container, pyexasol_connection, buc
         delete_testfile_from_BucketFS(file_path=path_in_bucket,
                                       bucket_config=bucketfs_location.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
-
 
 def test_load_file_to_fileObj(upload_language_container, pyexasol_connection, bucketfs_location):
     test_input_string = "test_fileobj_string"

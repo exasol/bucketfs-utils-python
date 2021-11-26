@@ -3,7 +3,7 @@ from pathlib import Path
 
 from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import LocalFSMockBucketFSLocation
 
-def test_upload_download_string_with_different_instance():
+def test_upload_download_string_from_different_instance():
     with TemporaryDirectory() as path:
         bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
         bucketfs_location_download = LocalFSMockBucketFSLocation(path)
@@ -22,7 +22,7 @@ class TestValue():
         return self.value == self.value
 
 
-def test_upload_download_obj_with_different_instance(): #TODO also better names
+def test_upload_download_obj_from_different_instance():
     with TemporaryDirectory() as path:
         bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
         bucketfs_location_download = LocalFSMockBucketFSLocation(path)
@@ -35,7 +35,6 @@ def test_upload_download_obj_with_different_instance(): #TODO also better names
 
 def test_read_file_from_bucketfs_to_fileobj():
     with TemporaryDirectory() as path:
-        #bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
         bucketfs_location_read = LocalFSMockBucketFSLocation(path)
         bucket_file_path = "test_file.txt"
         test_byte_string = b"test_byte_string"
