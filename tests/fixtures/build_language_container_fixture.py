@@ -15,7 +15,7 @@ def find_script(script_name: str):
     if script_path.exists():
         return script_path
     else:
-        raise RuntimeError("Could not find build_language_container.sh")
+        raise RuntimeError(f"Could not find {script_name}")
 
 
 @pytest.fixture(scope="session")

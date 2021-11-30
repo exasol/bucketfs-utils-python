@@ -9,7 +9,7 @@ import joblib
 def read_file_from_bucketfs_to_string(bucket_file_path: str, bucket_config: BucketConfig) -> str:
     """
     Read a file from the specified path in the bucket in the BucketFs into a string.
-    Can be used inside a UDF.
+    Can be used inside of an UDF.
 
     :param bucket_config: BucketConfig for the bucket to read from
     :param bucket_file_path: Path in the bucket to the file to read, given as a string.
@@ -18,14 +18,15 @@ def read_file_from_bucketfs_to_string(bucket_file_path: str, bucket_config: Buck
     if bucket_file_path is None:
         raise ValueError("bucket_file_path can't be None")
     bucket_path = generate_bucket_udf_path(bucket_config, bucket_file_path)
-    text_as_string = open(bucket_path).read()
+    with open(bucket_path) as file:
+        text_as_string = file.read()
     return text_as_string
 
 
-def read_file_from_bucketfs_to_file(bucket_file_path: str, bucket_config: BucketConfig, local_file_path: Path):
+def read_file_from_bucketfs_to_file(bucket_file_path: str, bucket_config: BucketConfig, local_file_path: Path) -> None:
     """
     Read a file from the specified path in the bucket in the BucketFs and save as a local file
-    Can be used inside a UDF.
+    Can be used inside of an UDF.
 
     :param bucket_config: BucketConfig for the bucket to download from
     :param local_file_path: Path in the bucket to save the file content in.
@@ -36,11 +37,11 @@ def read_file_from_bucketfs_to_file(bucket_file_path: str, bucket_config: Bucket
         read_file_from_bucketfs_to_fileobj(bucket_file_path, bucket_config, fileobj=f)
 
 
-def read_file_from_bucketfs_to_fileobj(bucket_file_path: str, bucket_config: BucketConfig, fileobj: typing.IO):
+def read_file_from_bucketfs_to_fileobj(bucket_file_path: str, bucket_config: BucketConfig, fileobj: typing.IO) -> None:
     """
     Download a file from the specified path in the bucket in the BucketFs into a given
     `file object <https://docs.python.org/3/glossary.html#term-file-object>`_
-    Can be used inside a UDF.
+    Can be used inside of an UDF.
 
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to the file to read, given as a string.
@@ -59,7 +60,7 @@ def read_file_from_bucketfs_via_joblib(bucket_file_path: str, bucket_config: Buc
     """
     Download a file from the specified path in the bucket in the BucketFs and deserialize it via
     `joblib.load <https://joblib.readthedocs.io/en/latest/generated/joblib.load.html#>`_
-    Can be used inside a UDF. Only works for objects types known in the UDF.
+    Can be used inside of an UDF. Only works for objects types known in the UDF.
 
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to the file to read, given as a string.

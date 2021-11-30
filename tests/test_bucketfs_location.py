@@ -7,7 +7,7 @@ from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConn
 from exasol_bucketfs_utils_python.bucketfs_location import BucketFSLocation
 import pytest
 import textwrap
-from tests.test_load_fs_file_from_udf import delete_testfile_from_BucketFS, upload_testfile_to_BucketFS
+from tests.test_load_fs_file_from_udf import delete_testfile_from_bucketfs, upload_testfile_to_bucketfs
 # TODO replace upload_testfile_to_BucketFS once missing funcs in BucketFSLocation are implemented
 
 
@@ -23,7 +23,7 @@ def test_upload_download_string_from_different_instance():
     bucketfs_location_upload.upload_string_to_bucketfs(bucket_file_path, test_string)
     result = bucketfs_location_download.download_from_bucketfs_to_string(bucket_file_path)
     assert result == test_string
-    delete_testfile_from_BucketFS(file_path=str(bucket_base_path) + "/" + bucket_file_path,
+    delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                   bucket_config=bucketfs_location_upload.bucket_config)
 
 
@@ -47,13 +47,12 @@ def test_upload_download_obj_from_different_instance():
     bucketfs_location_upload.upload_object_to_bucketfs_via_joblib(test_value, bucket_file_path)
     result = bucketfs_location_download.download_object_from_bucketfs_via_joblib(bucket_file_path)
     assert result == test_value
-    delete_testfile_from_BucketFS(file_path=str(bucket_base_path) + "/" + bucket_file_path,
+    delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                   bucket_config=bucketfs_location_upload.bucket_config)
 
 
 @pytest.mark.usefixtures("upload_language_container",
-                             "pyexasol_connection",
-                             "db_connection")
+                         "pyexasol_connection")
 def test_read_files_to_str_from_bucketfs_inside_udf(upload_language_container, pyexasol_connection):
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig("bfsdefault", connection_config=connection_config)
@@ -106,7 +105,7 @@ def test_read_files_to_str_from_bucketfs_inside_udf(upload_language_container, p
             )""").fetchall()
         assert output_test_string[0][0] == test_string
     finally:
-        delete_testfile_from_BucketFS(file_path=str(bucket_base_path) + "/" + bucket_file_path,
+        delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                       bucket_config=bucketfs_location_read.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
 
@@ -165,7 +164,7 @@ def test_read_files_via_joblib_from_bucketfs_inside_udf(upload_language_containe
             )""").fetchall()
         assert output_test_string[0][0] == test_python_object.bucketfs_name
     finally:
-        delete_testfile_from_BucketFS(file_path=str(bucket_base_path) + "/" + bucket_file_path,
+        delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                       bucket_config=bucketfs_location_read.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
 
@@ -177,7 +176,7 @@ def test_read_files_to_file_from_bucketfs_inside_udf(upload_language_container, 
     bucket_base_path = PurePosixPath("test_read_file")
     bucket_file_path = "test_file.txt"
     test_string = "test_string"
-    upload_testfile_to_BucketFS(bucket_config, str(bucket_base_path) + "/" + bucket_file_path, test_string)
+    upload_testfile_to_bucketfs(bucket_config, str(bucket_base_path) + "/" + bucket_file_path, test_string)
     bucketfs_location_read = BucketFSLocation(bucket_config, bucket_base_path)
 
     try:
@@ -223,7 +222,7 @@ def test_read_files_to_file_from_bucketfs_inside_udf(upload_language_container, 
             )""").fetchall()
         assert output_test_string[0][0] == test_string
     finally:
-        delete_testfile_from_BucketFS(file_path=str(bucket_base_path) + "/" + bucket_file_path,
+        delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                       bucket_config=bucketfs_location_read.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
 
@@ -235,7 +234,7 @@ def test_read_files_to_fileobj_from_bucketfs_inside_udf(upload_language_containe
     bucketfs_location_upload = BucketFSLocation(bucket_config, bucket_base_path)
     bucket_file_path = "test_file.txt"
     test_string = "test_string"
-    upload_testfile_to_BucketFS(bucket_config, str(bucket_base_path) + "/" + bucket_file_path, test_string)
+    upload_testfile_to_bucketfs(bucket_config, str(bucket_base_path) + "/" + bucket_file_path, test_string)
 
     bucketfs_location_read = BucketFSLocation(bucket_config, bucket_base_path)
 
@@ -284,6 +283,6 @@ def test_read_files_to_fileobj_from_bucketfs_inside_udf(upload_language_containe
             )""").fetchall()
         assert output_test_string[0][0] == test_string
     finally:
-        delete_testfile_from_BucketFS(file_path=str(bucket_base_path) + "/" + bucket_file_path,
+        delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                       bucket_config=bucketfs_location_read.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")

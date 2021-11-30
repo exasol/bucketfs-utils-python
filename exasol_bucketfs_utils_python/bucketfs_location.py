@@ -14,8 +14,8 @@ class BucketFSLocation(AbstractBucketFSLocation):
     BucketFSLocation implements AbstractBucketFSLocation.
     BucketFSLocation is used to upload fileobjects, strings or joblib objects to the BucketFS given a path and the object,
     or to download objects into strings, fileobjects or joblib objects from the BucketFS given a file path.
-    Also able to read files from the BucketFS directly, if called from inside a UDF.
-    If reading an object via joblib inside an UDF, make sure the object type is known inside the UDF.
+    Also able to read files from the BucketFS directly, if called from inside of an UDF.
+    If reading an object via joblib inside of an UDF, make sure the object type is known inside the UDF.
     """
 
     def __init__(self, bucket_config: BucketConfig, base_path: PurePosixPath):
@@ -77,19 +77,16 @@ class BucketFSLocation(AbstractBucketFSLocation):
         )
         return result
 
-
-    def read_file_from_bucketfs_to_file(self, bucket_file_path: str, local_file_path: Path):
-        result = from_BFS.read_file_from_bucketfs_to_file(
+    def read_file_from_bucketfs_to_file(self, bucket_file_path: str, local_file_path: Path) -> None:
+        from_BFS.read_file_from_bucketfs_to_file(
             self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config,
             local_file_path
         )
-        return result
 
-    def read_file_from_bucketfs_to_fileobj(self, bucket_file_path: str, fileobj: typing.IO):
-        result = from_BFS.read_file_from_bucketfs_to_fileobj(
+    def read_file_from_bucketfs_to_fileobj(self, bucket_file_path: str, fileobj: typing.IO) -> None:
+        from_BFS.read_file_from_bucketfs_to_fileobj(
             self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config,
             fileobj
         )
-        return result
