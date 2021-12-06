@@ -5,7 +5,7 @@ import pytest
 
 
 def find_script(script_name: str):
-    current_path = Path("./../fixtures/").absolute()
+    current_path = Path("../fixtures").absolute()
     script_path = None
     while current_path != current_path.root:
         script_path = Path(current_path, script_name)
