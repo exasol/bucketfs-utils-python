@@ -1,8 +1,9 @@
 import typing
-from pathlib import PurePosixPath
+from pathlib import PurePosixPath, Path
 from typing import Any
 
 from exasol_bucketfs_utils_python import download, upload
+from exasol_bucketfs_utils_python import load_file_from_local_fs as from_BFS
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
 from exasol_bucketfs_utils_python.abstract_bucketfs_location import AbstractBucketFSLocation
@@ -13,6 +14,8 @@ class BucketFSLocation(AbstractBucketFSLocation):
     BucketFSLocation implements AbstractBucketFSLocation.
     BucketFSLocation is used to upload fileobjects, strings or joblib objects to the BucketFS given a path and the object,
     or to download objects into strings, fileobjects or joblib objects from the BucketFS given a file path.
+    Also able to read files from the BucketFS directly, if called from inside of an UDF.
+    If reading an object via joblib inside of an UDF, make sure the object type is known inside the UDF.
     """
 
     def __init__(self, bucket_config: BucketConfig, base_path: PurePosixPath):
@@ -59,3 +62,31 @@ class BucketFSLocation(AbstractBucketFSLocation):
             self.get_complete_file_path_in_bucket(bucket_file_path),
             fileobj)
         return result
+
+    def read_file_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
+        result = from_BFS.read_file_from_bucketfs_to_string(
+            self.get_complete_file_path_in_bucket(bucket_file_path),
+            self.bucket_config
+        )
+        return result
+
+    def read_file_from_bucketfs_via_joblib(self, bucket_file_path: str) -> typing.Any:
+        result = from_BFS.read_file_from_bucketfs_via_joblib(
+            self.get_complete_file_path_in_bucket(bucket_file_path),
+            self.bucket_config
+        )
+        return result
+
+    def read_file_from_bucketfs_to_file(self, bucket_file_path: str, local_file_path: Path) -> None:
+        from_BFS.read_file_from_bucketfs_to_file(
+            self.get_complete_file_path_in_bucket(bucket_file_path),
+            self.bucket_config,
+            local_file_path
+        )
+
+    def read_file_from_bucketfs_to_fileobj(self, bucket_file_path: str, fileobj: typing.IO) -> None:
+        from_BFS.read_file_from_bucketfs_to_fileobj(
+            self.get_complete_file_path_in_bucket(bucket_file_path),
+            self.bucket_config,
+            fileobj
+        )

@@ -1,13 +1,14 @@
 import typing
 from abc import ABC, abstractmethod
 from typing import Any
+from pathlib import Path
 
 
 class AbstractBucketFSLocation(ABC):
     """
-    Abstract class for a BucketFSLocation for uploading and downloading strings, filesobjects and joblib objects.
+    Abstract class for a BucketFSLocation for uploading and downloading strings, fileobjects and joblib objects.
+    Also able to read files from the BucketFS directly, if called from inside a UDF.
     """
-
     @abstractmethod
     def download_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
         pass
@@ -30,4 +31,22 @@ class AbstractBucketFSLocation(ABC):
     def upload_fileobj_to_bucketfs(self,
                                    fileobj: typing.IO,
                                    bucket_file_path: str):
+        pass
+
+    # TODO add missing upload/download functions
+
+    @abstractmethod
+    def read_file_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
+        pass
+
+    @abstractmethod
+    def read_file_from_bucketfs_to_file(self, bucket_file_path: str, local_file_path: Path):
+        pass
+
+    @abstractmethod
+    def read_file_from_bucketfs_to_fileobj(self, bucket_file_path: str, fileobj: typing.IO):
+        pass
+
+    @abstractmethod
+    def read_file_from_bucketfs_via_joblib(self, bucket_file_path: str) -> typing.Any:
         pass
