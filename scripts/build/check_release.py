@@ -26,12 +26,12 @@ def get_poetry_version():
 
 def get_change_log_version():
     # Path overloads __truediv__
-    path_to_changelog = Path(__file__).parent / ".." / ".." / "doc" / "changes" / "changelog.rst"
+    path_to_changelog = Path(__file__).parent / ".." / ".." / "doc" / "changes" / "changelog.md"
     with open(path_to_changelog) as changelog:
         changelog_str = changelog.read()
         # Search for the FIRST pattern like: "* [0.5.0](changes_0.5.0.md)" in the changelog file.
         # Note that we encapsulate the [(0.5.0)] with parenthesis, which tells re to return the matching string as group
-        version_match = re.search(r"changes_([0-9]+.[0-9]+.[0-9]+)", changelog_str)
+        version_match = re.search(r"\* \[([0-9]+.[0-9]+.[0-9]+)]\(\S+\)", changelog_str)
         return version_match.groups()[0]
 
 
