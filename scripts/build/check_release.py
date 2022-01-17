@@ -11,9 +11,12 @@ def get_git_version():
     assert not repo.bare
     tag_strings = [t.name for t in repo.tags]
     tag_strings.sort(reverse=True)
-
-    latest_tag = tag_strings[0].strip()
-    return latest_tag
+    
+    if len(tag_strings) > 0:
+        latest_tag = tag_strings[0].strip()
+        return latest_tag
+    else:
+        return None
 
 
 def get_poetry_version():
@@ -23,11 +26,12 @@ def get_poetry_version():
 
 def get_change_log_version():
     # Path overloads __truediv__
-    with open(Path(__file__).parent / ".." / ".." / "doc" / "changes" / "changelog.md") as changelog:
+    path_to_changelog = Path(__file__).parent / ".." / ".." / "doc" / "changes" / "changelog.rst"
+    with open(path_to_changelog) as changelog:
         changelog_str = changelog.read()
         # Search for the FIRST pattern like: "* [0.5.0](changes_0.5.0.md)" in the changelog file.
         # Note that we encapsulate the [(0.5.0)] with parenthesis, which tells re to return the matching string as group
-        version_match = re.search(r"\* \[([0-9]+.[0-9]+.[0-9]+)]\(\S+\)", changelog_str)
+        version_match = re.search(r"changes_([0-9]+.[0-9]+.[0-9]+)", changelog_str)
         return version_match.groups()[0]
 
 
@@ -40,7 +44,7 @@ if __name__ == '__main__':
     print(f'Latest git tag: "{latest_tag}"')
 
 
-    if latest_tag == "" and poetry_version != "0.1.0":
+    if latest_tag is None and poetry_version != "0.1.0":
         raise ValueError("You don't have yet a release. Your Poetry version needs to be 0.1.0!")
 
     # We expect that the current version in pyproject.toml is alway greater than the latest tag.
