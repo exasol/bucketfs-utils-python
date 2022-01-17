@@ -74,6 +74,9 @@ checkout_target_branch_as_worktree() {
 }
 
 build_and_copy_documentation() {
+  echo "Build api-doc"
+  sphinx-apidoc -T -d 1 --separate -o "$SCRIPT_DIR/api" "$SCRIPT_DIR/exasol_bucketfs_utils_python"
+
   echo "Build with sphinx"
   sphinx-build -M html "$SCRIPT_DIR" "$BUILD_DIR" -W
 
