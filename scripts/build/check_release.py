@@ -13,7 +13,6 @@ def get_git_version():
     tag_strings.sort(reverse=True)
 
     latest_tag = tag_strings[0].strip()
-    assert len(latest_tag) > 0
     return latest_tag
 
 
@@ -39,6 +38,10 @@ if __name__ == '__main__':
     print(f'Changelog version: "{changelog_version}"')
     print(f'Current version: "{poetry_version}"')
     print(f'Latest git tag: "{latest_tag}"')
+
+
+    if latest_tag == "" and poetry_version != "0.1.0":
+        raise ValueError("You don't have yet a release. Your Poetry version needs to be 0.1.0!")
 
     # We expect that the current version in pyproject.toml is alway greater than the latest tag.
     # Thus we avoid creating a release without having the version number updated.
