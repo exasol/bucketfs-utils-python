@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>exasol_bucketfs_utils_python.bucket_config module &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <title>exasol_bucketfs_utils_python.bucketfs_factory module &#8212; Exasol BucketFS Utils Python  documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="exasol_bucketfs_utils_python.bucketfs_config module" href="exasol_bucketfs_utils_python.bucketfs_config.html" />
-    <link rel="prev" title="exasol_bucketfs_utils_python.abstract_bucketfs_location module" href="exasol_bucketfs_utils_python.abstract_bucketfs_location.html" />
+    <link rel="next" title="exasol_bucketfs_utils_python.bucketfs_location module" href="exasol_bucketfs_utils_python.bucketfs_location.html" />
+    <link rel="prev" title="exasol_bucketfs_utils_python.bucketfs_connection_config module" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,23 +32,26 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-exasol_bucketfs_utils_python.bucket_config">
-<span id="exasol-bucketfs-utils-python-bucket-config-module"></span><h1>exasol_bucketfs_utils_python.bucket_config module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.bucket_config" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-exasol_bucketfs_utils_python.bucketfs_factory">
+<span id="exasol-bucketfs-utils-python-bucketfs-factory-module"></span><h1>exasol_bucketfs_utils_python.bucketfs_factory module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.bucketfs_factory" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="exasol_bucketfs_utils_python.bucket_config.BucketConfig">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucket_config.</span></code><code class="sig-name descname"><span class="pre">BucketConfig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucketfs_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html#exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig" title="exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig"><span class="pre">exasol_bucketfs_utils_python.bucketfs_config.BucketFSConfig</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="Permalink to this definition">¶</a></dt>
+<dt id="exasol_bucketfs_utils_python.bucketfs_factory.BucketFSFactory">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_factory.</span></code><code class="sig-name descname"><span class="pre">BucketFSFactory</span></code><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_factory.BucketFSFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>The BucketConfig contains all required information about a BucketFS
-to access it either via HTTP[S] or in the file system inside of UDFs.</p>
+<p>Creates a BucketFSLocation given an url.</p>
 <dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucket_config.BucketConfig.bucket_name">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">bucket_name</span></code><a class="headerlink" href="#exasol_bucketfs_utils_python.bucket_config.BucketConfig.bucket_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucket_config.BucketConfig.bucketfs_config">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">bucketfs_config</span></code><a class="headerlink" href="#exasol_bucketfs_utils_python.bucket_config.BucketConfig.bucketfs_config" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="exasol_bucketfs_utils_python.bucketfs_factory.BucketFSFactory.create_bucketfs_location">
+<code class="sig-name descname"><span class="pre">create_bucketfs_location</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pwd</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.PurePosixPath" title="(in Python v3.10)"><span class="pre">pathlib.PurePosixPath</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_factory.BucketFSFactory.create_bucketfs_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create BucketFSLocation from the the url given. If the url has the schema <a class="reference external" href="http://">http://</a> or <a class="reference external" href="https://">https://</a>,
+this function creates a real BucketFSLocation for a url scheme <a class="reference external" href="file:///">file:///</a> we create a LocalFSMockBucketFSLocation.
+For url with  <a class="reference external" href="http://">http://</a> or <a class="reference external" href="https://">https://</a> schema you also need to provide the bucketfs-name via a url parameter.
+A url would look like the following: http[s]://&lt;host&gt;:&lt;port&gt;/&lt;bucket_name&gt;/&lt;path_in_bucket&gt;;&lt;bucketfs_name&gt;
+:param url:
+:param user:
+:param pwd:
+:param base_path:
+:return:</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -81,10 +84,10 @@ to access it either via HTTP[S] or in the file system inside of UDFs.</p>
 <li class="toctree-l1 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.abstract_bucketfs_location.html">exasol_bucketfs_utils_python.abstract_bucketfs_location module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.bucket_config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html">exasol_bucketfs_utils_python.bucket_config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html">exasol_bucketfs_utils_python.bucketfs_config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html">exasol_bucketfs_utils_python.bucketfs_connection_config module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_factory.html">exasol_bucketfs_utils_python.bucketfs_factory module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.bucketfs_factory module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_location.html">exasol_bucketfs_utils_python.bucketfs_location module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_utils.html">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.download.html">exasol_bucketfs_utils_python.download module</a></li>
@@ -105,8 +108,8 @@ to access it either via HTTP[S] or in the file system inside of UDFs.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul>
-      <li>Previous: <a href="exasol_bucketfs_utils_python.abstract_bucketfs_location.html" title="previous chapter">exasol_bucketfs_utils_python.abstract_bucketfs_location module</a></li>
-      <li>Next: <a href="exasol_bucketfs_utils_python.bucketfs_config.html" title="next chapter">exasol_bucketfs_utils_python.bucketfs_config module</a></li>
+      <li>Previous: <a href="exasol_bucketfs_utils_python.bucketfs_connection_config.html" title="previous chapter">exasol_bucketfs_utils_python.bucketfs_connection_config module</a></li>
+      <li>Next: <a href="exasol_bucketfs_utils_python.bucketfs_location.html" title="next chapter">exasol_bucketfs_utils_python.bucketfs_location module</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -141,7 +144,7 @@ to access it either via HTTP[S] or in the file system inside of UDFs.</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/api/exasol_bucketfs_utils_python.bucket_config.rst.txt"
+      <a href="../_sources/api/exasol_bucketfs_utils_python.bucketfs_factory.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
