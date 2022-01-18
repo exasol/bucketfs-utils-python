@@ -31,8 +31,3 @@ This release provides a initial version of the BucketFS Utils Python. It allows 
 
 n/a
 
-
----
-orphan: true
----
-
