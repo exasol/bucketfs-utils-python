@@ -16,7 +16,7 @@ This release provides a initial version of the BucketFS Utils Python. It allows 
 
 ## Bug Fixes
 
-n/a
+  - #49: Fix release-droid complaints regarding the changelog
   
 ## Documentation
 
