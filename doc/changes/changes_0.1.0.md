@@ -11,11 +11,11 @@ This release provides a initial version of the BucketFS Utils Python. It allows 
 
 ## Features / Enhancements
 
-  - #1: Added initial implementation.
+  - #1: Added initial implementation
   - #6: Download file into fileobj, string or file
   - #7: Upload file, string or fileboj
   - #29: Add sphinx documentation
-  - #13: Read file, string, fileobj, joblib-obj from BucketFS inside a UDF, added Language Container.
+  - #13: Read file, string, fileobj, joblib-obj from BucketFS inside a UDF, added Language Container
   - #45: Add release-droid GitHub workflow and prepare for release
 
 ## Bug Fixes
