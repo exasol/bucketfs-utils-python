@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # BucketFs Utils Python 0.1.0, released 2022-01-18
 Code name: Initial implementation
 
@@ -20,7 +16,7 @@ This release provides a initial version of the BucketFS Utils Python. It allows 
 
 ## Bug Fixes
 
-n/a
+  - #49: Fix release-droid complaints regarding the changelog
   
 ## Documentation
 
@@ -34,3 +30,4 @@ n/a
 ## Security
 
 n/a
+
