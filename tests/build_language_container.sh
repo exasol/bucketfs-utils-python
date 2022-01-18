@@ -3,7 +3,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
-pushd  $SCRIPT_DIR &> /dev/null
+pushd  "$SCRIPT_DIR" &> /dev/null
 poetry build
 
 
