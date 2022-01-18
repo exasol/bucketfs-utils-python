@@ -7,7 +7,7 @@ Code name: Initial implementation
 
 ## Summary
 
-This release provides a initial version of the BucketFS Utils Python. It allows you to download/upload files from/to the BucketFS into/from files, Python fileobj or strings. Inside of a UDF it alternatively can read the the files also from the local /buckets filesystem.
+This release provides a initial version of the BucketFS Utils Python. It allows you to download/upload files from/to the BucketFS into/from files, Python file object or strings. Inside a UDF it alternatively can read the files also from the local /buckets file system.
 
 ## Features / Enhancements
 
@@ -24,7 +24,7 @@ n/a
   
 ## Documentation
 
-- #47: Prepare changelog for release
+  - #47: Prepare changelog for release
 
 ## Refactoring
 
