@@ -47,7 +47,7 @@ if __name__ == '__main__':
     if latest_tag is None and poetry_version != "0.1.0":
         raise ValueError("You don't have yet a release. Your Poetry version needs to be 0.1.0!")
 
-    # We expect that the current version in pyproject.toml is alway greater than the latest tag.
+    # We expect that the current version in pyproject.toml is always greater than the latest tag.
     # Thus we avoid creating a release without having the version number updated.
     if poetry_version == latest_tag:
         raise ValueError("Poetry version needs to be updated!")

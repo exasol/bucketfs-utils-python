@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exasol-bucketfs-utils-python"
-version = "0.1.0"
+version = "0.2.0"
 description = "BucketFS utilities for the Python programming language"
 
 license = "MIT"
