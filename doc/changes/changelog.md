@@ -9,4 +9,5 @@
 hidden:
 ---
 changes_0.1.0
+changes_0.2.0
 ```
