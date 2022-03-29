@@ -1,12 +1,13 @@
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_udf_path
-import typing
+from typing import Any, IO
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 import joblib
 
 
-def read_file_from_bucketfs_to_string(bucket_file_path: str, bucket_config: BucketConfig) -> str:
+def read_file_from_bucketfs_to_string(bucket_file_path: str,
+                                      bucket_config: BucketConfig) -> str:
     """
     Read a file from the specified path in the bucket in the BucketFs into a string.
     Can be used inside of an UDF.
@@ -23,7 +24,9 @@ def read_file_from_bucketfs_to_string(bucket_file_path: str, bucket_config: Buck
     return text_as_string
 
 
-def read_file_from_bucketfs_to_file(bucket_file_path: str, bucket_config: BucketConfig, local_file_path: Path) -> None:
+def read_file_from_bucketfs_to_file(bucket_file_path: str,
+                                    bucket_config: BucketConfig,
+                                    local_file_path: Path) -> None:
     """
     Read a file from the specified path in the bucket in the BucketFs and save as a local file
     Can be used inside of an UDF.
@@ -34,10 +37,13 @@ def read_file_from_bucketfs_to_file(bucket_file_path: str, bucket_config: Bucket
     :return: None
     """
     with local_file_path.open("wb") as f:
-        read_file_from_bucketfs_to_fileobj(bucket_file_path, bucket_config, fileobj=f)
+        read_file_from_bucketfs_to_fileobj(
+            bucket_file_path, bucket_config, fileobj=f)
 
 
-def read_file_from_bucketfs_to_fileobj(bucket_file_path: str, bucket_config: BucketConfig, fileobj: typing.IO) -> None:
+def read_file_from_bucketfs_to_fileobj(bucket_file_path: str,
+                                       bucket_config: BucketConfig,
+                                       fileobj: IO) -> None:
     """
     Download a file from the specified path in the bucket in the BucketFs into a given
     `file object <https://docs.python.org/3/glossary.html#term-file-object>`_
@@ -56,7 +62,9 @@ def read_file_from_bucketfs_to_fileobj(bucket_file_path: str, bucket_config: Buc
         fileobj.write(file.read())
 
 
-def read_file_from_bucketfs_via_joblib(bucket_file_path: str, bucket_config: BucketConfig) -> typing.Any:
+def read_file_from_bucketfs_via_joblib(
+        bucket_file_path: str,
+        bucket_config: BucketConfig) -> Any:
     """
     Download a file from the specified path in the bucket in the BucketFs and deserialize it via
     `joblib.load <https://joblib.readthedocs.io/en/latest/generated/joblib.load.html#>`_

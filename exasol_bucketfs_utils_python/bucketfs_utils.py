@@ -1,10 +1,8 @@
 import urllib.parse
 from pathlib import PurePosixPath
 from typing import Union
-
 from requests.auth import HTTPBasicAuth
 from typeguard import typechecked
-
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
 
@@ -16,16 +14,18 @@ def _encode_url_part(part: str) -> str:
     return urlencoded
 
 
-def _correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) -> PurePosixPath:
+def _correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) \
+        -> PurePosixPath:
     for extension in ARCHIVE_EXTENSIONS:
         if path_in_bucket.name.endswith(extension):
-            path_in_bucket = PurePosixPath(path_in_bucket.parent,
-                                           path_in_bucket.name[:-len(extension)])
+            path_in_bucket = PurePosixPath(
+                path_in_bucket.parent, path_in_bucket.name[:-len(extension)])
             break
     return path_in_bucket
 
 
-def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
+def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) \
+        -> PurePosixPath:
     path_in_bucket = PurePosixPath(path_in_bucket)
     if path_in_bucket.is_absolute():
         path_in_bucket = path_in_bucket.relative_to(PurePosixPath("/"))
@@ -33,9 +33,11 @@ def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) -> Pure
 
 
 @typechecked(always=True)
-def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath:
+def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) \
+        -> PurePosixPath:
     """
-    This function generates the path where UDFs can access the content of a BucketFS in their file system
+    This function generates the path where UDFs can access the content of a
+    BucketFS in their file system
 
     :param bucketfs_config: Config of the BucketFS, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :return: Path of the given BucketFS in the file system of the UDFs
@@ -45,11 +47,12 @@ def generate_bucketfs_udf_path(bucketfs_config: BucketFSConfig) -> PurePosixPath
 
 
 @typechecked(always=True)
-def generate_bucket_udf_path(bucket_config: BucketConfig,
-                             path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
+def generate_bucket_udf_path(
+        bucket_config: BucketConfig,
+        path_in_bucket: Union[None, str, PurePosixPath]) -> PurePosixPath:
     """
-    This function generates the path where UDFs can access the content of a bucket or
-    the given path in a bucket in their file system
+    This function generates the path where UDFs can access the content of a
+    bucket or the given path in a bucket in their file system
 
     :param bucket_config: Config of the Bucket, the BucketFSConnectionConfig in the BucketFSConfig can be None
     :param path_in_bucket: If not None, path_in_bucket gets concatenated to the path of the bucket
@@ -68,8 +71,9 @@ def generate_bucket_udf_path(bucket_config: BucketConfig,
 
 
 @typechecked(always=True)
-def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
-                               with_credentials: bool = False) -> urllib.parse.ParseResult:
+def generate_bucketfs_http_url(
+        bucketfs_config: BucketFSConfig,
+        with_credentials: bool = False) -> urllib.parse.ParseResult:
     """
     This function generates an HTTP[s] url for the given BucketFSConfig
     with or without basic authentication  (a template: http[s]://user:password@host:port)
@@ -79,9 +83,11 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
     :return: HTTP[S] URL of the BucketFS
     """
     if bucketfs_config.connection_config is None:
-        raise ValueError("bucket_config.bucketfs_config.connection_config can't be None for this operation")
+        raise ValueError(
+            "bucket_config.bucketfs_config.connection_config can't be None for this operation")
     if with_credentials:
-        encoded_password = _encode_url_part(bucketfs_config.connection_config.pwd)
+        encoded_password = _encode_url_part(
+            bucketfs_config.connection_config.pwd)
         encoded_user = _encode_url_part(bucketfs_config.connection_config.user)
         credentials = f"{encoded_user}:{encoded_password}@"
     else:
@@ -98,8 +104,10 @@ def generate_bucketfs_http_url(bucketfs_config: BucketFSConfig,
 
 
 @typechecked(always=True)
-def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[None, str, PurePosixPath],
-                             with_credentials: bool = False) -> urllib.parse.ParseResult:
+def generate_bucket_http_url(
+        bucket_config: BucketConfig,
+        path_in_bucket: Union[None, str, PurePosixPath],
+        with_credentials: bool = False) -> urllib.parse.ParseResult:
     """
     This function generates an HTTP[s] url for the given bucket or the path in the bucket
     with or without basic authentication  (a template: http[s]://user:password@host:port)
@@ -109,7 +117,8 @@ def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[
     :param with_credentials: If True, this function generates a url with basic authentication, default False
     :return: HTTP[S] URL of the bucket or the path in the bucket
     """
-    url = generate_bucketfs_http_url(bucket_config.bucketfs_config, with_credentials)
+    url = generate_bucketfs_http_url(bucket_config.bucketfs_config,
+                                     with_credentials)
     if path_in_bucket is not None:
         path_in_bucket = _make_path_relative(path_in_bucket)
     else:
@@ -127,7 +136,8 @@ def generate_bucket_http_url(bucket_config: BucketConfig, path_in_bucket: Union[
 @typechecked(always=True)
 def create_auth_object(bucket_config: BucketConfig) -> HTTPBasicAuth:
     if bucket_config.bucketfs_config.connection_config is None:
-        raise TypeError("bucket_config.bucketfs_config.connection_config can't be None for this operation")
+        raise TypeError("bucket_config.bucketfs_config.connection_config "
+                        "can't be None for this operation")
     auth = HTTPBasicAuth(
         bucket_config.bucketfs_config.connection_config.user,
         bucket_config.bucketfs_config.connection_config.pwd)

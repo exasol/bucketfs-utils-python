@@ -80,6 +80,8 @@ def test_string_upload_download():
 
 
 class TestClass:
+    __test__ = False
+
     def __init__(self, attribute: str):
         self.attribute = attribute
 
