@@ -8,9 +8,13 @@ Code name: t.b.d
 
 ## Bug Fixes
 
+  - #54: Removed PosixPath conversion from alter session string
+
 ## Documentation
 
 ## Refactoring
+
+ - #58: Added Python type hints
 
 ## Security
 

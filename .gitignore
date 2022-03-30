@@ -137,3 +137,6 @@ poetry.lock
 # Sphinx
 doc/_build
 doc/api
+
+# Language container
+.build_output
