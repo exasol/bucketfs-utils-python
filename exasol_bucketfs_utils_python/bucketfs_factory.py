@@ -15,7 +15,8 @@ class BucketFSFactory:
     Creates a BucketFSLocation given an url.
     """
     def create_bucketfs_location(self, url: str, user: str, pwd: str,
-                                 base_path: Optional[PurePosixPath] = None):
+                                 base_path: Optional[PurePosixPath] = None) -> \
+            BucketFSLocation:
         """
         Create BucketFSLocation from the url given.
         If the url has the schema http:// or https://, this function creates a

@@ -9,7 +9,7 @@ class BucketFSConnectionConfig:
 
     @typechecked(always=True)
     def __init__(self, host: str, port: int,
-                 user: str, pwd: str, is_https=False):
+                 user: str, pwd: str, is_https: bool = False):
         self._is_https = is_https
         if host == "":
             raise ValueError("Host can't be an empty string")

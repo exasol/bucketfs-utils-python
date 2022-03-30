@@ -2,14 +2,14 @@ import requests
 
 
 class ReleaseLinkExtractor:
-    def __init__(self, repository_api_link):
+    def __init__(self, repository_api_link: str):
         """
         Create a new instance of ReleaseLinkExtractor class.
         :param repository_api_link: Link to the GitHub API page with the latest release.
         """
         self.repository_api_link = repository_api_link
 
-    def get_link_by_release_name(self, file_to_download_name) -> str:
+    def get_link_by_release_name(self, file_to_download_name: str) -> str:
         """
         This method extracts a link from the GitHub API page searching
         by a release name.
@@ -29,7 +29,9 @@ class ReleaseLinkExtractor:
                              f'was not found. Please check the name or '
                              f'select another release')
 
-    def __find_link(self, list_of_available_releases, release_name) -> str:
+    def __find_link(self,
+                    list_of_available_releases: list,
+                    release_name: str) -> str:
         for release in list_of_available_releases:
             if release_name in release["name"]:
                 return release["browser_download_url"]
