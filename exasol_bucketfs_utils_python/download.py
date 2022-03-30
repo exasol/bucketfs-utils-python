@@ -13,7 +13,7 @@ def download_from_bucketfs_to_file(bucket_config: BucketConfig,
                                    local_file_path: Path) -> None:
     """
     Download a file from the specified path in the bucket in the BucketFs
-    and save as a local file
+    and save as a local file.
 
     :param bucket_config: BucketConfig for the bucket to download from
     :param bucket_file_path: Path in the bucket to download the file from
