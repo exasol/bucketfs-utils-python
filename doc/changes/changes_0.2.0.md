@@ -14,6 +14,8 @@ Code name: t.b.d
 
 ## Refactoring
 
+ - #58: Added Python type hints
+
 ## Security
 
  - #51: Added fixed numpy version build from source because of Buffer Overflow vulnerability in NumPy
