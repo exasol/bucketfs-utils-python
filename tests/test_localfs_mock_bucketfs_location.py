@@ -14,7 +14,9 @@ def test_upload_download_string_from_different_instance():
         assert result == test_string
 
 
-class TestValue():
+class TestValue:
+    __test__ = False
+
     def __init__(self, value: str):
         self.value = value
 

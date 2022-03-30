@@ -27,7 +27,9 @@ def test_upload_download_string_from_different_instance():
                                   bucket_config=bucketfs_location_upload.bucket_config)
 
 
-class TestValue():
+class TestValue:
+    __test__ = False
+
     def __init__(self, value: str):
         self.value = value
 
