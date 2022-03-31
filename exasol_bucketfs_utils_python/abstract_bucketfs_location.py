@@ -65,3 +65,8 @@ class AbstractBucketFSLocation(ABC):
     def read_file_from_bucketfs_via_joblib(self,
                                            bucket_file_path: str) -> Any:
         pass
+
+    @abstractmethod
+    def list_files_in_bucketfs(self,
+                               bucket_file_path: str) -> str:
+        pass

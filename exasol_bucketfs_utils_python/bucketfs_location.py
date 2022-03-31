@@ -1,7 +1,7 @@
 from typing import Any, Tuple, IO
 from pathlib import PurePosixPath, Path
 from urllib.parse import ParseResult
-from exasol_bucketfs_utils_python import download, upload
+from exasol_bucketfs_utils_python import download, upload, list_files
 from exasol_bucketfs_utils_python import load_file_from_local_fs as from_BFS
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
@@ -109,5 +109,13 @@ class BucketFSLocation(AbstractBucketFSLocation):
         result = from_BFS.read_file_from_bucketfs_via_joblib(
             self.get_complete_file_path_in_bucket(bucket_file_path),
             self.bucket_config
+        )
+        return result
+
+    def list_files_in_bucketfs(self,
+                               bucket_file_path: str) -> str:
+        result = list_files.list_files_in_bucketfs(
+            self.bucket_config,
+            self.get_complete_file_path_in_bucket(bucket_file_path)
         )
         return result
