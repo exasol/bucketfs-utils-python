@@ -23,17 +23,17 @@ def test_list_files():
                 string=test_string)
 
         bucket_file_path_map = {
-            "path": "\n".join(("in/bucket/file.txt", "file2.txt")),
-            "path/": "\n".join(("in/bucket/file.txt", "file2.txt")),
-            "path/in": "bucket/file.txt",
-            "path/in/": "bucket/file.txt",
-            "path/in/bucket": "file.txt",
-            "path/in/bucket/": "file.txt",
-            "path/in/bucket/file.txt": "."
+            "path": ["in/bucket/file.txt", "file2.txt"],
+            "path/": ["in/bucket/file.txt", "file2.txt"],
+            "path/in": ["bucket/file.txt"],
+            "path/in/": ["bucket/file.txt"],
+            "path/in/bucket": ["file.txt"],
+            "path/in/bucket/": ["file.txt"],
+            "path/in/bucket/file.txt": ["."]
         }
         for bucket_path, expected in bucket_file_path_map.items():
-            assert list_files.list_files_in_bucketfs(
-                bucket_config, bucket_path) == expected
+            assert expected == list_files.list_files_in_bucketfs(
+                bucket_config, bucket_path)
     finally:
         for path_in_bucket in path_list:
             delete_testfile_from_bucketfs(

@@ -68,5 +68,5 @@ class AbstractBucketFSLocation(ABC):
 
     @abstractmethod
     def list_files_in_bucketfs(self,
-                               bucket_file_path: str) -> str:
+                               bucket_file_path: str) -> list:
         pass
