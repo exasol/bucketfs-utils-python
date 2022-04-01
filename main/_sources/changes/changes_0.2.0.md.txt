@@ -6,6 +6,8 @@ Code name: t.b.d
 
 ## Features / Enhancements
 
+  - #55: Added method to list files in bucket 
+
 ## Bug Fixes
 
   - #54: Removed PosixPath conversion from alter session string
