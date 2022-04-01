@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Tuple, IO
+from typing import Any, Tuple, IO, Iterable
 from pathlib import PurePosixPath, Path
 from urllib.parse import ParseResult
 
@@ -68,5 +68,5 @@ class AbstractBucketFSLocation(ABC):
 
     @abstractmethod
     def list_files_in_bucketfs(self,
-                               bucket_file_path: str) -> list:
+                               bucket_file_path: str) -> Iterable[str]:
         pass

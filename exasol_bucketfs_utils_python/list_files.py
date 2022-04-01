@@ -1,3 +1,4 @@
+from typing import Iterable
 import requests
 from pathlib import Path
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
@@ -6,7 +7,7 @@ from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_http_url
 
 
 def list_files_in_bucketfs(bucket_config: BucketConfig,
-                           bucket_file_path: str = "") -> list:
+                           bucket_file_path: str = "") -> Iterable[str]:
     """
     List files at the specified path in the bucket in BucketFs, line by line.
 
