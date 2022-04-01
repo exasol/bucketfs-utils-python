@@ -81,3 +81,9 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
         result = joblib.load(
             self.get_complete_file_path_in_bucket(bucket_file_path))
         return result
+
+    def list_files_in_bucketfs(self,
+                               bucket_file_path: str) -> list:
+        path = self.get_complete_file_path_in_bucket(bucket_file_path)
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        return ["."]
