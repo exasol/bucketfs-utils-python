@@ -9,10 +9,10 @@ from exasol_bucketfs_utils_python.bucketfs_utils import generate_bucket_http_url
 def list_files_in_bucketfs(bucket_config: BucketConfig,
                            bucket_file_path: str = "") -> Iterable[str]:
     """
-    List files at the specified path in the bucket in BucketFs, line by line.
+    List files at the specified path in the bucket in BucketFS, line by line.
 
-    :param bucket_config: BucketConfig for the bucket to download from
-    :param bucket_file_path: Path in the bucket to download the file from
+    :param bucket_config: BucketConfig for the bucket to list files in
+    :param bucket_file_path: Path in the bucket to list the files in
     :return: The list of the files in the BucketFS as string.
     """
     if bucket_file_path is None:
