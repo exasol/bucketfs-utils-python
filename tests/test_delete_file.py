@@ -44,10 +44,7 @@ def test_delete_files():
         for bucket_path, expected in bucket_file_path_map.items():
             listed_files = list_files.list_files_in_bucketfs(
                 bucket_config, bucket_path)
-            print(listed_files)
-            for listed_file in listed_files:
-                assert listed_file not in expected
-                print(listed_file)
+            assert not listed_files
     finally:
         for path_in_bucket in path_list:
             delete_testfile_from_bucketfs(

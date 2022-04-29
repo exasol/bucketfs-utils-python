@@ -20,6 +20,3 @@ def delete_file_in_bucketfs(
     auth = bucketfs_utils.create_auth_object(bucket_config)
     response = requests.delete(url.geturl(), auth=auth)
     response.raise_for_status()
-    print(f"response: {response.text} || {response.content} || "
-          f"{response.status_code} || {response.reason}")
-    print(response)
