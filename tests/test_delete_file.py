@@ -14,7 +14,7 @@ def test_delete_files():
         bucket_name="default", bucketfs_config=bucketfs_config)
     test_string = "test_string"
 
-    path_list = ["path/in/bucket/file.txt", "path/file2.txt"]
+    path_list = ["delete_path/in/the/bucket/file.txt", "delete_path/file2.txt"]
     try:
         # upload files
         for path_in_bucket in path_list:
@@ -24,8 +24,8 @@ def test_delete_files():
                 string=test_string)
 
         bucket_file_path_map = {
-            "path": ["in/bucket/file.txt", "file2.txt"],
-            "path/in/bucket/": ["file.txt"]
+            "delete_path": ["in/the/bucket/file.txt", "file2.txt"],
+            "delete_path/in/the/bucket/": ["file.txt"]
         }
 
         # # check files exist
