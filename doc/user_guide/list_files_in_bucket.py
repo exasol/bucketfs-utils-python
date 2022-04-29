@@ -22,7 +22,7 @@ upload.upload_file_to_bucketfs(
     bucket_file_path=path_in_bucket,
     local_file_path=local_input_file_path)
 
-bucket_file_path = Path("path/in/bucket")
+bucket_file_path = "path/in/bucket"
 files = list_files.list_files_in_bucketfs(
     bucket_config=bucket_config,
-    bucket_file_path=path_in_bucket)
+    bucket_file_path=bucket_file_path)

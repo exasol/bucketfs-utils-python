@@ -1,6 +1,6 @@
 
 #####################################
-Listing files in bucket
+Listing files in BucketFS
 #####################################
 
 This library provides a function to list the files in the bucket under a given
