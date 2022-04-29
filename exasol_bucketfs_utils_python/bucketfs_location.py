@@ -1,7 +1,8 @@
-from typing import Any, Tuple, IO
+from typing import Any, Tuple, IO, Iterable
 from pathlib import PurePosixPath, Path
 from urllib.parse import ParseResult
-from exasol_bucketfs_utils_python import download, upload, list_files
+from exasol_bucketfs_utils_python import download, upload, list_files, \
+    delete
 from exasol_bucketfs_utils_python import load_file_from_local_fs as from_BFS
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
@@ -114,8 +115,16 @@ class BucketFSLocation(AbstractBucketFSLocation):
 
     def list_files_in_bucketfs(
             self,
-            bucket_file_path: str) -> list:
+            bucket_file_path: str) -> Iterable[str]:
         return list_files.list_files_in_bucketfs(
+            self.bucket_config,
+            self.get_complete_file_path_in_bucket(bucket_file_path)
+        )
+
+    def delete_file_in_bucketfs(
+            self,
+            bucket_file_path: str) -> None:
+        delete.delete_file_in_bucketfs(
             self.bucket_config,
             self.get_complete_file_path_in_bucket(bucket_file_path)
         )
