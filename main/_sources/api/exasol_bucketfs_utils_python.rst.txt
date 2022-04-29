@@ -14,6 +14,7 @@ Submodules
    exasol_bucketfs_utils_python.bucketfs_factory
    exasol_bucketfs_utils_python.bucketfs_location
    exasol_bucketfs_utils_python.bucketfs_utils
+   exasol_bucketfs_utils_python.delete
    exasol_bucketfs_utils_python.download
    exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader
    exasol_bucketfs_utils_python.list_files

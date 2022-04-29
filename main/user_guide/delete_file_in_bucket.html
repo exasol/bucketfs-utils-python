@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Listing files in BucketFS &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <title>Deleting file in BucketFS &#8212; Exasol BucketFS Utils Python  documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Deleting file in BucketFS" href="delete_file_in_bucket.html" />
-    <link rel="prev" title="Uploading an artefact from a public Github Release into the BucketFS" href="upload_github_release_to_bucket.html" />
+    <link rel="next" title="Developer Guide" href="../developer_guide/developer_guide.html" />
+    <link rel="prev" title="Listing files in BucketFS" href="list_files_in_bucket.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,14 +32,14 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="listing-files-in-bucketfs">
-<h1>Listing files in BucketFS<a class="headerlink" href="#listing-files-in-bucketfs" title="Permalink to this headline">¶</a></h1>
-<p>This library provides a function to list the files in the bucket under a given
-path. As in the example below, the list of files in the specified bucket
-directory is obtained by the provided listing method.</p>
+  <div class="section" id="deleting-file-in-bucketfs">
+<h1>Deleting file in BucketFS<a class="headerlink" href="#deleting-file-in-bucketfs" title="Permalink to this headline">¶</a></h1>
+<p>This library provides a function to delete the file in a bucket under a given
+path. As in the example below, the file whose bucketfs path is given is deleted
+with the provided delete method.</p>
 <p>Example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python</span> <span class="kn">import</span> <span class="n">upload</span><span class="p">,</span> <span class="n">list_files</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python</span> <span class="kn">import</span> <span class="n">upload</span><span class="p">,</span> <span class="n">delete</span>
 <span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucket_config</span> <span class="kn">import</span> <span class="n">BucketConfig</span>
 <span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_config</span> <span class="kn">import</span> <span class="n">BucketFSConfig</span>
 <span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_connection_config</span> <span class="kn">import</span> <span class="n">BucketFSConnectionConfig</span>
@@ -62,10 +62,9 @@ directory is obtained by the provided listing method.</p>
     <span class="n">bucket_file_path</span><span class="o">=</span><span class="n">path_in_bucket</span><span class="p">,</span>
     <span class="n">local_file_path</span><span class="o">=</span><span class="n">local_input_file_path</span><span class="p">)</span>
 
-<span class="n">bucket_file_path</span> <span class="o">=</span> <span class="s2">&quot;path/in/bucket&quot;</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">list_files</span><span class="o">.</span><span class="n">list_files_in_bucketfs</span><span class="p">(</span>
+<span class="n">delete</span><span class="o">.</span><span class="n">delete_file_in_bucketfs</span><span class="p">(</span>
     <span class="n">bucket_config</span><span class="o">=</span><span class="n">bucket_config</span><span class="p">,</span>
-    <span class="n">bucket_file_path</span><span class="o">=</span><span class="n">bucket_file_path</span><span class="p">)</span>
+    <span class="n">bucket_file_path</span><span class="o">=</span><span class="n">path_in_bucket</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -102,8 +101,8 @@ directory is obtained by the provided listing method.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="user_guide.html">User Guide</a><ul>
-      <li>Previous: <a href="upload_github_release_to_bucket.html" title="previous chapter">Uploading an artefact from a public Github Release into the BucketFS</a></li>
-      <li>Next: <a href="delete_file_in_bucket.html" title="next chapter">Deleting file in BucketFS</a></li>
+      <li>Previous: <a href="list_files_in_bucket.html" title="previous chapter">Listing files in BucketFS</a></li>
+      <li>Next: <a href="../developer_guide/developer_guide.html" title="next chapter">Developer Guide</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -138,7 +137,7 @@ directory is obtained by the provided listing method.</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/user_guide/list_files_in_bucket.rst.txt"
+      <a href="../_sources/user_guide/delete_file_in_bucket.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

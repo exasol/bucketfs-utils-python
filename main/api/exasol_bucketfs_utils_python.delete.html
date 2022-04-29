@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>exasol_bucketfs_utils_python.release_link_extractor module &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <title>exasol_bucketfs_utils_python.delete module &#8212; Exasol BucketFS Utils Python  documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="exasol_bucketfs_utils_python.upload module" href="exasol_bucketfs_utils_python.upload.html" />
-    <link rel="prev" title="exasol_bucketfs_utils_python.localfs_mock_bucketfs_location module" href="exasol_bucketfs_utils_python.localfs_mock_bucketfs_location.html" />
+    <link rel="next" title="exasol_bucketfs_utils_python.download module" href="exasol_bucketfs_utils_python.download.html" />
+    <link rel="prev" title="exasol_bucketfs_utils_python.bucketfs_utils module" href="exasol_bucketfs_utils_python.bucketfs_utils.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,27 +32,20 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-exasol_bucketfs_utils_python.release_link_extractor">
-<span id="exasol-bucketfs-utils-python-release-link-extractor-module"></span><h1>exasol_bucketfs_utils_python.release_link_extractor module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.release_link_extractor" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="exasol_bucketfs_utils_python.release_link_extractor.ReleaseLinkExtractor">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.release_link_extractor.</span></code><code class="sig-name descname"><span class="pre">ReleaseLinkExtractor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_api_link</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exasol_bucketfs_utils_python.release_link_extractor.ReleaseLinkExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.release_link_extractor.ReleaseLinkExtractor.get_link_by_release_name">
-<code class="sig-name descname"><span class="pre">get_link_by_release_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_to_download_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.release_link_extractor.ReleaseLinkExtractor.get_link_by_release_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method extracts a link from the GitHub API page searching
-by a release name.</p>
+  <div class="section" id="module-exasol_bucketfs_utils_python.delete">
+<span id="exasol-bucketfs-utils-python-delete-module"></span><h1>exasol_bucketfs_utils_python.delete module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.delete" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="exasol_bucketfs_utils_python.delete.delete_file_in_bucketfs">
+<code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.delete.</span></code><code class="sig-name descname"><span class="pre">delete_file_in_bucketfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.delete.delete_file_in_bucketfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the file in bucket under a given path in BucketFS</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>file_to_download_name</strong> – the name of the file</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a link in a string format</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket_config</strong> – BucketConfig for the bucket to delete from</p></li>
+<li><p><strong>bucket_file_path</strong> – Path in the bucket to delete the file from</p></li>
+</ul>
 </dd>
 </dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -90,13 +83,13 @@ by a release name.</p>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_factory.html">exasol_bucketfs_utils_python.bucketfs_factory module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_location.html">exasol_bucketfs_utils_python.bucketfs_location module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_utils.html">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.delete.html">exasol_bucketfs_utils_python.delete module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.delete module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.download.html">exasol_bucketfs_utils_python.download module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html">exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.list_files.html">exasol_bucketfs_utils_python.list_files module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.load_file_from_local_fs.html">exasol_bucketfs_utils_python.load_file_from_local_fs module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.localfs_mock_bucketfs_location.html">exasol_bucketfs_utils_python.localfs_mock_bucketfs_location module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.release_link_extractor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.release_link_extractor.html">exasol_bucketfs_utils_python.release_link_extractor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.upload.html">exasol_bucketfs_utils_python.upload module</a></li>
 </ul>
 </li>
@@ -110,8 +103,8 @@ by a release name.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul>
-      <li>Previous: <a href="exasol_bucketfs_utils_python.localfs_mock_bucketfs_location.html" title="previous chapter">exasol_bucketfs_utils_python.localfs_mock_bucketfs_location module</a></li>
-      <li>Next: <a href="exasol_bucketfs_utils_python.upload.html" title="next chapter">exasol_bucketfs_utils_python.upload module</a></li>
+      <li>Previous: <a href="exasol_bucketfs_utils_python.bucketfs_utils.html" title="previous chapter">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
+      <li>Next: <a href="exasol_bucketfs_utils_python.download.html" title="next chapter">exasol_bucketfs_utils_python.download module</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -146,7 +139,7 @@ by a release name.</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/api/exasol_bucketfs_utils_python.release_link_extractor.rst.txt"
+      <a href="../_sources/api/exasol_bucketfs_utils_python.delete.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
