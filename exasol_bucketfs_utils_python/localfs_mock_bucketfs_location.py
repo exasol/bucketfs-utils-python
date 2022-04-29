@@ -87,3 +87,9 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
         path = self.get_complete_file_path_in_bucket(bucket_file_path)
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         return ["."]
+
+    def delete_file_in_bucketfs(
+            self,
+            bucket_file_path: str) -> None:
+        path = self.get_complete_file_path_in_bucket(bucket_file_path)
+        Path(path).unlink(missing_ok=True)
