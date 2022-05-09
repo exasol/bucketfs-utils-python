@@ -18,7 +18,7 @@ homepage = "https://github.com/exasol/bucketfs-utils-python"
 keywords = ['exasol', 'bucketfs']
 
 [tool.poetry.dependencies]
-python = ">=3.6.1,<4.0"
+python = ">=3.8,<4.0"
 requests = ">=2.24.0"
 joblib=">=1.0.1"
 typeguard = ">=2.11.1"

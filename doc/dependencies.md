@@ -4,7 +4,7 @@
 
 | Dependency                    | Purpose                          | License            |
 |-------------------------------|----------------------------------|--------------------|
-| [Python 3][python]            | Python version 3.6.1 and above   | PSF                |
+| [Python 3][python]            | Python version 3.8 and above     | PSF                |
 | [Requests][requests]          | Allows to send HTTP/1.1 requests | Apache License 2.0 |
 
 
