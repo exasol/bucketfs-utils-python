@@ -18,7 +18,6 @@ version build from source against the buffer overflow vulnerability in numpy.
 ## Refactoring
 
  - #58: Added Python type hints
- - #53: Upgraded Python version to >=3.8, removed numpy from source again
 
 ## Security
 
