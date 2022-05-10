@@ -4,18 +4,19 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>exasol_bucketfs_utils_python.bucketfs_location module &#8212; Exasol BucketFS Utils Python  documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>exasol_bucketfs_utils_python.bucketfs_location &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="exasol_bucketfs_utils_python.bucketfs_utils module" href="exasol_bucketfs_utils_python.bucketfs_utils.html" />
-    <link rel="prev" title="exasol_bucketfs_utils_python.bucketfs_factory module" href="exasol_bucketfs_utils_python.bucketfs_factory.html" />
+    <link rel="next" title="exasol_bucketfs_utils_python.bucketfs_utils" href="exasol_bucketfs_utils_python.bucketfs_utils.html" />
+    <link rel="prev" title="exasol_bucketfs_utils_python.bucketfs_factory" href="exasol_bucketfs_utils_python.bucketfs_factory.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,82 +33,21 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-exasol_bucketfs_utils_python.bucketfs_location">
-<span id="exasol-bucketfs-utils-python-bucketfs-location-module"></span><h1>exasol_bucketfs_utils_python.bucketfs_location module<a class="headerlink" href="#module-exasol_bucketfs_utils_python.bucketfs_location" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">exasol_bucketfs_utils_python.bucketfs_location.</span></code><code class="sig-name descname"><span class="pre">BucketFSLocation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html#exasol_bucketfs_utils_python.bucket_config.BucketConfig" title="exasol_bucketfs_utils_python.bucket_config.BucketConfig"><span class="pre">exasol_bucketfs_utils_python.bucket_config.BucketConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.PurePosixPath" title="(in Python v3.10)"><span class="pre">pathlib.PurePosixPath</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="exasol_bucketfs_utils_python.abstract_bucketfs_location.html#exasol_bucketfs_utils_python.abstract_bucketfs_location.AbstractBucketFSLocation" title="exasol_bucketfs_utils_python.abstract_bucketfs_location.AbstractBucketFSLocation"><code class="xref py py-class docutils literal notranslate"><span class="pre">exasol_bucketfs_utils_python.abstract_bucketfs_location.AbstractBucketFSLocation</span></code></a></p>
-<p>BucketFSLocation implements AbstractBucketFSLocation.
-BucketFSLocation is used to upload fileobjects, strings or joblib objects to
-the BucketFS given a path and the object, or to download objects into
-strings, fileobjects or joblib objects from the BucketFS given a file path.
-Also able to read files from the BucketFS directly, if called from inside of
-an UDF. If reading an object via joblib inside of an UDF, make sure the
-object type is known inside the UDF.</p>
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.delete_file_in_bucketfs">
-<code class="sig-name descname"><span class="pre">delete_file_in_bucketfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.delete_file_in_bucketfs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.download_from_bucketfs_to_string">
-<code class="sig-name descname"><span class="pre">download_from_bucketfs_to_string</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.download_from_bucketfs_to_string" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.download_object_from_bucketfs_via_joblib">
-<code class="sig-name descname"><span class="pre">download_object_from_bucketfs_via_joblib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.download_object_from_bucketfs_via_joblib" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.get_complete_file_path_in_bucket">
-<code class="sig-name descname"><span class="pre">get_complete_file_path_in_bucket</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.get_complete_file_path_in_bucket" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.list_files_in_bucketfs">
-<code class="sig-name descname"><span class="pre">list_files_in_bucketfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.list_files_in_bucketfs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_to_file">
-<code class="sig-name descname"><span class="pre">read_file_from_bucketfs_to_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">pathlib.Path</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_to_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_to_fileobj">
-<code class="sig-name descname"><span class="pre">read_file_from_bucketfs_to_fileobj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fileobj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">IO</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_to_fileobj" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_to_string">
-<code class="sig-name descname"><span class="pre">read_file_from_bucketfs_to_string</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_to_string" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_via_joblib">
-<code class="sig-name descname"><span class="pre">read_file_from_bucketfs_via_joblib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.read_file_from_bucketfs_via_joblib" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.upload_fileobj_to_bucketfs">
-<code class="sig-name descname"><span class="pre">upload_fileobj_to_bucketfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileobj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">IO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.ParseResult" title="(in Python v3.10)"><span class="pre">urllib.parse.ParseResult</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.PurePosixPath" title="(in Python v3.10)"><span class="pre">pathlib.PurePosixPath</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.upload_fileobj_to_bucketfs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.upload_object_to_bucketfs_via_joblib">
-<code class="sig-name descname"><span class="pre">upload_object_to_bucketfs_via_joblib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.ParseResult" title="(in Python v3.10)"><span class="pre">urllib.parse.ParseResult</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.PurePosixPath" title="(in Python v3.10)"><span class="pre">pathlib.PurePosixPath</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.upload_object_to_bucketfs_via_joblib" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.upload_string_to_bucketfs">
-<code class="sig-name descname"><span class="pre">upload_string_to_bucketfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.ParseResult" title="(in Python v3.10)"><span class="pre">urllib.parse.ParseResult</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.PurePosixPath" title="(in Python v3.10)"><span class="pre">pathlib.PurePosixPath</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#exasol_bucketfs_utils_python.bucketfs_location.BucketFSLocation.upload_string_to_bucketfs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
+  <section id="module-exasol_bucketfs_utils_python.bucketfs_location">
+<span id="exasol-bucketfs-utils-python-bucketfs-location"></span><h1>exasol_bucketfs_utils_python.bucketfs_location<a class="headerlink" href="#module-exasol_bucketfs_utils_python.bucketfs_location" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">BucketFSLocation</span></code>(bucket_config, base_path)</p></td>
+<td><p>BucketFSLocation implements AbstractBucketFSLocation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 
 
           </div>
@@ -133,26 +73,22 @@ object type is known inside the UDF.</p>
 <li class="toctree-l1"><a class="reference internal" href="../changes/changelog.html">Changes</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.abstract_bucketfs_location.html">exasol_bucketfs_utils_python.abstract_bucketfs_location module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html">exasol_bucketfs_utils_python.bucket_config module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html">exasol_bucketfs_utils_python.bucketfs_config module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html">exasol_bucketfs_utils_python.bucketfs_connection_config module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_factory.html">exasol_bucketfs_utils_python.bucketfs_factory module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.bucketfs_location module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_utils.html">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.delete.html">exasol_bucketfs_utils_python.delete module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.download.html">exasol_bucketfs_utils_python.download module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html">exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.list_files.html">exasol_bucketfs_utils_python.list_files module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.load_file_from_local_fs.html">exasol_bucketfs_utils_python.load_file_from_local_fs module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.localfs_mock_bucketfs_location.html">exasol_bucketfs_utils_python.localfs_mock_bucketfs_location module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.release_link_extractor.html">exasol_bucketfs_utils_python.release_link_extractor module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exasol_bucketfs_utils_python.upload.html">exasol_bucketfs_utils_python.upload module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.html#module-exasol_bucketfs_utils_python">Module contents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.abstract_bucketfs_location.html">exasol_bucketfs_utils_python.abstract_bucketfs_location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.bucket_config.html">exasol_bucketfs_utils_python.bucket_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_config.html">exasol_bucketfs_utils_python.bucketfs_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_connection_config.html">exasol_bucketfs_utils_python.bucketfs_connection_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_factory.html">exasol_bucketfs_utils_python.bucketfs_factory</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">exasol_bucketfs_utils_python.bucketfs_location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.bucketfs_utils.html">exasol_bucketfs_utils_python.bucketfs_utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.delete.html">exasol_bucketfs_utils_python.delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.download.html">exasol_bucketfs_utils_python.download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader.html">exasol_bucketfs_utils_python.github_release_file_bucketfs_uploader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.list_files.html">exasol_bucketfs_utils_python.list_files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.load_file_from_local_fs.html">exasol_bucketfs_utils_python.load_file_from_local_fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.localfs_mock_bucketfs_location.html">exasol_bucketfs_utils_python.localfs_mock_bucketfs_location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.release_link_extractor.html">exasol_bucketfs_utils_python.release_link_extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exasol_bucketfs_utils_python.upload.html">exasol_bucketfs_utils_python.upload</a></li>
 </ul>
 </li>
 </ul>
@@ -161,9 +97,9 @@ object type is known inside the UDF.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a><ul>
-      <li>Previous: <a href="exasol_bucketfs_utils_python.bucketfs_factory.html" title="previous chapter">exasol_bucketfs_utils_python.bucketfs_factory module</a></li>
-      <li>Next: <a href="exasol_bucketfs_utils_python.bucketfs_utils.html" title="next chapter">exasol_bucketfs_utils_python.bucketfs_utils module</a></li>
+  <li><a href="exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python</a><ul>
+      <li>Previous: <a href="exasol_bucketfs_utils_python.bucketfs_factory.html" title="previous chapter">exasol_bucketfs_utils_python.bucketfs_factory</a></li>
+      <li>Next: <a href="exasol_bucketfs_utils_python.bucketfs_utils.html" title="next chapter">exasol_bucketfs_utils_python.bucketfs_utils</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -172,7 +108,7 @@ object type is known inside the UDF.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -194,7 +130,7 @@ object type is known inside the UDF.</p>
       &copy;2021, Exasol.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

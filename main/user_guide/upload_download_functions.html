@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Uploading and downloading to/from the BucketFS &#8212; Exasol BucketFS Utils Python  documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -32,7 +33,7 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="uploading-and-downloading-to-from-the-bucketfs">
+  <section id="uploading-and-downloading-to-from-the-bucketfs">
 <h1>Uploading and downloading to/from the BucketFS<a class="headerlink" href="#uploading-and-downloading-to-from-the-bucketfs" title="Permalink to this headline">¶</a></h1>
 <p>With these functions you can upload and download data to and from the BucketFS.
 The upload and download functions can have different sources or targets,
@@ -44,7 +45,7 @@ For more details, please refer to our</p>
 <li><p><a class="reference internal" href="../api/exasol_bucketfs_utils_python.download.html"><span class="doc">Download API</span></a></p></li>
 </ul>
 </div></blockquote>
-<div class="section" id="uploading-and-downloading-data-from-and-to-files">
+<section id="uploading-and-downloading-data-from-and-to-files">
 <h2>Uploading and downloading data from and to files<a class="headerlink" href="#uploading-and-downloading-data-from-and-to-files" title="Permalink to this headline">¶</a></h2>
 <p>In their simplest form the download and upload functions simply upload a local file to the BucketFS or
 download the data from the BucketFS into a local file.</p>
@@ -81,8 +82,8 @@ download the data from the BucketFS into a local file.</p>
     <span class="n">local_file_path</span><span class="o">=</span><span class="n">local_output_file_path</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="uploading-and-downloading-data-from-and-to-file-objects">
+</section>
+<section id="uploading-and-downloading-data-from-and-to-file-objects">
 <h2>Uploading and downloading data from and to file-objects<a class="headerlink" href="#uploading-and-downloading-data-from-and-to-file-objects" title="Permalink to this headline">¶</a></h2>
 <p>A more sophisticated version of the previous function allows you
 to upload from or download into a
@@ -132,8 +133,8 @@ Other modules may provide additional ways to create file-objects. See
     <span class="n">output_test_byte_string</span> <span class="o">=</span> <span class="n">output_temp_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="uploading-and-downloading-data-from-and-to-a-string">
+</section>
+<section id="uploading-and-downloading-data-from-and-to-a-string">
 <h2>Uploading and downloading data from and to a string<a class="headerlink" href="#uploading-and-downloading-data-from-and-to-a-string" title="Permalink to this headline">¶</a></h2>
 <p>This library also provides functions to simply upload a Python string or download into a Python string.
 This for example, can be useful to upload or download configuration in json or yaml format from the BucketFS.</p>
@@ -167,8 +168,8 @@ This for example, can be useful to upload or download configuration in json or y
         <span class="n">bucket_file_path</span><span class="o">=</span><span class="n">path_in_bucket</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="serialize-and-deserialize-a-python-object-directly-into-or-from-bucketfs">
+</section>
+<section id="serialize-and-deserialize-a-python-object-directly-into-or-from-bucketfs">
 <h2>Serialize and deserialize a Python object directly into or from BucketFS<a class="headerlink" href="#serialize-and-deserialize-a-python-object-directly-into-or-from-bucketfs" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes it can be useful to directly upload a serialized Python object to the BucketFS
 and later download it and deserialize it. For example,
@@ -215,8 +216,8 @@ for Python objects containing large data and it supports compression for the out
         <span class="n">bucket_file_path</span><span class="o">=</span><span class="n">path_in_bucket</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -242,7 +243,7 @@ for Python objects containing large data and it supports compression for the out
 <li class="toctree-l1"><a class="reference internal" href="../changes/changelog.html">Changes</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/exasol_bucketfs_utils_python.html">exasol_bucketfs_utils_python</a></li>
 </ul>
 
 <div class="relations">
@@ -260,7 +261,7 @@ for Python objects containing large data and it supports compression for the out
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -282,7 +283,7 @@ for Python objects containing large data and it supports compression for the out
       &copy;2021, Exasol.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

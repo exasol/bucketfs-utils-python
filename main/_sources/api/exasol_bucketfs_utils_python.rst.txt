@@ -1,11 +1,31 @@
-exasol\_bucketfs\_utils\_python package
-=======================================
+﻿exasol\_bucketfs\_utils\_python
+===============================
 
-Submodules
-----------
+.. automodule:: exasol_bucketfs_utils_python
 
-.. toctree::
-   :maxdepth: 1
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
 
    exasol_bucketfs_utils_python.abstract_bucketfs_location
    exasol_bucketfs_utils_python.bucket_config
@@ -23,10 +43,3 @@ Submodules
    exasol_bucketfs_utils_python.release_link_extractor
    exasol_bucketfs_utils_python.upload
 
-Module contents
----------------
-
-.. automodule:: exasol_bucketfs_utils_python
-   :members:
-   :undoc-members:
-   :show-inheritance:

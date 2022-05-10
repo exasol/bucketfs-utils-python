@@ -1,7 +1,29 @@
-exasol\_bucketfs\_utils\_python.release\_link\_extractor module
-===============================================================
+exasol\_bucketfs\_utils\_python.release\_link\_extractor
+========================================================
 
 .. automodule:: exasol_bucketfs_utils_python.release_link_extractor
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ReleaseLinkExtractor
+   
+   
+
+   
+   
+   
+
+
+

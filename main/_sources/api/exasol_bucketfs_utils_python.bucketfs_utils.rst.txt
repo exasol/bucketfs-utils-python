@@ -1,7 +1,33 @@
-exasol\_bucketfs\_utils\_python.bucketfs\_utils module
-======================================================
+exasol\_bucketfs\_utils\_python.bucketfs\_utils
+===============================================
 
 .. automodule:: exasol_bucketfs_utils_python.bucketfs_utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_auth_object
+      generate_bucket_http_url
+      generate_bucket_udf_path
+      generate_bucketfs_http_url
+      generate_bucketfs_udf_path
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
