@@ -15,7 +15,7 @@ In a Nutshell
 Prerequisites
 -------------
 
-- Python 3.6+
+- Python 3.8+
 
 Installation
 -------------

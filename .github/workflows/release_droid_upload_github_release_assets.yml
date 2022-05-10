@@ -15,10 +15,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python 3.6 for integration-test-docker-environment
+      - name: Setup Python 3.8 for integration-test-docker-environment
         uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: 3.8
 
       - name: Install Poetry
         uses: abatilo/actions-poetry@v2.0.0
@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.8]
     runs-on: ubuntu-latest
 
     steps:
@@ -40,12 +40,9 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: abatilo/actions-poetry@v2.0.0
+      - uses: abatilo/actions-poetry@v2.1.4
         with:
-          poetry-version: 1.1.4
-      - name: Install lapack/blas for Numpy from source
-        run: sudo apt-get update && sudo apt-get install -y liblapack-dev libblas-dev
-        #highly recommended for numpy from source, check https://numpy.org/devdocs/user/building.html#prerequisites
+          poetry-version: 1.1.11
       - name: Poetry install
         run: poetry install
       - name: Poetry build
@@ -67,15 +64,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup Python 3.6
+    - name: Setup Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: 3.6
+        python-version: 3.8
 
     - name: Install Poetry
-      uses: abatilo/actions-poetry@v2.0.0
+      uses: abatilo/actions-poetry@v2.1.4
       with:
-        poetry-version: 1.1.6
+        poetry-version: 1.1.11
 
     - name: Build Release
       run: |

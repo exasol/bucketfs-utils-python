@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exasol-bucketfs-utils-python"
-version = "0.2.0"
+version = "0.3.0"
 description = "BucketFS utilities for the Python programming language"
 
 license = "MIT"
@@ -18,19 +18,19 @@ homepage = "https://github.com/exasol/bucketfs-utils-python"
 keywords = ['exasol', 'bucketfs']
 
 [tool.poetry.dependencies]
-python = ">=3.6.1,<4.0"
+python = ">=3.8,<4.0"
 requests = ">=2.24.0"
 joblib=">=1.0.1"
 typeguard = ">=2.11.1"
 
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.1.1"
-pytest-cov = "^2.10.1"
-Sphinx = "^3.5.3"
-poethepoet = "^0.10.0"
-myst-parser = "^0.14.0"
-pyexasol = "^0.17.0"
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+Sphinx = "^4.5"
+poethepoet = "^0.13.0"
+myst-parser = "^0.17.0"
+pyexasol = "^0.24.0"
 dill = "^0.3.4"
 exasol-udf-mock-python = { git = "https://github.com/exasol/udf-mock-python.git", branch = "master" }
 gitpython = ">=2.1.0"
