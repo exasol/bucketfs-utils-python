@@ -9,7 +9,7 @@
 
 ## Bug Fixes
 
-    - /
+ - #63: Corrected uploading fileobject method of the mock bucketfs
 
 ## Refactoring
 
