@@ -1,5 +1,5 @@
 from tempfile import TemporaryDirectory, NamedTemporaryFile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import LocalFSMockBucketFSLocation
 
@@ -88,3 +88,26 @@ def test_read_file_from_bucketfs_via_joblib():
         result = bucketfs_location_read.read_file_from_bucketfs_via_joblib(bucket_file_path)
         assert result == test_value
 
+
+def test_upload_read_fileobject ():
+    tmp_file_fname = "tmp_file_path.txt"
+    input_test_byte_string = b"test_byte_string"
+
+    with TemporaryDirectory() as path:
+        bucketfs_location = LocalFSMockBucketFSLocation(path)
+
+        with NamedTemporaryFile() as input_tmp_file:
+            input_tmp_file.write(input_test_byte_string)
+            input_tmp_file.flush()
+            input_tmp_file.seek(0)
+            bucketfs_location.upload_fileobj_to_bucketfs(
+                input_tmp_file, str(PurePosixPath(path, tmp_file_fname)))
+
+        with NamedTemporaryFile() as output_tmp_file:
+            bucketfs_location.read_file_from_bucketfs_to_fileobj(
+                str(PurePosixPath(path, tmp_file_fname)), output_tmp_file)
+            output_tmp_file.flush()
+            output_tmp_file.seek(0)
+            output_test_byte_string = output_tmp_file.read()
+
+    assert input_test_byte_string == output_test_byte_string
