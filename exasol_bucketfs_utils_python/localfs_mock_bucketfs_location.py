@@ -54,7 +54,7 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
         path = self.get_complete_file_path_in_bucket(bucket_file_path)
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         with open(path, "wb") as f:
-            for chunk in iter(lambda: fileobj.read(10000), ''):
+            for chunk in iter(lambda: fileobj.read(10000), b''):
                 f.write(chunk)
 
     def read_file_from_bucketfs_to_fileobj(self,
