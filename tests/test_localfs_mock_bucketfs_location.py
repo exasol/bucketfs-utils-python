@@ -111,3 +111,16 @@ def test_upload_read_fileobject ():
             output_test_byte_string = output_tmp_file.read()
 
     assert input_test_byte_string == output_test_byte_string
+
+
+def test_list_files_in_bucketfs():
+    with TemporaryDirectory() as path:
+        bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
+        bucketfs_location_listing = LocalFSMockBucketFSLocation(path)
+        bucket_file_path = "test_file.txt"
+        test_value = TestValue("test_string")
+        bucketfs_location_upload.upload_object_to_bucketfs_via_joblib(
+            test_value, bucket_file_path)
+
+        files = bucketfs_location_listing.list_files_in_bucketfs(path)
+        assert bucket_file_path in files
