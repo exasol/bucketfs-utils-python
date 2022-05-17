@@ -117,10 +117,15 @@ def test_list_files_in_bucketfs():
     with TemporaryDirectory() as path:
         bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
         bucketfs_location_listing = LocalFSMockBucketFSLocation(path)
-        bucket_file_path = "test_file.txt"
-        test_value = TestValue("test_string")
-        bucketfs_location_upload.upload_object_to_bucketfs_via_joblib(
-            test_value, bucket_file_path)
 
-        files = bucketfs_location_listing.list_files_in_bucketfs(path)
-        assert bucket_file_path in files
+        bucket_files_path = [
+            "path/in/bucket/file.txt",
+            "path/in/file.txt"
+            "file.txt"]
+        test_value = TestValue("test_string")
+        for file_path in bucket_files_path:
+            bucketfs_location_upload.upload_object_to_bucketfs_via_joblib(
+                test_value, file_path)
+
+        listed_files = bucketfs_location_listing.list_files_in_bucketfs(path)
+        assert set(listed_files) == set(bucket_files_path)
