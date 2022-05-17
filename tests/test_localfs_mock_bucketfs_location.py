@@ -118,14 +118,17 @@ def test_list_files_in_bucketfs():
         bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
         bucketfs_location_listing = LocalFSMockBucketFSLocation(path)
 
+        local_path = "path/in/"
         bucket_files_path = [
-            "path/in/bucket/file.txt",
-            "path/in/file.txt"
-            "file.txt"]
+            f"{local_path}bucket/file.txt",
+            f"{local_path}file1.txt",
+            f"{local_path}file2.txt"]
         test_value = TestValue("test_string")
         for file_path in bucket_files_path:
             bucketfs_location_upload.upload_object_to_bucketfs_via_joblib(
                 test_value, file_path)
 
-        listed_files = bucketfs_location_listing.list_files_in_bucketfs(path)
-        assert set(listed_files) == set(bucket_files_path)
+        expected_files = ['file1.txt', 'file2.txt', 'bucket/file.txt']
+        listed_files = bucketfs_location_listing\
+            .list_files_in_bucketfs(local_path)
+        assert set(listed_files) == set(expected_files)

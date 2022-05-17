@@ -29,13 +29,14 @@ def test_list_files():
             "path/in/": ["bucket/file.txt"],
             "path/in/bucket": ["file.txt"],
             "path/in/bucket/": ["file.txt"],
-            "path/in/bucket/file.txt": [],
-            ".": ["path/in/bucket/file.txt", "path/file2.txt"]
+            "path/in/bucket/file.txt": []
         }
         for bucket_path, expected in bucket_file_path_map.items():
-            assert set(expected).issubset(
-                set(list_files.list_files_in_bucketfs(
-                    bucket_config, bucket_path)))
+            assert set(expected) == set(list_files.list_files_in_bucketfs(
+                bucket_config, bucket_path))
+
+        assert {"path/in/bucket/file.txt", "path/file2.txt"}.issubset(
+            set(list_files.list_files_in_bucketfs(bucket_config, ".")))
     finally:
         for path_in_bucket in path_list:
             delete_testfile_from_bucketfs(
