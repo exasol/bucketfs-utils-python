@@ -28,7 +28,8 @@ def list_files_in_bucketfs(bucket_config: BucketConfig,
         path_parts = Path(path).parts
         if path_parts[:len(bucket_file_path_parts)] == bucket_file_path_parts:
             relevant_parts = path_parts[len(bucket_file_path_parts):]
-            relevant_path = str(Path(*relevant_parts))
-            files.append(relevant_path)
+            if relevant_parts != ():
+                relevant_path = str(Path(*relevant_parts))
+                files.append(relevant_path)
 
     return files

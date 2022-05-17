@@ -29,7 +29,8 @@ def test_list_files():
             "path/in/": ["bucket/file.txt"],
             "path/in/bucket": ["file.txt"],
             "path/in/bucket/": ["file.txt"],
-            "path/in/bucket/file.txt": ["."]
+            "path/in/bucket/file.txt": [],
+            ".": ["path/in/bucket/file.txt", "path/file2.txt"]
         }
         for bucket_path, expected in bucket_file_path_map.items():
             assert set(expected) == set(list_files.list_files_in_bucketfs(
