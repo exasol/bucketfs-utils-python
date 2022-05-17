@@ -85,7 +85,7 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
     def list_files_in_bucketfs(self,
                                bucket_file_path: str) -> list:
         path = self.get_complete_file_path_in_bucket(bucket_file_path)
-        list_files = [str(p.relative_to(bucket_file_path))
+        list_files = [str(p.relative_to(path))
                       for p in Path(path).rglob('*') if p.is_file()]
 
         return list_files
