@@ -1,3 +1,5 @@
+import pytest
+
 from exasol_bucketfs_utils_python import upload, list_files, delete
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
@@ -42,9 +44,9 @@ def test_delete_files():
 
         # # check files not exist
         for bucket_path, expected in bucket_file_path_map.items():
-            listed_files = list_files.list_files_in_bucketfs(
-                bucket_config, bucket_path)
-            assert not listed_files
+            with pytest.raises(FileNotFoundError):
+                list_files.list_files_in_bucketfs(bucket_config, bucket_path)
+
     finally:
         for path_in_bucket in path_list:
             delete_testfile_from_bucketfs(
