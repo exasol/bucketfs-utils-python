@@ -10,6 +10,7 @@
 ## Bug Fixes
 
  - #63: Corrected uploading fileobject method of the mock bucketfs
+ - #66: Corrected listing method of localfs mock bucketfs  
 
 ## Refactoring
 

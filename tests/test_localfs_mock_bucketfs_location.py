@@ -1,6 +1,8 @@
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from pathlib import Path, PurePosixPath
 
+import pytest
+
 from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import LocalFSMockBucketFSLocation
 
 def test_upload_download_string_from_different_instance():
@@ -111,3 +113,34 @@ def test_upload_read_fileobject ():
             output_test_byte_string = output_tmp_file.read()
 
     assert input_test_byte_string == output_test_byte_string
+
+
+def test_list_files_in_bucketfs():
+    with TemporaryDirectory() as path:
+        bucketfs_location_upload = LocalFSMockBucketFSLocation(path)
+        bucketfs_location_listing = LocalFSMockBucketFSLocation(path)
+
+        local_path = "path/in/"
+        bucket_files_path = [
+            f"{local_path}bucket/file.txt",
+            f"{local_path}file1.txt",
+            f"{local_path}file2.txt"]
+        test_value = TestValue("test_string")
+        for file_path in bucket_files_path:
+            bucketfs_location_upload.upload_object_to_bucketfs_via_joblib(
+                test_value, file_path)
+
+        expected_files = ['file1.txt', 'file2.txt', 'bucket/file.txt']
+        listed_files = bucketfs_location_listing\
+            .list_files_in_bucketfs(local_path)
+        assert set(listed_files) == set(expected_files)
+
+
+def test_list_files_not_found_error():
+    with TemporaryDirectory() as path:
+        bucketfs_location_listing = LocalFSMockBucketFSLocation(path)
+
+        local_path = "path/in/"
+        bucket_path = f"{local_path}not_existing_path"
+        with pytest.raises(FileNotFoundError):
+            bucketfs_location_listing.list_files_in_bucketfs(bucket_path)

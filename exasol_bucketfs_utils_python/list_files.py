@@ -23,12 +23,19 @@ def list_files_in_bucketfs(bucket_config: BucketConfig,
     response.raise_for_status()
 
     bucket_file_path_parts = Path(bucket_file_path).parts
+    path_exist = False
     files = []
     for path in response.text.split():
         path_parts = Path(path).parts
         if path_parts[:len(bucket_file_path_parts)] == bucket_file_path_parts:
+            path_exist = True
             relevant_parts = path_parts[len(bucket_file_path_parts):]
-            relevant_path = str(Path(*relevant_parts))
-            files.append(relevant_path)
+            if relevant_parts != ():
+                relevant_path = str(Path(*relevant_parts))
+                files.append(relevant_path)
+
+    if not path_exist:
+        raise FileNotFoundError(
+            f"No such file or directory '{bucket_file_path}' in bucketfs")
 
     return files

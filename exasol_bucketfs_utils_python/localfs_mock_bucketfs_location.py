@@ -1,4 +1,4 @@
-from typing import Any, IO
+from typing import Any, IO, List
 from pathlib import PurePosixPath, Path
 from typing import Any
 import joblib
@@ -83,10 +83,16 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
         return result
 
     def list_files_in_bucketfs(self,
-                               bucket_file_path: str) -> list:
-        path = self.get_complete_file_path_in_bucket(bucket_file_path)
-        Path(path).parent.mkdir(parents=True, exist_ok=True)
-        return ["."]
+                               bucket_file_path: str) -> List[str]:
+        complete_path = self.get_complete_file_path_in_bucket(bucket_file_path)
+        path = Path(complete_path)
+        if not path.exists():
+            raise FileNotFoundError(
+                f"No such file or directory '{bucket_file_path}' in bucketfs")
+
+        list_files = [str(p.relative_to(complete_path))
+                      for p in path.rglob('*') if p.is_file()]
+        return list_files
 
     def delete_file_in_bucketfs(
             self,
