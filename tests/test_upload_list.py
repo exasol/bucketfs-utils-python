@@ -1,7 +1,8 @@
 from exasol_bucketfs_utils_python import upload, list_files
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
-from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConnectionConfig
+from exasol_bucketfs_utils_python.bucketfs_connection_config \
+    import BucketFSConnectionConfig
 from tests.test_load_fs_file_from_udf import delete_testfile_from_bucketfs
 
 
@@ -21,6 +22,8 @@ def test_list_files():
                 bucket_config=bucket_config,
                 bucket_file_path=path_in_bucket,
                 string=test_string)
+
+
 
         bucket_file_path_map = {
             "path": ["in/bucket/file.txt", "file2.txt"],
