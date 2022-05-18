@@ -20,6 +20,9 @@ def test_list_files(bucket_path, expected_list, prepare_bucket):
     assert set(expected_list) == set(list_files.list_files_in_bucketfs(
         bucket_config, bucket_path))
 
+
+def test_list_files_of_current_directory(prepare_bucket):
+    bucket_config = prepare_bucket
     assert {"path/in/bucket/file.txt", "path/file2.txt"}.issubset(
         set(list_files.list_files_in_bucketfs(bucket_config, ".")))
 
