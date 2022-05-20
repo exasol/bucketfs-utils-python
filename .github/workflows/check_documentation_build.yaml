@@ -1,9 +1,14 @@
-name: Build and push documentation for main branch
+name: Check the documentation build, publish if on main
 
 on:
   push:
-    branches:
-      - main
+  # This way it only triggers on branch pushes,
+  # and ignores releases that push a tag.
+    tags-ignore:
+      - '**'
+    branches-ignore:
+    - github-pages/*
+
 jobs:
   create_github_pages_docs:
     strategy:
@@ -25,9 +30,12 @@ jobs:
         poetry-version: 1.1.11
     - name: Poetry install
       run: poetry install
-    - name: Deploy documentation to github-pages-main branch
+    - name: Deploy documentation to github-pages branch
       run: |
         git config --local user.email "opensource@exasol.com"
         git config --local user.name "GitHub Action"
         git fetch
-        poetry run poe push-html-doc-to-github-pages-main
+        poetry run poe push_pages_current
+    - name: Cleanup delete target branch
+      if: ${{ !contains(github.ref, 'main') }}
+      run: git push -d origin "github-pages/"$(git branch --show-current)""
