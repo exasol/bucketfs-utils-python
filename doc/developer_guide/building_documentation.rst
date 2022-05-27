@@ -16,6 +16,8 @@ Building the Documentation interactively during coding
 We defined several commands in the project.toml in poethepoet
 which allow you to build and view the documentation during coding::
 
+.. code:: bash
+
     poetry run poe build-html-doc # Builds the documentation
     poetry run poe open-html-doc # Opens the currently build documentation in the browser
     poetry run poe build-and-open-html-doc # Builds and opens the documentation
@@ -47,6 +49,8 @@ On tag creation, the documentation is also build, and saved in the "tag-name" di
 You can run these tasks manually for testing purposes or
 checking the branch with Github Pages in a fork of the main repository.
 For this purpose, we also provide a few shortcuts defined in our project.toml for poethepoet::
+
+.. code:: bash
 
     poetry run poe commit_pages_main  # creates or updates github-pages/main locally
     poetry run poe push_pages_main  # creates or updates github-pages/main and pushes it to origin
