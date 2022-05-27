@@ -33,7 +33,7 @@ myst-parser = "^0.17.0"
 pyexasol = "^0.24.0"
 dill = "^0.3.4"
 exasol-udf-mock-python = { git = "https://github.com/exasol/udf-mock-python.git", branch = "master" }
-exasol-sphinx-github-pages-generator = { git = "https://github.com/exasol/sphinx-github-pages-generator.git", branch = "feature/20-add-action-for-release-docu" }
+exasol-sphinx-github-pages-generator = { git = "https://github.com/exasol/sphinx-github-pages-generator.git", branch = "main" }
 gitpython = ">=2.1.0"
 toml = ">=0.10.2"
 
@@ -45,13 +45,12 @@ build-html-doc = {shell = """
     """ }
 open-html-doc = { shell = """
     cd "$(git rev-parse --show-toplevel)/doc";
-    xdg-open .build-docu/html/index.html""" }
+    xdg-open .build-docu/index.html""" }
 build-and-open-html-doc = [ "build-html-doc", "open-html-doc" ]
 
-commit_pages_main = { shell = """cd $(git rev-parse --show-toplevel);declare -a StringArray=("../another_test_package" "../test_package"); python3 doc/call_pages_generator.py --target_branch "github-pages/main" --push_origin "origin" --push_enabled "commit" --source_branch "main"  --module_path "${StringArray[@]}" """ }
-commit_pages_current = { shell = """cd $(git rev-parse --show-toplevel);declare -a StringArray=("../another_test_package" "../test_package"); python3 doc/call_pages_generator.py --target_branch "github-pages/main" --push_origin "origin" --push_enabled "commit" --module_path "${StringArray[@]}" """ }
-push_pages_main = { shell = """cd $(git rev-parse --show-toplevel);declare -a StringArray=("../another_test_package" "../test_package"); python3 doc/call_pages_generator.py --target_branch "github-pages/main" --push_origin "origin" --push_enabled "push" --source_branch "main"  --module_path "${StringArray[@]}" """ }
-push_pages_current = { shell = """cd $(git rev-parse --show-toplevel);declare -a StringArray=("../another_test_package" "../test_package"); python3 doc/call_pages_generator.py --target_branch "github-pages/main" --push_origin "origin" --push_enabled "push" --module_path "${StringArray[@]}" """ }
-push_pages_release = { shell = """cd "$(git rev-parse --show-toplevel)";declare -a StringArray=("../another_test_package" "../test_package" ); python3 doc/call_pages_generator.py --target_branch "github-pages/main" --push_origin "origin" --push_enabled "push" --module_path "${StringArray[@]}" --source_branch $(git tag --sort=committerdate | tail -1) --source_origin "tags" """ }
-
+commit_pages_main = { shell = """cd $(git rev-parse --show-toplevel);  bash ./doc/scripts/commit_pages_main.sh """ }
+commit_pages_current = { shell = """cd "$(git rev-parse --show-toplevel)";  bash ./doc/scripts/commit_pages_current.sh """ }
+push_pages_main = { shell = """cd $(git rev-parse --show-toplevel);  bash ./doc/scripts/push_pages_main.sh """ }
+push_pages_current = { shell = """cd $(git rev-parse --show-toplevel);  bash ./doc/scripts/push_pages_current.sh """ }
+push_pages_release = { shell = """cd "$(git rev-parse --show-toplevel)";  bash ./doc/scripts/push_pages_main.sh """ }
 test =  "pytest tests"
