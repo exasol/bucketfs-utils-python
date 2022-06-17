@@ -2,8 +2,7 @@ name: Check the documentation build, publish if on main
 
 on:
   push:
-  # This way it only triggers on branch pushes,
-  # and ignores releases that push a tag.
+ # Only trigger if branches get pushed (ignored pushed a tag)
     tags-ignore:
       - '**'
     branches-ignore:
