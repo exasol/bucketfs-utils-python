@@ -15,6 +15,7 @@
 ## Refactoring
 
  - #53: Upgraded Python version to >=3.8, removed numpy from source again
+ - #38: Replaced old bash scripts for building documentation with Sphinx_Github-Pages-generator, migrated to Nox
 
 ## Security
 
