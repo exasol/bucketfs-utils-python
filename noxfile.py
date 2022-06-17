@@ -41,7 +41,7 @@ def commit_pages_main(session):
 @nox.session
 def commit_pages_current(session):
     BASE_PATH = session.run("git", "rev-parse", "--show-toplevel", silent=True)
-    branch = session.sun("git", "branch", "--show-current", silent=True)
+    branch = session.run("git", "branch", "--show-current", silent=True)
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages" + branch,
@@ -67,7 +67,7 @@ def push_pages_main(session):
 @nox.session
 def push_pages_current(session):
     BASE_PATH = session.run("git", "rev-parse", "--show-toplevel", silent=True)
-    branch = session.sun("git", "branch", "--show-current", silent=True)
+    branch = session.run("git", "branch", "--show-current", silent=True)
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages" + branch,
