@@ -22,7 +22,11 @@ Installation
 
 Install the package from Github via `pip`::
 
-    pip install -e git://github.com/exasol/bucketfs-utils-python.git@{tag name}#egg=exasol-bucketfs-utils-python
+    pip install -e git+https://github.com/exasol/bucketfs-utils-python.git@{tag name}#egg=exasol-bucketfs-utils-python
+
+Or install the wheel directly via::
+
+    pip install https://github.com/exasol/bucketfs-utils-python/releases/download/{tag name}/exasol_bucketfs_utils_python-{tag name}-py3-none-any.whl
 
 Documentation
 -------------
