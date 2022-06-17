@@ -28,7 +28,7 @@ Documentation
 -------------
 
 `Documentation for the current main branch <https://exasol.github.io/bucketfs-utils-python/main>`_ is hosted on the Github Pages of this project.
-`Here<https://exasol.github.io/bucketfs-utils-python>`_  is a list of documentations for previous releases.
+`Here <https://exasol.github.io/bucketfs-utils-python>`_  is a list of documentations for previous releases.
 
 Features
 ========
