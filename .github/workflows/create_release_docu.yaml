@@ -30,4 +30,5 @@ jobs:
         git config --local user.email "opensource@exasol.com"
         git config --local user.name "GitHub Action"
         git fetch
-        poetry run poe push_pages_release
+        poetry run python -m nox -s push_pages_release
+
