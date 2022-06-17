@@ -13,14 +13,14 @@ and supports reStructuredText with proper cross-document references.
 Building the Documentation interactively during coding
 ######################################################
 
-We defined several commands in the project.toml in poethepoet
+We defined several nox commands in the noxfile.py in poethepoet
 which allow you to build and view the documentation during coding::
 
 .. code:: bash
 
-    poetry run poe build-html-doc # Builds the documentation
-    poetry run poe open-html-doc # Opens the currently build documentation in the browser
-    poetry run poe build-and-open-html-doc # Builds and opens the documentation
+    nox -s build-html-doc # Builds the documentation
+    nox -s open-html-doc # Opens the currently build documentation in the browser
+    nox -s build-and-open-html-doc # Builds and opens the documentation
 
 All three build commands generate the documentation into /doc/.build-docu
 which is excluded in gitignore.
@@ -52,9 +52,9 @@ For this purpose, we also provide a few shortcuts defined in our project.toml fo
 
 .. code:: bash
 
-    poetry run poe commit_pages_main  # creates or updates github-pages/main locally
-    poetry run poe push_pages_main  # creates or updates github-pages/main and pushes it to origin
-    poetry run poe commit_pages_current  # creates or updates github-pages/<current-branch-name> locally
-    poetry run poe push_pages_current  # creates or updates github-pages/<current-branch-name> and pushes it to origin
-    poetry run poe push_pages_release  # creates or updates github-pages/<latest-tag> and pushes it to origin
+    nox -s commit_pages_main  # creates or updates github-pages/main locally
+    nox -s push_pages_main  # creates or updates github-pages/main and pushes it to origin
+    nox -s commit_pages_current  # creates or updates github-pages/<current-branch-name> locally
+    nox -s push_pages_current  # creates or updates github-pages/<current-branch-name> and pushes it to origin
+    nox -s push_pages_release  # creates or updates github-pages/<latest-tag> and pushes it to origin
 
