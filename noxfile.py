@@ -44,7 +44,7 @@ def commit_pages_current(session):
     branch = session.run("git", "branch", "--show-current", silent=True)
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
-                    "--target_branch", "github-pages" + branch,
+                    "--target_branch", "github-pages/" + branch,
                     "--push_origin", "origin",
                     "--push_enabled", "commit",
                     "--module_path", "${StringArray[@]}",
@@ -70,7 +70,7 @@ def push_pages_current(session):
     branch = session.run("git", "branch", "--show-current", silent=True)
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
-                    "--target_branch", "github-pages" + branch,
+                    "--target_branch", "github-pages/" + branch,
                     "--push_origin", "origin",
                     "--push_enabled", "push",
                     "--module_path", "${StringArray[@]}",
