@@ -19,3 +19,7 @@
 ## Security
 
     - /
+
+## Documentation
+
+ - #68: Fix installation instructions in README
