@@ -48,7 +48,7 @@ On tag creation, the documentation is also build, and saved in the "tag-name" di
 
 You can run these tasks manually for testing purposes or
 checking the branch with Github Pages in a fork of the main repository.
-For this purpose, we also provide a few shortcuts defined in our project.toml for poethepoet::
+For this purpose, we also provide a few shortcuts defined in our noxfile.py::
 
 .. code:: bash
 
