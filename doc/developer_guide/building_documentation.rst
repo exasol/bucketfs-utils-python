@@ -13,7 +13,7 @@ and supports reStructuredText with proper cross-document references.
 Building the Documentation interactively during coding
 ######################################################
 
-We defined several nox commands in the noxfile.py in poethepoet
+We defined several nox commands in the noxfile.py
 which allow you to build and view the documentation during coding::
 
 .. code:: bash
