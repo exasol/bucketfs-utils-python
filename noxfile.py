@@ -44,7 +44,7 @@ def commit_pages_current(session):
     branch = session.run("git", "branch", "--show-current", silent=True)
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
-                    "--target_branch", "github-pages/" + branch,
+                    "--target_branch", "github-pages/" + branch[:-1],
                     "--push_origin", "origin",
                     "--push_enabled", "commit",
                     "--module_path", "${StringArray[@]}",
@@ -70,7 +70,7 @@ def push_pages_current(session):
     branch = session.run("git", "branch", "--show-current", silent=True)
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
-                    "--target_branch", "github-pages/" + branch,
+                    "--target_branch", "github-pages/" + branch[:-1],
                     "--push_origin", "origin",
                     "--push_enabled", "push",
                     "--module_path", "${StringArray[@]}",
@@ -80,7 +80,9 @@ def push_pages_current(session):
 @nox.session
 def push_pages_release(session):
     BASE_PATH = session.run("git", "rev-parse", "--show-toplevel", silent=True)
-    tag = session.run("git", "tag", "--sort=committerdate", "|", "tail", "-1")
+    tags = session.run("git", "tag", "--sort=committerdate", silent=True)
+    # get the latest tag. last element in list is empty string, so choose second to last
+    tag = tags.split("\n")[-2]
     with session.chdir(BASE_PATH[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages/main",
