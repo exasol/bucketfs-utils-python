@@ -12,4 +12,5 @@ For a detailed explanation of the API, please refer to our :doc:`API Documentati
    upload_github_release_to_bucket
    list_files_in_bucket
    delete_file_in_bucket
+   bucketfs_location
 

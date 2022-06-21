@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>High Level Api &#8212; Exasol BucketFS Utils Python  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer Guide" href="../developer_guide/developer_guide.html" />
+    <link rel="prev" title="Deleting file in BucketFS" href="delete_file_in_bucket.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="high-level-api">
+<h1>High Level Api<a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h1>
+<p>The high level API documented bellow, abstracts away repetitive tasks and information.</p>
+<section id="bucketfslocation">
+<h2>BucketFSLocation<a class="headerlink" href="#bucketfslocation" title="Permalink to this headline">¶</a></h2>
+<p>Keeps track of connection information and provides access to specific bucket in a bucketfs.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Example</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">PurePosixPath</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucket_config</span> <span class="kn">import</span> <span class="n">BucketConfig</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_config</span> <span class="kn">import</span> <span class="n">BucketFSConfig</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_location</span> <span class="kn">import</span> <span class="n">BucketFSLocation</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_connection_config</span> <span class="kn">import</span> <span class="n">BucketFSConnectionConfig</span>
+
+<span class="n">bucket</span> <span class="o">=</span> <span class="n">BucketFSLocation</span><span class="p">(</span>
+    <span class="n">bucket_config</span><span class="o">=</span><span class="n">BucketConfig</span><span class="p">(</span>
+        <span class="n">bucket_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="n">bucketfs_config</span><span class="o">=</span><span class="n">BucketFSConfig</span><span class="p">(</span>
+            <span class="n">bucketfs_name</span><span class="o">=</span><span class="s2">&quot;bfsdefault&quot;</span><span class="p">,</span>
+            <span class="n">connection_config</span><span class="o">=</span><span class="n">BucketFSConnectionConfig</span><span class="p">(</span>
+                <span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+                <span class="n">port</span><span class="o">=</span><span class="mi">6666</span><span class="p">,</span>
+                <span class="n">user</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+                <span class="n">pwd</span><span class="o">=</span><span class="s2">&quot;write&quot;</span><span class="p">,</span>
+                <span class="n">is_https</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">base_path</span><span class="o">=</span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s2">&quot;test_read_obj&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;myfile.txt&quot;</span>
+<span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;Some file</span><span class="se">\n</span><span class="s2">content&quot;</span>
+
+<span class="n">bucket</span><span class="o">.</span><span class="n">upload_string_to_bucketfs</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="n">download</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">download_from_bucketfs_to_string</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">content</span> <span class="o">==</span> <span class="n">download</span>
+
+</pre></div>
+</div>
+</div>
+<p>For further details on the available functionality of <em>BucketFSLocation</em> see <a class="reference internal" href="../api.html#api-reference"><span class="std std-ref">API Reference</span></a>.</p>
+</section>
+<section id="bucketfsfactory">
+<h2>BucketFSFactory<a class="headerlink" href="#bucketfsfactory" title="Permalink to this headline">¶</a></h2>
+<p>Factory for creating bucket accessors (<em>BucketFSLocation</em>) or fake/mock accessors from a URI which can be used for testing.  This can be particular useful, if you wan’t create a BucketFSLocation in a UDF from a Exasol connection.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Example: Create Mock Bucket Accessor</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">PurePosixPath</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_factory</span> <span class="kn">import</span> <span class="n">BucketFSFactory</span>
+
+<span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;file://</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/bucket&quot;</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">BucketFSFactory</span><span class="p">()</span><span class="o">.</span><span class="n">create_bucketfs_location</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">pwd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">base_path</span><span class="o">=</span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s2">&quot;base&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">bucket_path</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">get_complete_file_path_in_bucket</span><span class="p">(</span><span class="s2">&quot;bucket_file_path&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">bucket_path</span> <span class="o">==</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/bucket/base/bucket_file_path&quot;</span>
+
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Example: Create Bucket Accessor</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">PurePosixPath</span>
+<span class="kn">from</span> <span class="nn">exasol_bucketfs_utils_python.bucketfs_factory</span> <span class="kn">import</span> <span class="n">BucketFSFactory</span>
+
+<span class="n">bucket</span> <span class="o">=</span> <span class="n">BucketFSFactory</span><span class="p">()</span><span class="o">.</span><span class="n">create_bucketfs_location</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://localhost:6583/bucket/path_in_bucket;bucketfsname&quot;</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="n">pwd</span><span class="o">=</span><span class="s2">&quot;write&quot;</span><span class="p">,</span>
+    <span class="n">base_path</span><span class="o">=</span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s2">&quot;base&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;myfile.txt&quot;</span>
+<span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;Some file</span><span class="se">\n</span><span class="s2">content&quot;</span>
+
+<span class="n">bucket</span><span class="o">.</span><span class="n">upload_string_to_bucketfs</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="n">download</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">download_from_bucketfs_to_string</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">content</span> <span class="o">==</span> <span class="n">download</span>
+
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Exasol BucketFS Utils Python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/developer_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes/changelog.html">Changes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="user_guide.html">User Guide</a><ul>
+      <li>Previous: <a href="delete_file_in_bucket.html" title="previous chapter">Deleting file in BucketFS</a></li>
+      <li>Next: <a href="../developer_guide/developer_guide.html" title="next chapter">Developer Guide</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Exasol.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/user_guide/bucketfs_location.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
