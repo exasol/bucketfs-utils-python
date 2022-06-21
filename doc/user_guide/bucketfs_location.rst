@@ -16,7 +16,7 @@ For further details on the available functionality of *BucketFSLocation* see :re
 
 BucketFSFactory
 ---------------
-Factory for creating bucket accessors (*BucketFSLocation*) or fake/mock accessors which can be used for testing.
+Factory for creating bucket accessors (*BucketFSLocation*) or fake/mock accessors from a URI which can be used for testing.  This can be particular useful, if you wan't create a BucketFSLocation in a UDF from a Exasol connection.
 
 .. literalinclude:: /examples/bucketfs_location.py
    :caption: Example: Create Mock Bucket Accessor
