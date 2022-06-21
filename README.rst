@@ -42,6 +42,6 @@ Features
   * Files on the local Filesystem
   * Python file objects
   * Python Strings
-  * Python objects ((De-)Serialization with [Joblib](https://joblib.readthedocs.io/en/latest/persistence.html))
+  * Python objects ((De-)Serialization with `Joblib <https://joblib.readthedocs.io/en/latest/persistence.html>`_)
 
 * Loading an artefact from a public Github Release into the BucketFS

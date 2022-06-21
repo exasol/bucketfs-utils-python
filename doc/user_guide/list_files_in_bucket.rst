@@ -10,5 +10,5 @@ directory is obtained by the provided listing method.
 
 Example:
 
-.. literalinclude:: list_files_in_bucket.py
+.. literalinclude:: /examples/list_files_in_bucket.py
    :language: python3
