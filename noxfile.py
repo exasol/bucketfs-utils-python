@@ -1,11 +1,9 @@
+import webbrowser
+from pathlib import Path
+
 import nox
 
-
-@nox.session
-def build_html_doc(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1] + "/doc"):
-        _build_html_doc(session)
+nox.options.sessions = []
 
 
 def _get_base_path(session: nox.Session):
@@ -18,11 +16,23 @@ def _build_html_doc(session: nox.Session):
     session.run("sphinx-build", "-b", "html", "-W", ".", ".build-docu")
 
 
+def _open_docs_in_browser(session: nox.Session):
+    index_file_path = Path(".build-docu/index.html").resolve()
+    webbrowser.open_new_tab(index_file_path.as_uri())
+
+
+@nox.session
+def build_html_doc(session: nox.Session):
+    BASE_PATH = _get_base_path(session)
+    with session.chdir(BASE_PATH[:-1] + "/doc"):
+        _build_html_doc(session)
+
+
 @nox.session
 def open_html_doc(session: nox.Session):
     BASE_PATH = _get_base_path(session)
     with session.chdir(BASE_PATH[:-1] + "/doc"):
-        session.run("xdg-open", ".build-docu/index.html")
+        _open_docs_in_browser(session)
 
 
 @nox.session
@@ -30,7 +40,7 @@ def build_and_open_html_doc(session: nox.Session):
     BASE_PATH = _get_base_path(session)
     with session.chdir(BASE_PATH[:-1] + "/doc"):
         _build_html_doc(session)
-        session.run("xdg-open", ".build-docu/index.html")
+        _open_docs_in_browser(session)
 
 
 @nox.session
