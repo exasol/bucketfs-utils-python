@@ -7,8 +7,8 @@ nox.options.sessions = []
 
 
 def _get_base_path(session: nox.Session):
-    BASE_PATH = session.run("git", "rev-parse", "--show-toplevel", silent=True)
-    return BASE_PATH
+    base_path = session.run("git", "rev-parse", "--show-toplevel", silent=True)
+    return base_path
 
 
 def _build_html_doc(session: nox.Session):
@@ -23,30 +23,30 @@ def _open_docs_in_browser(session: nox.Session):
 
 @nox.session
 def build_html_doc(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1] + "/doc"):
+    base_path = _get_base_path(session)
+    with session.chdir(base_path[:-1] + "/doc"):
         _build_html_doc(session)
 
 
 @nox.session
 def open_html_doc(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1] + "/doc"):
+    base_path = _get_base_path(session)
+    with session.chdir(base_path[:-1] + "/doc"):
         _open_docs_in_browser(session)
 
 
 @nox.session
 def build_and_open_html_doc(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1] + "/doc"):
+    base_path = _get_base_path(session)
+    with session.chdir(base_path[:-1] + "/doc"):
         _build_html_doc(session)
         _open_docs_in_browser(session)
 
 
 @nox.session
 def commit_pages_main(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1]):
+    base_path = _get_base_path(session)
+    with session.chdir(base_path[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages/main",
                     "--push_origin", "origin",
@@ -58,9 +58,9 @@ def commit_pages_main(session: nox.Session):
 
 @nox.session
 def commit_pages_current(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
+    base_path = _get_base_path(session)
     branch = session.run("git", "branch", "--show-current", silent=True)
-    with session.chdir(BASE_PATH[:-1]):
+    with session.chdir(base_path[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages/" + branch[:-1],
                     "--push_origin", "origin",
@@ -71,8 +71,8 @@ def commit_pages_current(session: nox.Session):
 
 @nox.session
 def push_pages_main(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1]):
+    base_path = _get_base_path(session)
+    with session.chdir(base_path[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages/main",
                     "--push_origin", "origin",
@@ -84,9 +84,9 @@ def push_pages_main(session: nox.Session):
 
 @nox.session
 def push_pages_current(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
+    base_path = _get_base_path(session)
     branch = session.run("git", "branch", "--show-current", silent=True)
-    with session.chdir(BASE_PATH[:-1]):
+    with session.chdir(base_path[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages/" + branch[:-1],
                     "--push_origin", "origin",
@@ -97,11 +97,11 @@ def push_pages_current(session: nox.Session):
 
 @nox.session
 def push_pages_release(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
+    base_path = _get_base_path(session)
     tags = session.run("git", "tag", "--sort=committerdate", silent=True)
     # get the latest tag. last element in list is empty string, so choose second to last
     tag = tags.split("\n")[-2]
-    with session.chdir(BASE_PATH[:-1]):
+    with session.chdir(base_path[:-1]):
         session.run("sgpg",
                     "--target_branch", "github-pages/main",
                     "--push_origin", "origin",
@@ -114,6 +114,6 @@ def push_pages_release(session: nox.Session):
 
 @nox.session
 def run_tests(session: nox.Session):
-    BASE_PATH = _get_base_path(session)
-    with session.chdir(BASE_PATH[:-1]):
+    base_path = _get_base_path(session)
+    with session.chdir(base_path[:-1]):
         session.run("pytest", "tests")
