@@ -7,5 +7,5 @@ This can be useful, if you want to upload a released artefact from one of `Exaso
 
 Example:
 
-.. literalinclude:: upload_github_release_to_bucket.py
+.. literalinclude:: /examples/upload_github_release_to_bucket.py
    :language: python3

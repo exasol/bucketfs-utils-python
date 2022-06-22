@@ -19,7 +19,7 @@ download the data from the BucketFS into a local file.
 
 Example:
 
-.. literalinclude:: upload_download_file.py
+.. literalinclude:: /examples/upload_download_file.py
    :language: python3
 
 #######################################################
@@ -36,7 +36,7 @@ Other modules may provide additional ways to create file-objects. See
 
 Example:
 
-.. literalinclude:: upload_download_fileobj.py
+.. literalinclude:: /examples/upload_download_fileobj.py
    :language: python3
 
 ###################################################
@@ -48,7 +48,7 @@ This for example, can be useful to upload or download configuration in json or y
 
 Example:
 
-.. literalinclude:: upload_download_string.py
+.. literalinclude:: /examples/upload_download_string.py
    :language: python3
 
 ########################################################################
@@ -65,5 +65,5 @@ for Python objects containing large data and it supports compression for the out
 
 Example:
 
-.. literalinclude:: upload_download_python_object.py
+.. literalinclude:: /examples/upload_download_python_object.py
    :language: python3
