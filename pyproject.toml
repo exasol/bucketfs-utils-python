@@ -28,27 +28,12 @@ typeguard = ">=2.11.1"
 pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 Sphinx = "^4.5"
-poethepoet = "^0.13.0"
 myst-parser = "^0.17.0"
 pyexasol = "^0.24.0"
 dill = "^0.3.4"
 exasol-udf-mock-python = { git = "https://github.com/exasol/udf-mock-python.git", branch = "master" }
+exasol-sphinx-github-pages-generator = { git = "https://github.com/exasol/sphinx-github-pages-generator.git", tag = "0.1.0"}
 gitpython = ">=2.1.0"
 toml = ">=0.10.2"
+nox = "^2022.1.7"
 
-[tool.poe.tasks]
-build-html-doc = {shell = """
-    cd "$(git rev-parse --show-toplevel)/doc";
-    make clean-build; make html
-    """ }
-open-html-doc = { shell = """
-    cd "$(git rev-parse --show-toplevel)/doc";
-    xdg-open _build/html/index.html""" }
-build-and-open-html-doc = [ "build-html-doc", "open-html-doc" ]
-
-commit-html-doc-to-github-pages-main = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-main.sh commit" }
-push-html-doc-to-github-pages-main = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-main.sh push" }
-commit-html-doc-to-github-pages-current = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-current.sh commit" }
-push-html-doc-to-github-pages-current = { shell = "cd $(git rev-parse --show-toplevel)/doc; bash deploy-to-github-pages-current.sh push" }
-
-test =  "pytest tests"
