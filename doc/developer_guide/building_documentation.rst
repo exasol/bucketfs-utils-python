@@ -52,9 +52,9 @@ For this purpose, we also provide a few shortcuts defined in our noxfile.py::
 
 .. code:: bash
 
-    nox -s commit_pages_main  # creates or updates github-pages/main locally
-    nox -s push_pages_main  # creates or updates github-pages/main and pushes it to origin
-    nox -s commit_pages_current  # creates or updates github-pages/<current-branch-name> locally
-    nox -s push_pages_current  # creates or updates github-pages/<current-branch-name> and pushes it to origin
-    nox -s push_pages_release  # creates or updates github-pages/<latest-tag> and pushes it to origin
+    nox -s commit-pages-main  # creates or updates github-pages/main locally
+    nox -s push-pages-main  # creates or updates github-pages/main and pushes it to origin
+    nox -s commit-pages-current  # creates or updates github-pages/<current-branch-name> locally
+    nox -s push-pages-current  # creates or updates github-pages/<current-branch-name> and pushes it to origin
+    nox -s push-pages-release  # creates or updates github-pages/<latest-tag> and pushes it to origin
 
