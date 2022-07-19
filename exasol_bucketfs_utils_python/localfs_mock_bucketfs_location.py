@@ -29,8 +29,6 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
         if path_in_bucket is not None:
             path_in_bucket = bucketfs_utils.\
                 make_path_relative(path_in_bucket)
-            path_in_bucket = bucketfs_utils.\
-                correct_path_in_bucket_for_archives(path_in_bucket)
         else:
             path_in_bucket = ""
         path = PurePosixPath(self.base_path, path_in_bucket)

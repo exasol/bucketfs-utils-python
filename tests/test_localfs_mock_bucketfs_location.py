@@ -8,11 +8,7 @@ from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import \
 
 @pytest.mark.parametrize("path_in_bucket", [
     "/path/in/bucket/file.txt",
-    "path/in/bucket/file.txt",
-    "path/in/bucket/file.txt.tar.gz",
-    "path/in/bucket/file.txt.zip",
-    "path/in/bucket/file.txt.tgz",
-    "path/in/bucket/file.txt.tar"])
+    "path/in/bucket/file.txt"])
 def test_generate_bucket_udf_path(path_in_bucket):
     with tempfile.TemporaryDirectory() as tmpdir_name:
         bucketfs_location = LocalFSMockBucketFSLocation(tmpdir_name)
