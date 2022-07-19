@@ -28,7 +28,76 @@ def test_generate_bucket_udf_path(path_in_bucket):
     udf_path = bucketfs_location.generate_bucket_udf_path(
         path_in_bucket=path_in_bucket)
 
-    assert str(udf_path) == "/buckets/bfsdefault/default/path/in/bucket/file.txt"
+    assert str(udf_path) == "/buckets/bfsdefault/default/" \
+                            "path/in/bucket/file.txt"
+
+
+def test_generate_bucket_udf_path_with_db(
+        upload_language_container, pyexasol_connection):
+
+    connection_config = BucketFSConnectionConfig(
+        host="localhost", port=6666, user="w", pwd="write", is_https=False)
+    bucketfs_config = BucketFSConfig(
+        connection_config=connection_config, bucketfs_name="bfsdefault")
+    bucket_config = BucketConfig(
+        bucket_name="default", bucketfs_config=bucketfs_config)
+    bucketfs_location = BucketFSLocation(bucket_config, "")
+
+    bucket_file_path = "test_file.txt"
+    test_string = "test_string"
+    bucketfs_location.upload_string_to_bucketfs(bucket_file_path, test_string)
+
+    target_schema = "TARGET_SCHEMA"
+    try:
+        # access file from udf
+        udf_name = "AccessFileInBucketFSFromUDF"
+        pyexasol_connection.execute(
+            f"CREATE SCHEMA IF NOT EXISTS {target_schema};")
+        pyexasol_connection.execute(
+            f"OPEN SCHEMA {target_schema};")
+        udf_sql = textwrap.dedent(f"""
+            CREATE OR REPLACE PYTHON3_BFSUP SET SCRIPT {target_schema}."{udf_name}"(
+                  "path_in_bucket" VARCHAR(20000))
+            RETURNS BOOLEAN
+            AS 
+            from exasol_bucketfs_utils_python.bucket_config import BucketConfig
+            from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConnectionConfig
+            from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
+            from exasol_bucketfs_utils_python.bucketfs_location import BucketFSLocation
+            from pathlib import PurePosixPath
+            
+            bucket_name = "default"
+            bucketfs_name = "bfsdefault"
+            def get_bucket_config():    
+                connection_config = BucketFSConnectionConfig(host="localhost",
+                                                             port=6666,
+                                                             user="r", pwd="read",
+                                                             is_https=False)
+                bucketfs_config = BucketFSConfig(bucketfs_name, connection_config=connection_config)
+                return BucketConfig(bucket_name, bucketfs_config)
+                
+            def get_bucket_path():
+                return PurePosixPath("/buckets", bucketfs_name, bucket_name)
+                
+            def run(ctx):
+                path_in_bucket = ctx.path_in_bucket
+                bucket_config = get_bucket_config()
+                bucket_path = get_bucket_path()
+                bucketfs_location = BucketFSLocation(bucket_config, "")
+                relative_file_path = bucketfs_location.generate_bucket_udf_path(
+                    path_in_bucket).relative_to(bucket_path)
+                listed_files = bucketfs_location.list_files_in_bucketfs(".")
+                return str(relative_file_path) in listed_files
+            """)
+        pyexasol_connection.execute(udf_sql)
+        result = pyexasol_connection.execute(
+            f"""select {target_schema}."{udf_name}"('{bucket_file_path}')""").fetchall()
+        print(result)
+        assert result[0][0]
+    finally:
+        delete_testfile_from_bucketfs(file_path=bucket_file_path,
+                                      bucket_config=bucketfs_location.bucket_config)
+        pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
 
 
 def test_upload_download_string_from_different_instance():
@@ -247,6 +316,7 @@ def test_read_files_to_file_from_bucketfs_inside_udf(upload_language_container, 
         delete_testfile_from_bucketfs(file_path=str(bucket_base_path) + "/" + bucket_file_path,
                                       bucket_config=bucketfs_location_read.bucket_config)
         pyexasol_connection.execute(f"DROP SCHEMA IF EXISTS {target_schema} CASCADE;")
+
 
 def test_read_files_to_fileobj_from_bucketfs_inside_udf(upload_language_container, pyexasol_connection):
     connection_config = BucketFSConnectionConfig(host="localhost", port=6666, user="w", pwd="write", is_https=False)
