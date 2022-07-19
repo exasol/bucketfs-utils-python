@@ -9,7 +9,7 @@ from pathlib import Path
 
 @pytest.fixture(scope="session")
 def db_connection():
-    db_connection = Connection(address=f"localhost:9563", user="sys", password="exasol")
+    db_connection = Connection(address=f"localhost:8888", user="sys", password="exasol")
     return db_connection
 
 
