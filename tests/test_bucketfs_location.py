@@ -70,7 +70,7 @@ def test_generate_bucket_udf_path_with_db(
             bucketfs_name = "bfsdefault"
             def get_bucket_config():    
                 connection_config = BucketFSConnectionConfig(host="localhost",
-                                                             port=6666,
+                                                             port=6583,
                                                              user="r", pwd="read",
                                                              is_https=False)
                 bucketfs_config = BucketFSConfig(bucketfs_name, connection_config=connection_config)
