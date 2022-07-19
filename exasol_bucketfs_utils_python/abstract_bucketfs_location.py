@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Tuple, IO, Iterable
 from pathlib import PurePosixPath, Path
 from urllib.parse import ParseResult
+from typing import Union
 
 
 class AbstractBucketFSLocation(ABC):
@@ -10,6 +11,13 @@ class AbstractBucketFSLocation(ABC):
     fileobjects and joblib objects. Also able to read files from the BucketFS
     directly, if called from inside a UDF.
     """
+
+    @abstractmethod
+    def generate_bucket_udf_path(
+            self, path_in_bucket: Union[None, str, PurePosixPath]) \
+            -> PurePosixPath:
+        pass
+
     @abstractmethod
     def download_from_bucketfs_to_string(
             self,

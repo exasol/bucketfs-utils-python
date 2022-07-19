@@ -1,8 +1,8 @@
-from typing import Any, Tuple, IO, Iterable
+from typing import Any, Tuple, IO, Iterable, Union
 from pathlib import PurePosixPath, Path
 from urllib.parse import ParseResult
 from exasol_bucketfs_utils_python import download, upload, list_files, \
-    delete
+    delete, bucketfs_utils
 from exasol_bucketfs_utils_python import load_file_from_local_fs as from_BFS
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 
@@ -24,6 +24,12 @@ class BucketFSLocation(AbstractBucketFSLocation):
     def __init__(self, bucket_config: BucketConfig, base_path: PurePosixPath):
         self.base_path = base_path
         self.bucket_config = bucket_config
+
+    def generate_bucket_udf_path(
+            self, path_in_bucket: Union[None, str, PurePosixPath]) \
+            -> PurePosixPath:
+        return bucketfs_utils.generate_bucket_udf_path(
+            self.bucket_config, path_in_bucket)
 
     def get_complete_file_path_in_bucket(
             self,

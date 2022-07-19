@@ -1,7 +1,9 @@
-from typing import Any, IO, List
+from typing import Any, IO, List, Union
 from pathlib import PurePosixPath, Path
 from typing import Any
 import joblib
+
+from exasol_bucketfs_utils_python import bucketfs_utils
 from exasol_bucketfs_utils_python.abstract_bucketfs_location import \
     AbstractBucketFSLocation
 
@@ -19,6 +21,20 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
 
     def get_complete_file_path_in_bucket(self, bucket_file_path) -> str:
         return str(PurePosixPath(self.base_path, bucket_file_path))
+
+    def generate_bucket_udf_path(
+            self, path_in_bucket: Union[None, str, PurePosixPath]) \
+            -> PurePosixPath:
+
+        if path_in_bucket is not None:
+            path_in_bucket = bucketfs_utils.\
+                make_path_relative(path_in_bucket)
+            path_in_bucket = bucketfs_utils.\
+                correct_path_in_bucket_for_archives(path_in_bucket)
+        else:
+            path_in_bucket = ""
+        path = PurePosixPath(self.base_path, path_in_bucket)
+        return path
 
     def download_from_bucketfs_to_string(self, bucket_file_path: str) -> str:
         with open(self.get_complete_file_path_in_bucket(
