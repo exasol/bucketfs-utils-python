@@ -1,9 +1,25 @@
+import tempfile
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from pathlib import Path, PurePosixPath
-
 import pytest
+from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import \
+    LocalFSMockBucketFSLocation
 
-from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import LocalFSMockBucketFSLocation
+
+@pytest.mark.parametrize("path_in_bucket", [
+    "/path/in/bucket/file.txt",
+    "path/in/bucket/file.txt",
+    "path/in/bucket/file.txt.tar.gz",
+    "path/in/bucket/file.txt.zip",
+    "path/in/bucket/file.txt.tgz",
+    "path/in/bucket/file.txt.tar"])
+def test_generate_bucket_udf_path(path_in_bucket):
+    with tempfile.TemporaryDirectory() as tmpdir_name:
+        bucketfs_location = LocalFSMockBucketFSLocation(tmpdir_name)
+        udf_path = bucketfs_location.generate_bucket_udf_path(path_in_bucket)
+
+        assert udf_path == PurePosixPath(tmpdir_name, "path/in/bucket/file.txt")
+
 
 def test_upload_download_string_from_different_instance():
     with TemporaryDirectory() as path:

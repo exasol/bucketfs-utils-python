@@ -1,14 +1,34 @@
 from pathlib import PurePosixPath
-
 from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
 from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConnectionConfig
-
 from exasol_bucketfs_utils_python.bucketfs_location import BucketFSLocation
 import pytest
 import textwrap
 from tests.test_load_fs_file_from_udf import delete_testfile_from_bucketfs, upload_testfile_to_bucketfs
 # TODO replace upload_testfile_to_BucketFS once missing funcs in BucketFSLocation are implemented
+
+
+@pytest.mark.parametrize("path_in_bucket", [
+    "/path/in/bucket/file.txt",
+    "path/in/bucket/file.txt",
+    "path/in/bucket/file.txt.tar.gz",
+    "path/in/bucket/file.txt.zip",
+    "path/in/bucket/file.txt.tgz",
+    "path/in/bucket/file.txt.tar"])
+def test_generate_bucket_udf_path(path_in_bucket):
+    connection_config = BucketFSConnectionConfig(
+        host="localhost", port=6666, user="w", pwd="write", is_https=False)
+    bucketfs_config = BucketFSConfig(
+        connection_config=connection_config, bucketfs_name="bfsdefault")
+    bucket_config = BucketConfig(
+        bucket_name="default", bucketfs_config=bucketfs_config)
+    bucketfs_location = BucketFSLocation(bucket_config, "")
+
+    udf_path = bucketfs_location.generate_bucket_udf_path(
+        path_in_bucket=path_in_bucket)
+
+    assert str(udf_path) == "/buckets/bfsdefault/default/path/in/bucket/file.txt"
 
 
 def test_upload_download_string_from_different_instance():
