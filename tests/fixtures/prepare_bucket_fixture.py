@@ -4,7 +4,7 @@ from exasol_bucketfs_utils_python.bucket_config import BucketConfig
 from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
 from exasol_bucketfs_utils_python.bucketfs_connection_config import \
     BucketFSConnectionConfig
-from tests.test_load_fs_file_from_udf import delete_testfile_from_bucketfs
+from tests.integration_tests.with_db.test_load_fs_file_from_udf import delete_testfile_from_bucketfs
 
 
 @pytest.fixture(scope="module")
