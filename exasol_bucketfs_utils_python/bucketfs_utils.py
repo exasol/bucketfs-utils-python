@@ -14,7 +14,7 @@ def _encode_url_part(part: str) -> str:
     return urlencoded
 
 
-def _correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) \
+def correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) \
         -> PurePosixPath:
     for extension in ARCHIVE_EXTENSIONS:
         if path_in_bucket.name.endswith(extension):
@@ -24,7 +24,7 @@ def _correct_path_in_bucket_for_archives(path_in_bucket: PurePosixPath) \
     return path_in_bucket
 
 
-def _make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) \
+def make_path_relative(path_in_bucket: Union[None, str, PurePosixPath]) \
         -> PurePosixPath:
     path_in_bucket = PurePosixPath(path_in_bucket)
     if path_in_bucket.is_absolute():
@@ -62,8 +62,8 @@ def generate_bucket_udf_path(
     path = PurePosixPath(bucketfs_path, bucket_config.bucket_name)
 
     if path_in_bucket is not None:
-        path_in_bucket = _make_path_relative(path_in_bucket)
-        path_in_bucket = _correct_path_in_bucket_for_archives(path_in_bucket)
+        path_in_bucket = make_path_relative(path_in_bucket)
+        path_in_bucket = correct_path_in_bucket_for_archives(path_in_bucket)
     else:
         path_in_bucket = ""
     path = PurePosixPath(path, path_in_bucket)
@@ -120,7 +120,7 @@ def generate_bucket_http_url(
     url = generate_bucketfs_http_url(bucket_config.bucketfs_config,
                                      with_credentials)
     if path_in_bucket is not None:
-        path_in_bucket = _make_path_relative(path_in_bucket)
+        path_in_bucket = make_path_relative(path_in_bucket)
     else:
         path_in_bucket = ""
     encoded_bucket_and_path_in_bucket = \

@@ -5,7 +5,8 @@
 
 
 ## Features / Enhancements
-    - /
+
+ - #72: Added generate bucket udf path method to BucketFSLocation
 
 ## Bug Fixes
 
