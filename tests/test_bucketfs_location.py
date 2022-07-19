@@ -64,30 +64,25 @@ def test_generate_bucket_udf_path_with_db(
             from exasol_bucketfs_utils_python.bucketfs_connection_config import BucketFSConnectionConfig
             from exasol_bucketfs_utils_python.bucketfs_config import BucketFSConfig
             from exasol_bucketfs_utils_python.bucketfs_location import BucketFSLocation
-            from pathlib import PurePosixPath
+            from pathlib import PurePosixPath, Path
             
             bucket_name = "default"
             bucketfs_name = "bfsdefault"
             def get_bucket_config():    
                 connection_config = BucketFSConnectionConfig(host="localhost",
-                                                             port=6583,
+                                                             port=6666,
                                                              user="r", pwd="read",
                                                              is_https=False)
                 bucketfs_config = BucketFSConfig(bucketfs_name, connection_config=connection_config)
                 return BucketConfig(bucket_name, bucketfs_config)
                 
-            def get_bucket_path():
-                return PurePosixPath("/buckets", bucketfs_name, bucket_name)
-                
             def run(ctx):
                 path_in_bucket = ctx.path_in_bucket
                 bucket_config = get_bucket_config()
-                bucket_path = get_bucket_path()
                 bucketfs_location = BucketFSLocation(bucket_config, "")
-                relative_file_path = bucketfs_location.generate_bucket_udf_path(
-                    path_in_bucket).relative_to(bucket_path)
-                listed_files = bucketfs_location.list_files_in_bucketfs(".")
-                return str(relative_file_path) in listed_files
+                file_path = bucketfs_location.generate_bucket_udf_path(path_in_bucket)
+                
+                return Path(file_path).exists()
             """)
         pyexasol_connection.execute(udf_sql)
         result = pyexasol_connection.execute(
