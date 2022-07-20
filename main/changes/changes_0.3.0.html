@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="BucketFs Utils Python 0.2.0, released 2022-04-29" href="changes_0.2.0.html" /><link rel="prev" title="Changes" href="changelog.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
-        <title>BucketFs Utils Python 0.3.0, released XXXX-XX-XX - Exasol BucketFS Utils Python documentation</title>
+        <title>BucketFs Utils Python 0.3.0, released 2022-07-20 - Exasol BucketFS Utils Python documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -190,7 +190,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="changelog.html">Changes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">BucketFs Utils Python 0.3.0, released XXXX-XX-XX</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">BucketFs Utils Python 0.3.0, released 2022-07-20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changes_0.2.0.html">BucketFs Utils Python 0.2.0, released 2022-04-29</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changes_0.1.0.html">BucketFs Utils Python 0.1.0, released 2022-01-18</a></li>
 </ul>
@@ -228,10 +228,14 @@
           </label>
         </div>
         <article role="main">
-          <section id="bucketfs-utils-python-0-3-0-released-xxxx-xx-xx">
-<h1>BucketFs Utils Python 0.3.0, released XXXX-XX-XX<a class="headerlink" href="#bucketfs-utils-python-0-3-0-released-xxxx-xx-xx" title="Permalink to this headline">#</a></h1>
+          <section id="bucketfs-utils-python-0-3-0-released-2022-07-20">
+<h1>BucketFs Utils Python 0.3.0, released 2022-07-20<a class="headerlink" href="#bucketfs-utils-python-0-3-0-released-2022-07-20" title="Permalink to this headline">#</a></h1>
+<p>Code name: Added method to BucketFSLocation to generate bucket udf path and upgraded Python version to &gt;=3.8.</p>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+<p>This release adds generate_bucket_udf_path method in BucketFSLoction.
+In addition, bugs in the listing and uploading methods are fixed. Furthermore,
+Python version is upgraded to &gt;=3.8</p>
 </section>
 <section id="features-enhancements">
 <h2>Features / Enhancements<a class="headerlink" href="#features-enhancements" title="Permalink to this headline">#</a></h2>
@@ -244,6 +248,7 @@
 <ul class="simple">
 <li><p>#63: Corrected uploading fileobject method of the mock bucketfs</p></li>
 <li><p>#66: Corrected listing method of localfs mock bucketfs</p></li>
+<li><p>#74: Fixed generating bucket udf path method</p></li>
 </ul>
 </section>
 <section id="refactoring">
@@ -252,12 +257,6 @@
 <li><p>#53: Upgraded Python version to &gt;=3.8, removed numpy from source again</p></li>
 <li><p>#38: Replaced old bash scripts for building documentation with Sphinx_Github-Pages-generator, migrated to Nox</p></li>
 </ul>
-</section>
-<section id="security">
-<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">#</a></h2>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- /
-</pre></div>
-</div>
 </section>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
@@ -324,12 +323,11 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">BucketFs Utils Python 0.3.0, released XXXX-XX-XX</a><ul>
+<li><a class="reference internal" href="#">BucketFs Utils Python 0.3.0, released 2022-07-20</a><ul>
 <li><a class="reference internal" href="#summary">Summary</a></li>
 <li><a class="reference internal" href="#features-enhancements">Features / Enhancements</a></li>
 <li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
 <li><a class="reference internal" href="#refactoring">Refactoring</a></li>
-<li><a class="reference internal" href="#security">Security</a></li>
 <li><a class="reference internal" href="#documentation">Documentation</a></li>
 </ul>
 </li>
