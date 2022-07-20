@@ -29,7 +29,8 @@ class BucketFSLocation(AbstractBucketFSLocation):
             self, path_in_bucket: Union[None, str, PurePosixPath]) \
             -> PurePosixPath:
         return bucketfs_utils.generate_bucket_udf_path(
-            self.bucket_config, path_in_bucket)
+            self.bucket_config,
+            self.get_complete_file_path_in_bucket(path_in_bucket))
 
     def get_complete_file_path_in_bucket(
             self,
