@@ -24,13 +24,22 @@ def test_generate_bucket_udf_path(path_in_bucket):
         connection_config=connection_config, bucketfs_name="bfsdefault")
     bucket_config = BucketConfig(
         bucket_name="default", bucketfs_config=bucketfs_config)
-    bucketfs_location = BucketFSLocation(bucket_config, "")
 
-    udf_path = bucketfs_location.generate_bucket_udf_path(
-        path_in_bucket=path_in_bucket)
+    base_path = "base_path"
+    bucketfs_location_with_base_path = \
+        BucketFSLocation(bucket_config, base_path=PurePosixPath(base_path))
+    bucketfs_location_without_base_path = \
+        BucketFSLocation(bucket_config, base_path=PurePosixPath(""))
 
-    assert str(udf_path) == "/buckets/bfsdefault/default/" \
-                            "path/in/bucket/file.txt"
+    udf_path_with_base_path = bucketfs_location_with_base_path\
+        .generate_bucket_udf_path(path_in_bucket=path_in_bucket)
+    udf_path_without_base_path = bucketfs_location_without_base_path \
+        .generate_bucket_udf_path(path_in_bucket=path_in_bucket)
+
+    assert str(udf_path_with_base_path) == \
+           f"/buckets/bfsdefault/default/{base_path}/path/in/bucket/file.txt" \
+           and str(str(udf_path_without_base_path)) == \
+           "/buckets/bfsdefault/default/path/in/bucket/file.txt"
 
 
 def test_upload_download_string_from_different_instance():

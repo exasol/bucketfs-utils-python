@@ -35,6 +35,10 @@ class BucketFSLocation(AbstractBucketFSLocation):
     def get_complete_file_path_in_bucket(
             self,
             bucket_file_path: str) -> str:
+
+        if bucket_file_path is not None:
+            bucket_file_path = bucketfs_utils\
+                .make_path_relative(bucket_file_path)
         return str(PurePosixPath(self.base_path, bucket_file_path))
 
     def download_from_bucketfs_to_string(
