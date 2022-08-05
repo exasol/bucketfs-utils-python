@@ -19,7 +19,8 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
     def __init__(self, base_path: Optional[PurePosixPath]):
         self.base_path = "" if base_path is None else base_path
 
-    def get_complete_file_path_in_bucket(self, bucket_file_path) -> str:
+    def get_complete_file_path_in_bucket(
+            self, bucket_file_path: Union[None, str, PurePosixPath]) -> str:
         if bucket_file_path is not None:
             bucket_file_path = bucketfs_utils\
                 .make_path_relative(bucket_file_path)

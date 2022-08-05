@@ -39,8 +39,6 @@ def test_get_complete_file_path_in_bucket_without_base_path(
            str(PurePosixPath(expected_path_in_bucket))
 
 
-
-
 @pytest.mark.parametrize("path_in_bucket", [
     "/path/in/bucket/file.txt",
     "path/in/bucket/file.txt"])

@@ -11,6 +11,7 @@ from tests.integration_tests.with_db.test_load_fs_file_from_udf import \
 
 # TODO replace upload_testfile_to_BucketFS once missing funcs in BucketFSLocation are implemented
 
+
 @pytest.mark.parametrize("path_in_bucket, expected_path_in_bucket", [
     ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),

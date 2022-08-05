@@ -34,8 +34,7 @@ class BucketFSLocation(AbstractBucketFSLocation):
             self.get_complete_file_path_in_bucket(path_in_bucket))
 
     def get_complete_file_path_in_bucket(
-            self,
-            bucket_file_path: str) -> str:
+            self, bucket_file_path: Union[None, str, PurePosixPath]) -> str:
 
         if bucket_file_path is not None:
             bucket_file_path = bucketfs_utils\
