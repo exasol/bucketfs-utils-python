@@ -92,7 +92,7 @@ def test_generate_bucket_udf_path_with_base_path(path_in_bucket):
     "path/in/bucket/file.txt.zip",
     "path/in/bucket/file.txt.tgz",
     "path/in/bucket/file.txt.tar"])
-def test_generate_bucket_udf_path_with_base_path(path_in_bucket):
+def test_generate_bucket_udf_path_without_base_path(path_in_bucket):
     connection_config = BucketFSConnectionConfig(
         host="localhost", port=6666, user="w", pwd="write", is_https=False)
     bucketfs_config = BucketFSConfig(
