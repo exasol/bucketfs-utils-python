@@ -16,7 +16,11 @@ from tests.integration_tests.with_db.test_load_fs_file_from_udf import \
     ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("", ""),
-    (None, "")])
+    (None, ""),
+    (PurePosixPath("/path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath("path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath(""), "")
+])
 def test_get_complete_file_path_in_bucket_with_base_path(
         path_in_bucket, expected_path_in_bucket):
 
@@ -41,7 +45,10 @@ def test_get_complete_file_path_in_bucket_with_base_path(
     ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("", ""),
-    (None, "")])
+    (None, ""),
+    (PurePosixPath("/path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath("path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath(""), "")])
 def test_get_complete_file_path_in_bucket_without_base_path(
         path_in_bucket, expected_path_in_bucket):
 

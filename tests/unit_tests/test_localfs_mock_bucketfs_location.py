@@ -10,7 +10,10 @@ from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import \
     ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("", ""),
-    (None, "")])
+    (None, ""),
+    (PurePosixPath("/path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath("path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath(""), "")])
 def test_get_complete_file_path_in_bucket_with_base_path(
         path_in_bucket, expected_path_in_bucket):
 
@@ -27,7 +30,10 @@ def test_get_complete_file_path_in_bucket_with_base_path(
     ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),
     ("", ""),
-    (None, "")])
+    (None, ""),
+    (PurePosixPath("/path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath("path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath(""), "")])
 def test_get_complete_file_path_in_bucket_without_base_path(
         path_in_bucket, expected_path_in_bucket):
 
