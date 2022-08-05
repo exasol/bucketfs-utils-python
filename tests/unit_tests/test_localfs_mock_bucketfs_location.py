@@ -6,15 +6,65 @@ from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import \
     LocalFSMockBucketFSLocation
 
 
+@pytest.mark.parametrize("path_in_bucket, expected_path_in_bucket", [
+    ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
+    ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),
+    ("", ""),
+    (None, ""),
+    (PurePosixPath("/path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath("path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath(""), "")])
+def test_get_complete_file_path_in_bucket_with_base_path(
+        path_in_bucket, expected_path_in_bucket):
+
+    with tempfile.TemporaryDirectory() as tmpdir_name:
+        bucketfs_location = LocalFSMockBucketFSLocation(base_path=tmpdir_name)
+
+        complete_file_path_in_bucket = bucketfs_location\
+            .get_complete_file_path_in_bucket(path_in_bucket)
+        assert complete_file_path_in_bucket == \
+               str(PurePosixPath(tmpdir_name, expected_path_in_bucket))
+
+
+@pytest.mark.parametrize("path_in_bucket, expected_path_in_bucket", [
+    ("/path/in/bucket/file.txt", "path/in/bucket/file.txt"),
+    ("path/in/bucket/file.txt", "path/in/bucket/file.txt"),
+    ("", ""),
+    (None, ""),
+    (PurePosixPath("/path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath("path/in/bucket/file.txt"), "path/in/bucket/file.txt"),
+    (PurePosixPath(""), "")])
+def test_get_complete_file_path_in_bucket_without_base_path(
+        path_in_bucket, expected_path_in_bucket):
+
+    bucketfs_location = LocalFSMockBucketFSLocation(base_path=None)
+
+    complete_file_path_in_bucket = bucketfs_location\
+        .get_complete_file_path_in_bucket(path_in_bucket)
+    assert complete_file_path_in_bucket == \
+           str(PurePosixPath(expected_path_in_bucket))
+
+
 @pytest.mark.parametrize("path_in_bucket", [
     "/path/in/bucket/file.txt",
     "path/in/bucket/file.txt"])
-def test_generate_bucket_udf_path(path_in_bucket):
+def test_generate_bucket_udf_path_with_base_path(path_in_bucket):
     with tempfile.TemporaryDirectory() as tmpdir_name:
-        bucketfs_location = LocalFSMockBucketFSLocation(tmpdir_name)
+        bucketfs_location = LocalFSMockBucketFSLocation(base_path=tmpdir_name)
         udf_path = bucketfs_location.generate_bucket_udf_path(path_in_bucket)
 
         assert udf_path == PurePosixPath(tmpdir_name, "path/in/bucket/file.txt")
+
+
+@pytest.mark.parametrize("path_in_bucket", [
+    "/path/in/bucket/file.txt",
+    "path/in/bucket/file.txt"])
+def test_generate_bucket_udf_path_without_base_path(path_in_bucket):
+
+    bucketfs_location = LocalFSMockBucketFSLocation(base_path=None)
+    udf_path = bucketfs_location.generate_bucket_udf_path(path_in_bucket)
+
+    assert udf_path == PurePosixPath("path/in/bucket/file.txt")
 
 
 def test_upload_download_string_from_different_instance():
