@@ -20,20 +20,20 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
         self.base_path = "" if base_path is None else base_path
 
     def get_complete_file_path_in_bucket(
-            self, bucket_file_path: Union[None, str, PurePosixPath]) -> str:
+            self, bucket_file_path: Optional[Union[str, PurePosixPath]] = None) -> str:
         if bucket_file_path is not None:
-            bucket_file_path = bucketfs_utils\
+            bucket_file_path = bucketfs_utils \
                 .make_path_relative(bucket_file_path)
         else:
             bucket_file_path = ""
         return str(PurePosixPath(self.base_path, bucket_file_path))
 
     def generate_bucket_udf_path(
-            self, path_in_bucket: Union[None, str, PurePosixPath]) \
+            self, path_in_bucket: Optional[Union[str, PurePosixPath]] = None) \
             -> PurePosixPath:
 
         if path_in_bucket is not None:
-            path_in_bucket = bucketfs_utils.\
+            path_in_bucket = bucketfs_utils. \
                 make_path_relative(path_in_bucket)
         else:
             path_in_bucket = ""
@@ -119,3 +119,6 @@ class LocalFSMockBucketFSLocation(AbstractBucketFSLocation):
             bucket_file_path: str) -> None:
         path = self.get_complete_file_path_in_bucket(bucket_file_path)
         Path(path).unlink(missing_ok=True)
+
+    def joinpath(self, *others: Union[str, PurePosixPath]) -> AbstractBucketFSLocation:
+        return LocalFSMockBucketFSLocation(base_path=PurePosixPath(self.base_path).joinpath(*others))

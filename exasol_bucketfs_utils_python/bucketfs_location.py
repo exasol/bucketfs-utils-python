@@ -27,17 +27,17 @@ class BucketFSLocation(AbstractBucketFSLocation):
         self.bucket_config = bucket_config
 
     def generate_bucket_udf_path(
-            self, path_in_bucket: Union[None, str, PurePosixPath]) \
+            self, path_in_bucket: Optional[Union[str, PurePosixPath]] = None) \
             -> PurePosixPath:
         return bucketfs_utils.generate_bucket_udf_path(
             self.bucket_config,
             self.get_complete_file_path_in_bucket(path_in_bucket))
 
     def get_complete_file_path_in_bucket(
-            self, bucket_file_path: Union[None, str, PurePosixPath]) -> str:
+            self, bucket_file_path: Optional[Union[str, PurePosixPath]] = None) -> str:
 
         if bucket_file_path is not None:
-            bucket_file_path = bucketfs_utils\
+            bucket_file_path = bucketfs_utils \
                 .make_path_relative(bucket_file_path)
         else:
             bucket_file_path = ""
@@ -141,3 +141,7 @@ class BucketFSLocation(AbstractBucketFSLocation):
             self.bucket_config,
             self.get_complete_file_path_in_bucket(bucket_file_path)
         )
+
+    def joinpath(self, *others: Union[str, PurePosixPath]) -> AbstractBucketFSLocation:
+        return BucketFSLocation(bucket_config=self.bucket_config,
+                                base_path=PurePosixPath(self.base_path).joinpath(*others))
