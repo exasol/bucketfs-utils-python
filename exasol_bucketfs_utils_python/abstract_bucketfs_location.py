@@ -1,11 +1,11 @@
-from abc import ABC, abstractmethod
-from typing import Any, Tuple, IO, Iterable
+from abc import ABC, abstractmethod, ABCMeta
+from typing import Any, Tuple, IO, Iterable, Optional
 from pathlib import PurePosixPath, Path
 from urllib.parse import ParseResult
 from typing import Union
 
 
-class AbstractBucketFSLocation(ABC):
+class AbstractBucketFSLocation(ABC, metaclass=ABCMeta):
     """
     Abstract class for a BucketFSLocation for uploading and downloading strings,
     fileobjects and joblib objects. Also able to read files from the BucketFS
@@ -14,8 +14,13 @@ class AbstractBucketFSLocation(ABC):
 
     @abstractmethod
     def generate_bucket_udf_path(
-            self, path_in_bucket: Union[None, str, PurePosixPath]) \
+            self, path_in_bucket: Optional[Union[str, PurePosixPath]]=None) \
             -> PurePosixPath:
+        pass
+
+    @abstractmethod
+    def get_complete_file_path_in_bucket(
+            self, bucket_file_path: Optional[Union[str, PurePosixPath]]=None) -> str:
         pass
 
     @abstractmethod
@@ -90,4 +95,8 @@ class AbstractBucketFSLocation(ABC):
     def delete_file_in_bucketfs(
             self,
             bucket_file_path: str) -> None:
+        pass
+
+    @abstractmethod
+    def joinpath(self, *others: Union[str, PurePosixPath]) -> "AbstractBucketFSLocation":
         pass

@@ -16,11 +16,10 @@ from exasol_bucketfs_utils_python.localfs_mock_bucketfs_location import \
     (PurePosixPath(""), "")])
 def test_get_complete_file_path_in_bucket_with_base_path(
         path_in_bucket, expected_path_in_bucket):
-
     with tempfile.TemporaryDirectory() as tmpdir_name:
         bucketfs_location = LocalFSMockBucketFSLocation(base_path=tmpdir_name)
 
-        complete_file_path_in_bucket = bucketfs_location\
+        complete_file_path_in_bucket = bucketfs_location \
             .get_complete_file_path_in_bucket(path_in_bucket)
         assert complete_file_path_in_bucket == \
                str(PurePosixPath(tmpdir_name, expected_path_in_bucket))
@@ -36,10 +35,9 @@ def test_get_complete_file_path_in_bucket_with_base_path(
     (PurePosixPath(""), "")])
 def test_get_complete_file_path_in_bucket_without_base_path(
         path_in_bucket, expected_path_in_bucket):
-
     bucketfs_location = LocalFSMockBucketFSLocation(base_path=None)
 
-    complete_file_path_in_bucket = bucketfs_location\
+    complete_file_path_in_bucket = bucketfs_location \
         .get_complete_file_path_in_bucket(path_in_bucket)
     assert complete_file_path_in_bucket == \
            str(PurePosixPath(expected_path_in_bucket))
@@ -60,7 +58,6 @@ def test_generate_bucket_udf_path_with_base_path(path_in_bucket):
     "/path/in/bucket/file.txt",
     "path/in/bucket/file.txt"])
 def test_generate_bucket_udf_path_without_base_path(path_in_bucket):
-
     bucketfs_location = LocalFSMockBucketFSLocation(base_path=None)
     udf_path = bucketfs_location.generate_bucket_udf_path(path_in_bucket)
 
@@ -105,11 +102,11 @@ def test_read_file_from_bucketfs_to_fileobj():
         bucket_file_path = "test_file.txt"
         test_byte_string = b"test_byte_string"
         with open(path + "/" + bucket_file_path, "wb") as file:
-            file. write(test_byte_string)
+            file.write(test_byte_string)
             file.flush()
         with NamedTemporaryFile() as output_temp_file:
             bucketfs_location_read.read_file_from_bucketfs_to_fileobj(bucket_file_path,
-                                                                output_temp_file)
+                                                                      output_temp_file)
             output_temp_file.flush()
             output_temp_file.seek(0)
             output_test_byte_string = output_temp_file.read()
@@ -122,7 +119,7 @@ def test_read_file_from_bucketfs_to_file():
         bucket_file_path = "test_file.txt"
         test_byte_string = b"test_byte_string"
         with open(path + "/" + bucket_file_path, "wb") as file:
-            file. write(test_byte_string)
+            file.write(test_byte_string)
             file.flush()
         with NamedTemporaryFile() as output_temp_file:
             bucketfs_location_read.read_file_from_bucketfs_to_file(bucket_file_path,
@@ -153,7 +150,7 @@ def test_read_file_from_bucketfs_via_joblib():
         assert result == test_value
 
 
-def test_upload_read_fileobject ():
+def test_upload_read_fileobject():
     tmp_file_fname = "tmp_file_path.txt"
     input_test_byte_string = b"test_byte_string"
 
@@ -193,7 +190,7 @@ def test_list_files_in_bucketfs():
                 test_value, file_path)
 
         expected_files = ['file1.txt', 'file2.txt', 'bucket/file.txt']
-        listed_files = bucketfs_location_listing\
+        listed_files = bucketfs_location_listing \
             .list_files_in_bucketfs(local_path)
         assert set(listed_files) == set(expected_files)
 
@@ -206,3 +203,19 @@ def test_list_files_not_found_error():
         bucket_path = f"{local_path}not_existing_path"
         with pytest.raises(FileNotFoundError):
             bucketfs_location_listing.list_files_in_bucketfs(bucket_path)
+
+
+@pytest.mark.parametrize("path,expected_path_in_bucket", [
+    (["path"], "path"),
+    (["path/subpath"], "path/subpath"),
+    (["path", "subpath"], "path/subpath"),
+    ([PurePosixPath("path/subpath")], "path/subpath"),
+    ([PurePosixPath("path"), PurePosixPath("subpath")], "path/subpath"),
+    ([PurePosixPath("path"), "subpath"], "path/subpath")
+])
+def test_joinpath(path, expected_path_in_bucket, tmp_path: Path):
+    bucketfs_location = LocalFSMockBucketFSLocation(PurePosixPath(tmp_path))
+
+    result_bucketfs_location = bucketfs_location.joinpath(*path)
+    acutal_path_in_bucket = result_bucketfs_location.generate_bucket_udf_path()
+    assert acutal_path_in_bucket == Path(bucketfs_location.generate_bucket_udf_path(), expected_path_in_bucket)
