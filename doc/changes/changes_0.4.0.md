@@ -11,5 +11,6 @@ TBD.
 ## Bug Fixes
 
 ## Refactoring
+ - #81: Updated poetry version for CI to 1.2.0
 
 ## Documentation
