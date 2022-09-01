@@ -10,7 +10,7 @@ init_poetry () {
 request_install_poetry () {
   install_command="cat install-python-poetry.py | python3 -"
   curl -sSL -o install-python-poetry.py https://install.python-poetry.org
-  sed -i 's/allowed_executables = \["python", "python3"\]/allowed_executables = ["python3", "python"]/'  install-python-poetry.py
+
   if [ "$POETRY_INSTALL" = YES ]
   then
     ANSWER=yes
