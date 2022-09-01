@@ -8,9 +8,9 @@ init_poetry () {
 }
 
 request_install_poetry () {
-  install_command="cat get-poetry.py | python3 -"
-  curl -sSL -o get-poetry.py https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
-  sed -i 's/allowed_executables = \["python", "python3"\]/allowed_executables = ["python3", "python"]/'  get-poetry.py 
+  install_command="cat install-python-poetry.py | python3 -"
+  curl -sSL -o install-python-poetry.py https://install.python-poetry.org
+
   if [ "$POETRY_INSTALL" = YES ]
   then
     ANSWER=yes
@@ -25,14 +25,14 @@ request_install_poetry () {
     if ! bash -c "$install_command"
     then
       echo "The automatic installation of Poetry failed please install in manually."
-      echo "To install it manually, you can use the command 'cat get-poetry.py | python3 -'."
+      echo "To install it manually, you can use the command 'cat install-python-poetry.py | python3 -'."
       echo "Aborting"
       exit 1
     fi
-    rm get-poetry.py
+    rm install-python-poetry.py
   else
       echo "Please install poetry manually or set the environment variable POETRY_BIN."
-      echo "To install it manually you can use 'cat get-poetry.py | python3 -'."
+      echo "To install it manually you can use 'cat install-python-poetry.py | python3 -'."
       echo "Aborting"
       exit 1
   fi
