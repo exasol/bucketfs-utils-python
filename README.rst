@@ -3,7 +3,6 @@
 
 This project is no longer maintained, it is superseded by `bucketfs-python <https://github.com/exasol/bucketfs-python>`_.
 
-
 #####################
 BucketFS Utils Python
 #####################
